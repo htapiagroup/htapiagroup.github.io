@@ -1,0 +1,31 @@
+{
+  "environment": "web",
+  "source": "1bbIifv_99IoSNKWR1COj6G3Bd1IqvhfWuQtE4EbalIM",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-02-08T16:42:00Z",
+  "id": "rysi2019-intro",
+  "duration": 24,
+  "title": "Desarrollo de Aplicaciones Móviles con Jupyter",
+  "author": "htapia",
+  "summary": "",
+  "theme": "python",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "Python",
+    "Android",
+    "Jupyter"
+  ],
+  "tags": [
+    "android",
+    "colab",
+    "jupyter",
+    "python",
+    "rysi"
+  ],
+  "feedback": "https://github.com/htapia/damju/issues",
+  "url": "rysi2019-intro"
+}

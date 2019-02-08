@@ -1,0 +1,396 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Desarrollo de Aplicaciones Móviles con Jupyter</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Desarrollo de Aplicaciones Móviles con Jupyter"
+                  environment="web"
+                  feedback-link="https://github.com/htapia/damju/issues">
+    
+      <google-codelab-step label="Introducción" duration="0">
+        <p>El material contenido en este repositorio corresponde al curso de Tópicos Selectos en Aplicaciones Distribuidas Móviles ofrecido como parte del Diplomado de la RySI, modalidad presencial y en línea. El curso tiene como objetivo ofrecer un punto de entrada y una vista general del ecosistema de programación y desarrollo de Jupyter para el prototipado de aplicaciones móviles distribuidas desplegadas en dispositivos basados en Android.</p>
+<p>Android es tradicionalmente un sistema operativo exclusivamente dedicado a Java. Sin embargo, este lenguaje de programación no permite la flexibilidad que se requiere para un desarrollo ágil de prototipos móviles. El Scripting Layer for Android (SL4A) es una librería para la plataforma de Android con soporte para una variedad de lenguajes interpretados con los que se pueden ejecutar scripts, tales como Perl, Python, JRuby, PHP etc. </p>
+<p>La tecnología que se utilizará durante el curso se basa en el ecosistema de programación de Jupyter a través de la cual aprenderán a interactuar directamente con el dispositivo, por medio de la SL4A, y a desarrollar aplicaciones que pueden ejecutarse completamente en el dispositivo.</p>
+<p>Además se utilizara el ecosistema de Jupyter utilizando el ambiente alojado en la nube para aprender los fundamentos del desarrollo de aplicaciones de <em>Aprendizaje de Máquina</em> que pueden desplegarse en los dispositivos móviles.</p>
+<h2><strong>Ecosistema de desarrollo de Jupyter</strong></h2>
+<p><img style="max-width: 320.03px" src="img/526ec51c971f12d6.png"></p>
+<p>Jupyter es un ecosistema de desarrollo y creación de documentos digitales basado en Python, llamados Libretas de Jupyter. Los documentos pueden contener información legible para los humanos así como contenido digital (código, ejecutable, etc) interpretado por una máquina.</p>
+<p>La aplicación que permite editar y ejecutar libretas de Jupyter se conoce como Jupyter Notebook App. Esta semana aprenderemos como instalar y ejecutar diversas instancias de la aplicación para crear y editar libretas, a través de las cuales podremos interactuar con un dispositivo móvil</p>
+<aside class="special"><p>Quieres saber más de la aplicación Jupyter Notebooks? Checa la documentación oficial de  <a href="https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html" target="_blank">Jupyter Notebook App</a> y el sitio oficial del  <a href="https://jupyter.org/" target="_blank">Proyecto Jupyter</a>.</p>
+</aside>
+<h2><strong>Python para Android</strong></h2>
+<p><img style="max-width: 319.50px" src="img/cebe41e5a95cc54a.png"></p>
+<p>Es posible instalar el intérprete de Python y ejecutar script usando este lenguaje en dispositivos móviles. En Android se logra a través del <em>Scripting Layer 4 Android</em>. Esta semana aprenderemos también cómo instalar y ejecutar este servicio en un móvil sobre la plataforma Android para ejecutar código de Python creado en la aplicación de Jupyter.</p>
+<h2><strong>Que aprenderán?</strong></h2>
+<ul>
+<li>Cómo instalar y configurar Python a partir de la distribución de Anaconda en sus computadoras personales</li>
+<li>Cómo ejecutar código de Python y escribir texto en una libreta de Jupyter Notebooks</li>
+<li>Cómo instalar Python en un dispositi móvil con Android</li>
+<li>Cómo ejecutar código en un dispositivo móvil con Android y Python</li>
+<li>Conceptos básicos de Aprendizaje de Maquina</li>
+<li>Cómo entrenar un algortimo de aprendizaje para reconocimiento de objetos en imágenes</li>
+<li>Cómo desplegar un algoritmo de aprendizaje en el dispositivo móvil</li>
+</ul>
+<h2>Qué necesitarán?</h2>
+<ul>
+<li>Una computadora moderna con un sistema operativo reciente</li>
+<li>Un dispositivo móvil con Android &gt;= 4</li>
+<li>Un cable USB para transferir datos entre computadora y móvil</li>
+<li>Un navegador moderno (<a href="https://www.google.com/chrome/" target="_blank">Chrome</a> o <a href="https://www.mozilla.org/es-MX/firefox/new/" target="_blank">Firefox</a>)</li>
+<li>Acceso al repositorio del curso en Github</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Estructura del curso" duration="0">
+        <p>El curso está organizado en tres partes, cada una de ellas correspondiente a una semana, dentro de las cuales</p>
+<ul>
+<li>El participante conocerá el ecosistema de programación de Jupyter y en particular el lenguaje de programación Python y cómo utilizarlo para interactuar con dispositivos móviles basados en el SO Android</li>
+<li>el participante desarrollará y desplegará aplicaciones básicas que le permitirán acceder a diferentes componentes del sistema e interactuar con el dispositivo, p.e. antenas, sensores, lectura de clipboard, etc.</li>
+<li>el participante implementará un algoritmo de reconocimiento de imágenes y utilizará el dispositivo móvil como herramienta de adquisición y procesamiento de datos.</li>
+</ul>
+<p>El curso está basado en la tecnología de libretas de Jupyter y está disponible en un repositorio en Github. El contenido semanal puede accederse directamente desde la página oficial del curso o desde el repositorio anterior.</p>
+<p>Cada libreta contiene la información específica del trabajo que va a realizarse durante la semana organizado como a continuación se describe:</p>
+<ol type="1" start="1">
+<li>Introducción al tema de la semana</li>
+<li>Objetivos de aprendizaje de la semana</li>
+<li>Requerimentos técnicos para la semana (software/hardware adicional, etc.)</li>
+<li>Actividades/Libretas correspondientes a la semana</li>
+<li>Material adicional y</li>
+<li>Enlaces externos.</li>
+</ol>
+<p>Para más información sobre el contenido de cada semana, ver más adelante.</p>
+<h2><strong>Semana 1</strong></h2>
+<ul>
+<li>Configuración de las herramientas de trabajo</li>
+</ul>
+<h2><strong>Semana 2</strong></h2>
+<ul>
+<li>Introducción a la API de Python en Android</li>
+</ul>
+<h2><strong>Semana 3</strong></h2>
+<ul>
+<li>Desarrollo de una aplicación basada en el Aprendizaje de Máquina basada en TensorFlow</li>
+<li>Despliegue de la aplicación en el dispositivo móvil</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Evaluación" duration="0">
+        <p>El curso será evaluado de acuerdo a los siguientes criterios:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>Actividad/Producto</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Sesión</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Valor</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Total</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Ejercicios/Libretas</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>S1_L#</p>
+</td><td colspan="1" rowspan="1"><p>Semana 1</p>
+</td><td colspan="1" rowspan="1"><p>15%</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>S2_L#</p>
+</td><td colspan="1" rowspan="1"><p>Semana 2</p>
+</td><td colspan="1" rowspan="1"><p>15%</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>S3_L#</p>
+</td><td colspan="1" rowspan="1"><p>Semana 3</p>
+</td><td colspan="1" rowspan="1"><p>20%</p>
+</td><td colspan="1" rowspan="1"><p><strong>50%</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Aplicaciones</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>S1_A1</p>
+</td><td colspan="1" rowspan="1"><p>Semana 1</p>
+</td><td colspan="1" rowspan="1"><p>10 %</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>S2_A2</p>
+</td><td colspan="1" rowspan="1"><p>Semana 2</p>
+</td><td colspan="1" rowspan="1"><p>10%</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>S3_A3</p>
+</td><td colspan="1" rowspan="1"><p>Semana 3</p>
+</td><td colspan="1" rowspan="1"><p>10%</p>
+</td><td colspan="1" rowspan="1"><p><strong>30%</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Proyecto Final</p>
+</td><td colspan="1" rowspan="1"><p><strong>10%</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Asistencia</p>
+</td><td colspan="1" rowspan="1"><p><strong>10%</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>100%</strong></p>
+</td></tr>
+</table>
+<h2><strong>Ejercicios/Libretas</strong></h2>
+<p>El contenido del curso está organizado en Libretas de Jupyter, entre 3 y 5 libretas por semana, que contienen las actividades y ejercicios que comprenden el curso. Las competencias se van construyendo de manera gradual por lo que es importante que se realicen las actividades en todas y cada una de las libretas desde el inicio. La primera semana es fundamental para tener el sistema funcionando, de otro modo no podrán realizar los ejercicios/actividades de las siguientes sesiones, especialmente la segunda semana. Las actividades y ejercicios contenidos en las libretas representan el 50% de la calificación.</p>
+<h2><strong>Aplicaciones</strong></h2>
+<p>Al término de cada sesión deberán completar una aplicación, detallada en las libretas de la semana correspondiente. Cada aplicación contribuye con un 10% adicional a la calificación. </p>
+<h3>Ejemplo</h3>
+<p>Si terminan todos los ejercicios de la primera semana, es decir si completan exitosamente todas las actividades de las libretas de la semana 1, habrán acumulado 15%. Si entregan la aplicación de la semana sumarán otro 10%, y dado que estarán presentes un ⅓ del 10% correspondiente a la asistencia. Asi, sumarían en la primera semana 28.3333% de la calificación total.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Perfil del participante" duration="0">
+        <p>Si tienen interés en aprender a desarrollar prototipos de aplicaciones móviles usando diversas tecnologías, este curso ofrece las bases con las que pueden desarrollarse aplicaciones más complejas. El participante deberá cubrir algunos de los siguientes campos:</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>Perfil</strong></p>
+</td><td colspan="1" rowspan="1"><p>Profesionales del área de TIC o afines, ingenierías, ciencias, programación</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Conocimientos previos</strong></p>
+</td><td colspan="1" rowspan="1"><ul>
+<li>Conocimiento básico sobre programación</li>
+<li>Experiencia con Python deseable</li>
+<li>Conocimiento de la línea de comando</li>
+<li>Conocimiento básico de las herramientas de SDK de Android</li>
+</ul>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Habilidades</strong></p>
+</td><td colspan="1" rowspan="1"><ul>
+<li>Independencia para trabajar de manera individual</li>
+<li>Capacidad de trabajar en equipo</li>
+<li>Interactuar con diversos sistemas operativos y tecnologías simultáneamente</li>
+</ul>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Actitudes</strong></p>
+</td><td colspan="1" rowspan="1"><ul>
+<li>Trabajo en grupo</li>
+<li>Respeto a sus pares</li>
+<li>Autoaprendizaje</li>
+<li>Honestidad y rectitud</li>
+<li>Manejo de presión</li>
+<li>Creatividad</li>
+</ul>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Requerimentos" duration="0">
+        <p>Para este curso es fundamental contar con una computadora moderna corriendo un sistema operativo reciente, y un dispositivo móvil compatible con Android &gt;= 4</p>
+<p>El curso está enfocado en el uso de Python por su flexibilidad, sencillez y soporte. Además de ser software libre, Python es uno de los principales lenguajes utilizados en la naciente disciplina de la Ciencia de Datos.</p>
+<p>Será deseable que el participante con alguna experiencia en programación de lenguajes interactivos como Python, aunque no es necesaria.</p>
+<p>Será de utilidad que el participante tenga conocimiento basico de interacción con sistemas operativos a través de la linea de comando.</p>
+<p>Experiencia con los principios fundamentales del Aprendizaje de Máquina e Inteligencia Artificial modernos es útil aunque no es fundamental ya que se espera que al término del curso el participante se lleve las bases.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Semana 1: Instalacion y configuracion de la herramienta de trabajo" duration="1">
+        <p>Aun cuando Google proporciona una herramienta sólida para el desarrollo de software para dispositivos android (SDK), ésta está orientada a Java, y cuando todo lo que queremos hacer es un script sencillo para automatizar tareas o procesos en android, o incluso para el desarrollo rápido y ágil de aplicaciones, el uso de Java puede ser tedioso con el diseño de programación tradicional de editar-compilar-ejecutar.</p>
+<p>Para estos casos el uso de un lenguaje programación interpretado puede acelerar el desarrollo de aplicaciones, y es aquí donde el proyecto del Scripting Layer 4 Android, o SL4A, se vuelve una herramienta útil para escribir código para dispositivos móviles con android y en lenguajes diferentes a Java y hacerlo de una forma interactiva.</p>
+<p>Al momento de preparar este curso el SL4A soporta Beanshell, JRuby, Lua, Perl, PHP, Python y Rhino. El curso está enfocado en el uso de Python por su flexibilidad, sencillez y soporte a través de una gran comunidad de múltiples disciplinas que contribuyen a su desarrollo. Además de ser software libre, Python es uno de los principales lenguajes utilizados en la naciente disciplina de la Ciencia de Datos.</p>
+<h2><strong>Objetivos de aprendizaje</strong></h2>
+<ul>
+<li>Conocer el proceso de instalación y configuración del ecosistema de Jupyter en su computadora personal</li>
+<li>Configurar los sistemas para establecer una comunicación interactiva entre Jupyter y Android</li>
+<li>Configurar una aplicación de Jupyter en la nube para ejecutarse en un entorno local</li>
+</ul>
+<h2><strong>Qué haremos</strong></h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Vamos a instalar y configurar las herramientas necesarias para contar con un ambiente de desarrollo flexible y ágil para desarrollar prototipos de aplicaciones móviles usando el lenguaje de programación Python Al final de la semana habrán:</p>
+<ul>
+<li>Instalado y configurado el ecosistema de Jupyter en su computadora personal</li>
+<li>Instalado y configurado el intérprete de Python en su dispositivo móvil</li>
+<li>Configurado un método de comunicación para interactuar entre su computadora local y el dispositivo móvil a través de Python</li>
+<li>Configurado el ambiente de Jupyter en la nube</li>
+</ul>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/dea569844508de9.png"></p>
+<p><img style="max-width: 134.50px" src="img/91f638ebc6ed29c2.png"></p>
+</td></tr>
+</table>
+<h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
+<ul class="checklist">
+<li>Cómo instalar y configurar Jupyter en una computadora personal</li>
+<li>Cómo instalar y configurar Python en un dispositivo móvil</li>
+<li>Cómo configurar el sistema para conectarse al dispositivo móvil </li>
+<li>Cómo interactuar con el dispositivo móvil usando Pytho</li>
+</ul>
+<h2><strong>Que vamos a necesitar</strong><br></h2>
+<ul>
+<li>Una computadora personal con un sistema operativo funcional</li>
+<li>Una dispositivo móvil con Android &gt;= 4</li>
+<li>Un cable USB de transferencia de datos</li>
+<li>Acceso al repositorio del curso en Github</li>
+<li><a href="https://www.anaconda.com/download/" target="_blank">Anaconda Python</a></li>
+<li><a href="https://github.com/htapia/sl4a" target="_blank">Scripting Layer 4 Android</a></li>
+<li><a href="https://github.com/htapia/python-for-android" target="_blank">Python for Android</a></li>
+<li><a href="https://colab.research.google.com/notebooks/welcome.ipynb" target="_blank">Google Collaborative</a></li>
+</ul>
+<h2><strong>Actividades/Libretas</strong></h2>
+<p>Cada semana se compone de una serie de laboratorios que deben seguir para poder configurar el sistema de trabajo. Cada laboratorio contiene una serie de pasos con instrucciones que deberán seguir y completar. Algunos de los pasos los llevarán a sitios externos (en el internet o en su computadora local). </p>
+<p>Los laboratorios que contienen las actividades de esta semana son:</p>
+<ol type="1" start="1">
+<li>Instalación local de Jupyter vía Anaconda</li>
+<li>Instalación/configuración local de <code>adb</code></li>
+<li>Instalación y configuración local del módulo <code>android.py</code></li>
+<li>Configuración del ecosistema de Jupyter en la nube</li>
+<li>Instalación de Python en el dispositivo móvil</li>
+<li>Comunicación entre el dispositivo móvil y el sistema local</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Semana 2: Introducción a la API de Python en Android" duration="1">
+        <p>El lenguaje programación interpretado Python permite acceder a una variedad de funciones del SO de Android a través de llamados especiales que se conocen como fachadas. En esta semana vamos a explorar ésta API, disponible para interactuar con el SO y crear aplicaciones que pueden desarrollarse localmente y ejecutarse de manera remota.</p>
+<aside class="warning"><p><strong>Atención:</strong> Para poder realizar los laboratorios de esta semana es necesario contar con el sistema configurado de acuerdo a los laboratorios de la semana anterior.</p>
+</aside>
+<h2><strong>Objetivos de aprendizaje</strong></h2>
+<ul>
+<li>Conocer la API de Android disponible en el SL4A</li>
+<li>Interactuar con el dispositivo móvil de manera remota</li>
+<li>Desarrollar una aplicación interactivamente y desplegarla en el dispositivo</li>
+<li>Conocer los posibles errores que pueden presentarse en el desarrollo y ejecución de aplicaciones usando SL4Al</li>
+</ul>
+<h2><strong>Qué haremos</strong></h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Vamos a conocer la API de Python en Android a través de las fachadas disponibles en el SL4A para desarrollar aplicaciones simples e interactivas desde nuestra computadora pero que se ejecutan directamente en el dispositivo móvil.</p>
+<p>Para ello vamos a aprender a establecer conexiones entre el sistema local y el dispositivo, usar la API de Python para acceder a (la mayoría de) las funciones de Android y desarrollar aplicaciones que usen éstas funciones. Al final de la semana habrán:</p>
+<ul>
+<li>Aprendido a establecer una conexion entre Python y Android</li>
+<li>Ejecutar comandos de Python en Android a través de SL4A</li>
+<li>Adquirido datos de los sensores embebidos en el dispositivo</li>
+<li>Generado aplicaciones sencillas que usan las funcionalidades principales de Android</li>
+<li>Conocer e identificar las posibles fallas y errores que se presentan en la arquitectura utilizada</li>
+</ul>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/8797f4a9b01cdf99.png"></p>
+<p><img style="max-width: 162.50px" src="img/91f638ebc6ed29c2.png"></p>
+</td></tr>
+</table>
+<h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
+<ul class="checklist">
+<li>Cómo establecer una conexión entre Android y Python</li>
+<li>Como ejectuar codigo de Python en Android interactvamente</li>
+<li>Como usar la API de Python en Android para crear aplicaciones simples</li>
+<li>Cuales son los principales errores que ocurren al usar esta tecnología y como corregirlos</li>
+</ul>
+<h2><strong>Que vamos a necesitar</strong></h2>
+<ul>
+<li>Una computadora personal con la configuración de la semana 1</li>
+<li>Una dispositivo móvil con Android &gt;= 4</li>
+<li>Un cable USB de transferencia de datos</li>
+</ul>
+<h2><strong>Actividades/Libretas</strong></h2>
+<p>Los laboratorios que contienen las actividades de esta semana son:</p>
+<ol type="1" start="1">
+<li>Como establecer una conexion entre Android y el sistema local usando adb</li>
+<li>Comunicación entre Python y dispositivo móvil</li>
+<li>Uso básico de la API:  interacción con usuario, papelera, antenas, sensores, etc.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Semana 3: Aprendizaje de Máquina  en Android" duration="1">
+        <p>Una de las técnicas modernas que han generado un enorme desarrollo tecnológico son las redes neuronales. En esta sesión vamos a utilizar conceptos de redes neuronales para desarrollar una aplicación que podemos desplegar y usar en nuestro dispositivo móvil y veremos como utlizarla en el contexto de Python y Android.</p>
+<aside class="warning"><p><strong>Atención:</strong> Para poder realizar los laboratorios de esta semana es necesario contar con el sistema configurado de acuerdo a los laboratorios de la semana anterior.</p>
+</aside>
+<h2><strong>Objetivos de aprendizaje</strong></h2>
+<ul>
+<li>Conocer los conceptos básicos de redes neuronales</li>
+<li>Conocer un flujo de desarrollo completo de una aplicación de aprendizaje de máquina, desde su concepción hasta el despliegue.</li>
+<li>Entrenar una red neuronal con un modelo de identificación de imágenes con Python</li>
+<li>Ejecutar la aplicación en Android</li>
+</ul>
+<h2><strong>Qué haremos</strong></h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Vamos a construir una aplicación que es capaz de reconocer objetos en imágenes capturadas con la cámara del dispositivo. Para ello, veremos como entrenar un modelo para que &#34;aprenda&#34; a clasificar a partir de un conjunto de entrenamiento que le damos.</p>
+<p>Usaremos la tecnología de Google Colab que nos permite emplear procesadores gráficos y acelerar el proceso de desarrollo de la aplicación.</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 174.50px" src="img/9b8ac522233104df.png"></p>
+</td></tr>
+</table>
+<h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
+<ul class="checklist">
+<li>Como usar TensorFlow para re-entrenar una red neuronal</li>
+<li>Como desarrollar una aplicación a partir de un modelo basado en redes neuronales</li>
+<li>Cómo desplegar la aplicación en el dispositivo usando Android Studio</li>
+<li>Cómo acceder a la aplicación programáticamente con Python</li>
+</ul>
+<h2><strong>Que vamos a necesitar</strong></h2>
+<ul>
+<li>Una computadora personal con la configuración de la semana 1</li>
+<li>Una dispositivo móvil con Android &gt;= 4</li>
+<li>Un cable USB de transferencia de datos</li>
+<li>Acceso a Internet</li>
+<li>Android Studio</li>
+</ul>
+<h2><strong>Actividades/Libretas</strong></h2>
+<p>Los laboratorios que contienen las actividades de esta semana son:</p>
+<ol type="1" start="1">
+<li>Conceptos elementales de redes neuronales</li>
+<li>(Re)entrenando una red neuronal con TensorFlow </li>
+<li>Instalando aplicación en dispositivo móvil con Android Studio</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Acerca del instructor" duration="0">
+        <table>
+<tr><td colspan="1" rowspan="1"><p><img style="max-width: 161.72px" src="img/f7a65d104510420c.png"></p>
+<p>htapia@lania.edu.mx</p>
+<p>Tel. +52 228 841-6100 ext. 1011</p>
+</td><td colspan="1" rowspan="1"><p><strong>Horacio Tapia-McClung</strong> es profesor/investigador del LANIA especializado en el análisis de grandes datos utilizando métodos de cómputo avanzado que permitan el procesamiento en tiempo real y con recursos limitados. </p>
+<p>También desarrolla y aplica técnicas para el análisis de imágenes usando procesadores gráficos (Redes Neuronales Convolucionales, Deep Learning, análisis morfológico) y utiliza principios y fundamentos fisicos y matematicos para analizar y estudiar sistemas complejos espacio-temporales.</p>
+<p>Algunas de las aplicaciones que ha desarrollado incluyen modelos de falla para motores de diesel, análisis de color en imágenes digitales, estudios sobre movilidad a partir de datos de geolocalización, adquisición y análisis de datos usando dispositivos móviles, aplicaciones del internet de las cosas, entre otros. Trabaja de cerca con empresas de diversos sectores industriales en temas relacionados al análisis de datos para impulsar la creación de valor a partir de la información digital. Es fundador y organizador del evento Data Challenge Industrial, una competencia de análisis de datos provenientes de la industria nacional.</p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>
