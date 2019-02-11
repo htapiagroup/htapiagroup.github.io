@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "source": "1qHKjb5xhpDsjvrLIXwY9g4vvybeCWSwPdOL8fz9sZf0",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-02-11T21:21:23Z",
+  "id": "rysi2019-s1-l02",
+  "duration": 33,
+  "title": "Lab 2: Instalación del módulo android.py",
+  "author": "htapia",
+  "summary": "En este lab vamos a usar Jupyter para programáticamente obtener el módulo, guarlarlo localmente y configurar el acceso",
+  "theme": "python",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "python"
+  ],
+  "tags": [
+    "jupyter",
+    "python",
+    "rysi"
+  ],
+  "feedback": "https://github.com/htapia/damju/issues",
+  "url": "rysi2019-s1-l02"
+}

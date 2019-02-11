@@ -1,0 +1,201 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Lab 2: Instalación del módulo android.py</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Lab 2: Instalación del módulo android.py"
+                  environment="web"
+                  feedback-link="https://github.com/htapia/damju/issues">
+    
+      <google-codelab-step label="Introducción" duration="1">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Objetivos de aprendizaje" duration="1">
+        <ul>
+<li>Conocer algunas de las funcionalidades de Jupyter Notebooks</li>
+<li>Obtener archivos de internet de manera programática</li>
+<li>Guardar archivos localmente de forma </li>
+</ul>
+<h2><strong>Qué haremos</strong></h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>En este laboratorio vamos a usar el ambiente de Jupyter que instalaron previamente para configurar el uso del módulo <code>android.py</code>, necesario para interactuar con el dispositivo móvil y el sistema local a través de Python.</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 297.00px" src="img/166c3b4982e4a0ad.png"></p>
+</td></tr>
+</table>
+<h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
+<ul class="checklist">
+<li>Cómo usar libretas de Jupyter para ejecutar código de Python</li>
+<li>Como obtener archivos de internet usando Jupyter</li>
+<li>Como modificar archivos en Jupyter y guardarlos localmente</li>
+<li>Como acceder al sistema operativo local desde una libreta de Jupyter</li>
+</ul>
+<h2>Que vamos a necesitar</h2>
+<ul>
+<li>Una computadora personal con la aplicación Jupyter Notebooks instalada</li>
+<li>Conexión a internet</li>
+</ul>
+<h2><strong>Actividades/Libretas</strong></h2>
+<p>Este semana se compone de una serie de tutoriales que deben seguir para poder configurar el sistema de trabajo. En cada tutorial hay un video corto que muestra los pasos principales y al final una libreta de codigo que deben ejecutar en su sistema para establecer la conexion entre su computadora y el dispositivo móvil.</p>
+<p>Las actividades de esta semana son:</p>
+<ol type="1" start="1">
+<li>Instalación local de Jupyter vía Anaconda</li>
+<li>Instalación/configuración local de <code>adb</code></li>
+<li>Instalación de Python en el dispositivo móvil</li>
+<li>Instalación y configuración local del módulo <code>androidhelper.py </code></li>
+<li>Comunicación entre el dispositivo móvil y el sistema local</li>
+<li>Configuración del ecosistema de Jupyter en la nube</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instala el modulo android.py desde Jupyter" duration="10">
+        <p>El módulo <code>android.py</code> es necesario para poder invocar objetos en Python que puedan acceder a la API de Android. A continuación están los enlaces donde podrás descargar los programas, sin embargo, haremos la configuración vía las libretas de Jupyter con el fin de familiarizarnos con el sistema y tener una evidencia de evaluación de los avances de la semana. </p>
+<p>Presiona el siguiente botón para acceder a la libreta de Jupyter que contiene las instrucciones para instalar el módulo en tu sistema.</p>
+<p><a href="https://github.com/htapia/damju/blob/master/Semana1/DAMJu_S1_A1.ipynb" target="_blank"><paper-button class="colored" raised>Actividad 1</paper-button></a></p>
+<h2>Enlaces al módulo <code>android.py</code><strong> para descarga local</strong></h2>
+<p>En caso de tener problemas para ejecutar las instrucciones anteriores, abajo encontraran los enlaces para descargar los modulos.</p>
+<h3>Descarga el módulo <strong><code>android.py</code></strong></h3>
+<p><a href="https://raw.githubusercontent.com/damonkohler/sl4a/master/python/ase/android.py" target="_blank"><paper-button class="colored" raised>Descarga </paper-button><paper-button class="colored" raised>android.py</paper-button><paper-button class="colored" raised> </paper-button></a></p>
+<h3>Descarga el módulo <strong><code>androidhelper.py</code></strong></h3>
+<p><a href="https://raw.githubusercontent.com/isislovecruft/android-locale-hack/master/androidhelper.py" target="_blank"><paper-button class="colored" raised>Descarga </paper-button><paper-button class="colored" raised>androidhelper.py</paper-button><paper-button class="colored" raised> </paper-button></a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instalación/configuración local de adb" duration="5">
+        <p><code>adb</code> es el programa proporcionado por los desarrolladores de Android para detectar dispositivo móvil en el sistema local. Puede obtenerse <a href="https://developer.android.com/studio/releases/platform-tools#download" target="_blank">en este enlace</a>. La documentación de <code>adb </code><a href="https://developer.android.com/studio/command-line/adb?hl=es" target="_blank">puede consultarse aqui</a>. </p>
+<aside class="special"><p>Es altamente probable que ya tengan instalado el programa de <code>adb</code>, de modo que antes de descargarlo, revisen si configuración. Si no lo tienen instalado entonces sigan las instrucciones de descarga e instalación en los enlaces anteriores.</p>
+</aside>
+<h2><strong>Verifica si tienes adb instalado en tu sistema</strong></h2>
+<p>Para verificar si tienes instalado el programa, abre otra ventana de Anaconda Prompt o terminal y en la línea de comando escribe lo siguiente:</p>
+<pre><code>adb --version</code></pre>
+<p>Debes ver como salida de este comando algo parecido a lo siguiente, que indica la versión del ejecutable y la ruta de instalación.</p>
+<pre><code>Android Debug Bridge version 1.0.40
+Version 4986621
+Installed as C:\Android\platform-tools\adb.exe</code></pre>
+<p>Si el comando anterior no regresa la información del programa, puede ser posible que no lo tengas en la ruta de acceso del sistema. La clave para encontrar el ejecutable es localizar los directorios <code>Android</code> y <code>platform-tools</code> pues es ahí donde tradicionalmente se localiza el ejecutable. </p>
+<h2>Agrega adb al PATH de windows</h2>
+<aside class="warning"><p><strong>Atención</strong>: NO es necesario realizar los pasos siguientes si el comando anterior ejecuta exitosamente.</p>
+</aside>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Una vez que hayas localizado el ejecutable, asegurate que la ruta está disponible en las variables de entorno del sistema operativo. Si estas en Windows, abre la configuración avanzada del sistema -&gt; propiedades del sistema y en la pestaña de opciones avanzadas selecciones variables de entorno</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 412.00px" src="img/1b540fce1c192d44.png"></p>
+</td></tr>
+</table>
+<table>
+<tr><td colspan="1" rowspan="1"><ul>
+<li>Localiza Path en variables del sistema y selecciona editar. </li>
+<li>Si no la tienes, agrega la ruta del ejecutable de <code>adb </code></li>
+<li>Presiona Aceptar para regresar a la ventana de variables de entorno</li>
+</ul>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 409.75px" src="img/31f873a4a05d5cab.png"></p>
+<p><img style="max-width: 298.00px" src="img/2f980b99c5214a8f.png"></p>
+</td></tr>
+</table>
+<table>
+<tr><td colspan="1" rowspan="1"><ul>
+<li>Finalmente, en la ventana variables de entorno, agrega una nueva variable del sistema con el nombre <code>AP_PORT</code> y valor <code>9999</code>.</li>
+<li>Presiona Aceptar y cierra las ventanas de configuración.</li>
+</ul>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/230dd15a1ae7eb1.png"></p>
+</td></tr>
+</table>
+<p>Vuelve a escribir en la consola el comando <code>adb --version</code>, esta vez debería funcionar si no lo ha hecho ya.</p>
+<p><br>En este punto, debes tener configurado tu sistema local con el ecosistema de Jupyter y Python disponibles y el programa <code>adb</code> accesible por el sistema operativo. A continuación vamos a configurar el dispositivo móvil.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instalación y configuración de Python en el dispositivo móvil" duration="10">
+        <p>Para poder ejecutar comandos de Python en Android usaremos una tecnología que permite acceder a la mayoría de las funcionalidades de Android a través de <em>fachadas</em>. </p>
+<p>Los pasos siguientes tienen que realizarse en el dispositivo móvil. La instalación es muy sencilla y automática. </p>
+<h2><strong>Descarga el software de SL4A</strong></h2>
+<p>Captura la siguiente imagen con la cámara de tu dispositivo para descargar el <a href="https://github.com/kuri65536/sl4a" target="_blank">Scripting Layer For Android</a></p>
+<p><img style="max-width: 200.00px" src="img/fcb42bde018fa2.png"></p>
+<h3><strong>Instala sl4a</strong></h3>
+<p>Para instalar el software debes tener habilitada la opción de permitir instalación de software externo bajo la configuración de opciones de desarrollador del dispositivo.</p>
+<p>Ejecuta el programa que descargaste y sigue las instrucciones en la pantalla del dispositivo.</p>
+<h2><strong>Descarga el software de Python</strong></h2>
+<p>Captura la siguiente imagen con la cámara de tu dispositivo para descargar <a href="https://github.com/kuri65536/python-for-android" target="_blank">Python for Android</a></p>
+<p><img style="max-width: 148.00px" src="img/9486a5761cbf1323.png"></p>
+<h3><strong>Instala python</strong></h3>
+<p>Para instalar el software debes tener habilitada la opción de permitir instalación de software externo bajo la configuración de opciones de desarrollador del dispositivo.</p>
+<p>Ejecuta el programa que descargaste y sigue las instrucciones en la pantalla del dispositivo. El programa descarga archivos adicionales y completa la instalación. </p>
+<h2><strong>Inicia el servicio de Python en el dispositivo móvil</strong></h2>
+<p>Abre la aplicacion SL4A identificada por el icono</p>
+<p><img style="max-width: 67.50px" src="img/8e86a0cba74f67f0.png"> </p>
+<p>en la pantalla de tu dispositivo. Del menú navega a Preferences-&gt;Server Port y escribe 2222 en la caja correspondiente.</p>
+<p>Después regresa al menú y navega a View-&gt;Interpreters, nuevamente menú y elige Start Server. El servicio Público permite comunicarse con el dispositivo vía WiFi. Elige iniciar un servicio  Privado y conecta tu dispositivo a un puerto USB de tu computadora.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Revisión configuración" duration="5">
+        <p>Vamos a revisar que localmente podemos identificar el dispositivo y que podemos comunicarnos con él a través del servicio de Python. Con el dispositivo conectado a un puerto USB de tu computadora, escribe lo siguiente en la ventana de comando:</p>
+<pre><code>&gt;adb devices</code></pre>
+<p>El resultado de dicha instrucción debe dar información sobre el dispositivo conectado a la computadora, por ejemplo</p>
+<pre><code>List of devices attached
+98f2eeee        device</code></pre>
+<p>Si el comando no regresa información revisa la conexión del dispositivo al puerto USB y asegurate que está autorizado por el sistema para comunicarse con la computadora. Después escribe</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Siguientes pasos" duration="1">
+        <p><a href="https://htapiagroup.github.io/rysi2019-s1-l03" target="_blank"><paper-button class="colored" raised>Siguiente laboratorio</paper-button></a></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>
