@@ -22,9 +22,9 @@
 
   <google-codelab title="Desarrollo de Aplicaciones Móviles con Jupyter"
                   environment="web"
-                  feedback-link="https://github.com/htapia/damju/issues">
+                  feedback-link="https://github.com/htapiagroup/htapiagroup.github.io/issues">
     
-      <google-codelab-step label="Introducción" duration="0">
+      <google-codelab-step label="Introducción" duration="5">
         <p>El material contenido en este repositorio corresponde al curso de Tópicos Selectos en Aplicaciones Distribuidas Móviles ofrecido como parte del Diplomado de la RySI, modalidad presencial y en línea. El curso tiene como objetivo ofrecer un punto de entrada y una vista general del ecosistema de programación y desarrollo de Jupyter para el prototipado de aplicaciones móviles distribuidas desplegadas en dispositivos basados en Android.</p>
 <p>Android es tradicionalmente un sistema operativo exclusivamente dedicado a Java. Sin embargo, este lenguaje de programación no permite la flexibilidad que se requiere para un desarrollo ágil de prototipos móviles. El Scripting Layer for Android (SL4A) es una librería para la plataforma de Android con soporte para una variedad de lenguajes interpretados con los que se pueden ejecutar scripts, tales como Perl, Python, JRuby, PHP etc. </p>
 <p>La tecnología que se utilizará durante el curso se basa en el ecosistema de programación de Jupyter a través de la cual aprenderán a interactuar directamente con el dispositivo, por medio de la SL4A, y a desarrollar aplicaciones que pueden ejecutarse completamente en el dispositivo.</p>
@@ -60,7 +60,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Estructura del curso" duration="0">
+      <google-codelab-step label="Estructura del curso" duration="1">
         <p>El curso está organizado en tres partes, cada una de ellas correspondiente a una semana, dentro de las cuales</p>
 <ul>
 <li>El participante conocerá el ecosistema de programación de Jupyter y en particular el lenguaje de programación Python y cómo utilizarlo para interactuar con dispositivos móviles basados en el SO Android</li>
@@ -78,24 +78,11 @@
 <li>Enlaces externos.</li>
 </ol>
 <p>Para más información sobre el contenido de cada semana, ver más adelante.</p>
-<h2><strong>Semana 1</strong></h2>
-<ul>
-<li>Configuración de las herramientas de trabajo</li>
-</ul>
-<h2><strong>Semana 2</strong></h2>
-<ul>
-<li>Introducción a la API de Python en Android</li>
-</ul>
-<h2><strong>Semana 3</strong></h2>
-<ul>
-<li>Desarrollo de una aplicación basada en el Aprendizaje de Máquina basada en TensorFlow</li>
-<li>Despliegue de la aplicación en el dispositivo móvil</li>
-</ul>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Evaluación" duration="0">
+      <google-codelab-step label="Evaluación" duration="1">
         <p>El curso será evaluado de acuerdo a los siguientes criterios:</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p><strong>Actividad/Producto</strong></p>
@@ -147,12 +134,12 @@
 <h2><strong>Aplicaciones</strong></h2>
 <p>Al término de cada sesión deberán completar una aplicación, detallada en las libretas de la semana correspondiente. Cada aplicación contribuye con un 10% adicional a la calificación. </p>
 <h3>Ejemplo</h3>
-<p>Si terminan todos los ejercicios de la primera semana, es decir si completan exitosamente todas las actividades de las libretas de la semana 1, habrán acumulado 15%. Si entregan la aplicación de la semana sumarán otro 10%, y dado que estarán presentes un ⅓ del 10% correspondiente a la asistencia. Asi, sumarían en la primera semana 28.3333% de la calificación total.</p>
+<p>Si terminan todos los ejercicios de la primera semana, es decir si completan exitosamente todas las actividades de las libretas de la semana 1, habrán acumulado 15%. Si entregan la aplicación de la semana sumarán otro 10%, y dado que estarán presentes un ⅓ del 10% correspondiente a la asistencia. Así, sumarían en la primera semana 28.3333% de la calificación total.</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Perfil del participante" duration="0">
+      <google-codelab-step label="Perfil del participante" duration="1">
         <p>Si tienen interés en aprender a desarrollar prototipos de aplicaciones móviles usando diversas tecnologías, este curso ofrece las bases con las que pueden desarrollarse aplicaciones más complejas. El participante deberá cubrir algunos de los siguientes campos:</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p><strong>Perfil</strong></p>
@@ -188,17 +175,17 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Requerimentos" duration="0">
+      <google-codelab-step label="Requerimentos" duration="1">
         <p>Para este curso es fundamental contar con una computadora moderna corriendo un sistema operativo reciente, y un dispositivo móvil compatible con Android &gt;= 4</p>
 <p>El curso está enfocado en el uso de Python por su flexibilidad, sencillez y soporte. Además de ser software libre, Python es uno de los principales lenguajes utilizados en la naciente disciplina de la Ciencia de Datos.</p>
 <p>Será deseable que el participante con alguna experiencia en programación de lenguajes interactivos como Python, aunque no es necesaria.</p>
-<p>Será de utilidad que el participante tenga conocimiento basico de interacción con sistemas operativos a través de la linea de comando.</p>
+<p>Será de utilidad que el participante tenga conocimiento básico de interacción con sistemas operativos a través de la línea de comando.</p>
 <p>Experiencia con los principios fundamentales del Aprendizaje de Máquina e Inteligencia Artificial modernos es útil aunque no es fundamental ya que se espera que al término del curso el participante se lleve las bases.</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Semana 1: Instalacion y configuracion de la herramienta de trabajo" duration="1">
+      <google-codelab-step label="Semana 1: Instalación y configuración de la herramienta de trabajo" duration="10">
         <p>Aun cuando Google proporciona una herramienta sólida para el desarrollo de software para dispositivos android (SDK), ésta está orientada a Java, y cuando todo lo que queremos hacer es un script sencillo para automatizar tareas o procesos en android, o incluso para el desarrollo rápido y ágil de aplicaciones, el uso de Java puede ser tedioso con el diseño de programación tradicional de editar-compilar-ejecutar.</p>
 <p>Para estos casos el uso de un lenguaje programación interpretado puede acelerar el desarrollo de aplicaciones, y es aquí donde el proyecto del Scripting Layer 4 Android, o SL4A, se vuelve una herramienta útil para escribir código para dispositivos móviles con android y en lenguajes diferentes a Java y hacerlo de una forma interactiva.</p>
 <p>Al momento de preparar este curso el SL4A soporta Beanshell, JRuby, Lua, Perl, PHP, Python y Rhino. El curso está enfocado en el uso de Python por su flexibilidad, sencillez y soporte a través de una gran comunidad de múltiples disciplinas que contribuyen a su desarrollo. Además de ser software libre, Python es uno de los principales lenguajes utilizados en la naciente disciplina de la Ciencia de Datos.</p>
@@ -254,7 +241,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Semana 2: Introducción a la API de Python en Android" duration="1">
+      <google-codelab-step label="Semana 2: Introducción a la API de Python en Android" duration="10">
         <p>El lenguaje programación interpretado Python permite acceder a una variedad de funciones del SO de Android a través de llamados especiales que se conocen como fachadas. En esta semana vamos a explorar ésta API, disponible para interactuar con el SO y crear aplicaciones que pueden desarrollarse localmente y ejecutarse de manera remota.</p>
 <aside class="warning"><p><strong>Atención:</strong> Para poder realizar los laboratorios de esta semana es necesario contar con el sistema configurado de acuerdo a los laboratorios de la semana anterior.</p>
 </aside>
@@ -283,9 +270,9 @@
 <h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
 <ul class="checklist">
 <li>Cómo establecer una conexión entre Android y Python</li>
-<li>Como ejectuar codigo de Python en Android interactvamente</li>
-<li>Como usar la API de Python en Android para crear aplicaciones simples</li>
-<li>Cuales son los principales errores que ocurren al usar esta tecnología y como corregirlos</li>
+<li>Cómo ejecutar código de Python en Android interactivamente</li>
+<li>Cómo usar la API de Python en Android para crear aplicaciones simples</li>
+<li>Cuales son los principales errores que ocurren al usar esta tecnología y cómo corregirlos</li>
 </ul>
 <h2><strong>Que vamos a necesitar</strong></h2>
 <ul>
@@ -296,7 +283,7 @@
 <h2><strong>Actividades/Libretas</strong></h2>
 <p>Los laboratorios que contienen las actividades de esta semana son:</p>
 <ol type="1" start="1">
-<li>Como establecer una conexion entre Android y el sistema local usando adb</li>
+<li>Cómo establecer una conexión entre Android y el sistema local usando adb</li>
 <li>Comunicación entre Python y dispositivo móvil</li>
 <li>Uso básico de la API:  interacción con usuario, papelera, antenas, sensores, etc.</li>
 </ol>
@@ -304,8 +291,8 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Semana 3: Aprendizaje de Máquina  en Android" duration="1">
-        <p>Una de las técnicas modernas que han generado un enorme desarrollo tecnológico son las redes neuronales. En esta sesión vamos a utilizar conceptos de redes neuronales para desarrollar una aplicación que podemos desplegar y usar en nuestro dispositivo móvil y veremos como utlizarla en el contexto de Python y Android.</p>
+      <google-codelab-step label="Semana 3: Aplicaciones de Aprendizaje de Máquina para Android" duration="10">
+        <p>Una de las técnicas modernas que han generado un enorme desarrollo tecnológico son las redes neuronales. En esta sesión vamos a utilizar conceptos de redes neuronales para desarrollar una aplicación que podemos desplegar y usar en nuestro dispositivo móvil y veremos cómo utilizarla en el contexto de Python y Android.</p>
 <aside class="warning"><p><strong>Atención:</strong> Para poder realizar los laboratorios de esta semana es necesario contar con el sistema configurado de acuerdo a los laboratorios de la semana anterior.</p>
 </aside>
 <h2><strong>Objetivos de aprendizaje</strong></h2>
@@ -324,8 +311,8 @@
 </table>
 <h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
 <ul class="checklist">
-<li>Como usar TensorFlow para re-entrenar una red neuronal</li>
-<li>Como desarrollar una aplicación a partir de un modelo basado en redes neuronales</li>
+<li>Cómo usar TensorFlow para re-entrenar una red neuronal</li>
+<li>Cómo desarrollar una aplicación a partir de un modelo basado en redes neuronales</li>
 <li>Cómo desplegar la aplicación en el dispositivo usando Android Studio</li>
 <li>Cómo acceder a la aplicación programáticamente con Python</li>
 </ul>
@@ -348,7 +335,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Acerca del instructor" duration="0">
+      <google-codelab-step label="Acerca del instructor" duration="1">
         <table>
 <tr><td colspan="1" rowspan="1"><p><img style="max-width: 161.72px" src="img/f7a65d104510420c.png"></p>
 <p>htapia@lania.edu.mx</p>

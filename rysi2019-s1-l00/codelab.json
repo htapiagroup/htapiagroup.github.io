@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "source": "1ReUAxPaxv4uBeoTyNuD4Ht_8kXmKEvQJux2WoI9GJAI",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-02-11T19:42:01Z",
+  "id": "rysi2019-s1-l00",
+  "duration": 10,
+  "title": "Semana 1: Instalación y configuración de la herramienta de trabajo",
+  "author": "htapia",
+  "summary": "En este lab vamos a presentar la semana",
+  "theme": "python",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "python"
+  ],
+  "tags": [
+    "jupyter",
+    "python",
+    "rysi"
+  ],
+  "feedback": "https://github.com/htapiagroup/htapiagroup.github.io/issues",
+  "url": "rysi2019-s1-l00"
+}

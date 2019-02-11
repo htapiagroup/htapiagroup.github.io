@@ -1,0 +1,126 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Semana 1: Instalación y configuración de la herramienta de trabajo</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Semana 1: Instalación y configuración de la herramienta de trabajo"
+                  environment="web"
+                  feedback-link="https://github.com/htapiagroup/htapiagroup.github.io/issues">
+    
+      <google-codelab-step label="Introducción" duration="3">
+        <p>Aun cuando Google proporciona una herramienta sólida para el desarrollo de software para dispositivos android (SDK), ésta está orientada a Java, y cuando todo lo que queremos hacer es un script sencillo para automatizar tareas o procesos en android, o incluso para el desarrollo rápido y ágil de aplicaciones, el uso de Java puede ser tedioso con el diseño de programación tradicional de editar-compilar-ejecutar.</p>
+<p>Para estos casos el uso de un lenguaje programación interpretado puede acelerar el desarrollo de aplicaciones, y es aquí donde el proyecto del Scripting Layer 4 Android, o SL4A, se vuelve una herramienta útil para escribir código para dispositivos móviles con android y en lenguajes diferentes a Java y hacerlo de una forma interactiva.</p>
+<p>Al momento de preparar este curso el SL4A soporta Beanshell, JRuby, Lua, Perl, PHP, Python y Rhino. El curso está enfocado en el uso de Python por su flexibilidad, sencillez y soporte a través de una gran comunidad de múltiples disciplinas que contribuyen a su desarrollo. Además de ser software libre, Python es uno de los principales lenguajes utilizados en la naciente disciplina de la Ciencia de Datos.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Objetivos de aprendizaje" duration="3">
+        <ul>
+<li>Conocer el proceso de instalación y configuración del ecosistema de Jupyter en su computadora personal</li>
+<li>Configurar los sistemas para establecer una comunicación interactiva entre Jupyter y Android</li>
+<li>Configurar una aplicación de Jupyter en la nube para ejecutarse en un entorno local</li>
+</ul>
+<h2><strong>Qué haremos</strong></h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Vamos a instalar y configurar las herramientas necesarias para contar con un ambiente de desarrollo flexible y ágil para desarrollar prototipos de aplicaciones móviles usando el lenguaje de programación Python Al final de la semana habrán:</p>
+<ul>
+<li>Instalado y configurado el ecosistema de Jupyter en su computadora personal</li>
+<li>Instalado y configurado el intérprete de Python en su dispositivo móvil</li>
+<li>Configurado un método de comunicación para interactuar entre su computadora local y el dispositivo móvil a través de Python</li>
+<li>Configurado el ambiente de Jupyter en la nube</li>
+</ul>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/dea569844508de9.png"></p>
+<p><img style="max-width: 134.50px" src="img/91f638ebc6ed29c2.png"></p>
+</td></tr>
+</table>
+<h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
+<ul class="checklist">
+<li>Cómo instalar y configurar Jupyter en una computadora personal</li>
+<li>Cómo instalar y configurar Python en un dispositivo móvil</li>
+<li>Cómo configurar el sistema para conectarse al dispositivo móvil </li>
+<li>Cómo interactuar con el dispositivo móvil usando Pytho</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Que vamos a necesitar" duration="2">
+        <ul>
+<li>Una computadora personal con un sistema operativo funcional</li>
+<li>Una dispositivo móvil con Android &gt;= 4</li>
+<li>Un cable USB de transferencia de datos</li>
+<li>Acceso al repositorio del curso en Github</li>
+<li><a href="https://www.anaconda.com/download/" target="_blank">Anaconda Python</a></li>
+<li><a href="https://github.com/htapia/sl4a" target="_blank">Scripting Layer 4 Android</a></li>
+<li><a href="https://github.com/htapia/python-for-android" target="_blank">Python for Android</a></li>
+<li><a href="https://colab.research.google.com/notebooks/welcome.ipynb" target="_blank">Google Collaborative</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Actividades/Libretas" duration="2">
+        <p>Cada semana se compone de una serie de laboratorios que deben seguir para poder configurar el sistema de trabajo. Cada laboratorio contiene una serie de pasos con instrucciones que deberán seguir y completar. Algunos de los pasos los llevarán a sitios externos (en el internet o en su computadora local). </p>
+<p>Los laboratorios que contienen las actividades de esta semana son:</p>
+<ol type="1" start="1">
+<li>Instalación local de Jupyter vía Anaconda</li>
+<li>Instalación/configuración local de <code>adb</code></li>
+<li>Instalación y configuración local del módulo <code>android.py</code></li>
+<li>Configuración del ecosistema de Jupyter en la nube</li>
+<li>Instalación de Python en el dispositivo móvil</li>
+<li>Comunicación entre el dispositivo móvil y el sistema local</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

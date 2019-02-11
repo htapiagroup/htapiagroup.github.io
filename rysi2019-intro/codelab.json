@@ -4,12 +4,12 @@
   "format": "html",
   "prefix": "../../",
   "mainga": "UA-49880327-14",
-  "updated": "2019-02-08T16:42:00Z",
+  "updated": "2019-02-11T19:46:22Z",
   "id": "rysi2019-intro",
-  "duration": 24,
+  "duration": 40,
   "title": "Desarrollo de Aplicaciones Móviles con Jupyter",
   "author": "htapia",
-  "summary": "",
+  "summary": "Ofrecer una vista general del ecosistema de programación Jupyter Notebooks como punto de partida para desarrollar prototipos de aplicaciones móviles basadas en Android",
   "theme": "python",
   "status": [
     "draft"
@@ -26,6 +26,6 @@
     "python",
     "rysi"
   ],
-  "feedback": "https://github.com/htapia/damju/issues",
+  "feedback": "https://github.com/htapiagroup/htapiagroup.github.io/issues",
   "url": "rysi2019-intro"
 }

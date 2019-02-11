@@ -1,0 +1,163 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Lab 1: Instalación local de Jupyter vía Anaconda</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Lab 1: Instalación local de Jupyter vía Anaconda"
+                  environment="web"
+                  feedback-link="https://github.com/htapiagroup/htapiagroup.github.io/issues">
+    
+      <google-codelab-step label="Introducción" duration="1">
+        <h2><strong>Ecosistema de desarrollo de Jupyter</strong></h2>
+<p>Jupyter es un ecosistema de desarrollo y creación de documentos digitales basado en Python, llamados Libretas de Jupyter. Los documentos pueden contener información legible para los humanos así como contenido digital (código, ejecutable, etc) interpretado por una máquina.</p>
+<p>La aplicación que permite editar y ejecutar libretas de Jupyter se conoce como Jupyter Notebook App. Esta semana aprenderemos como instalar y ejecutar diversas instancias de la aplicación para crear y editar libretas, a través de las cuales podremos interactuar con un dispositivo móvil</p>
+<aside class="special"><p>Quieres saber más de la aplicación Jupyter Notebooks? Checa la documentación oficial de  <a href="https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html" target="_blank">Jupyter Notebook App</a> y el sitio oficial del  <a href="https://jupyter.org/" target="_blank">Proyecto Jupyter</a>.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Objetivos de aprendizaje" duration="1">
+        <ul>
+<li>Conocer el proceso de instalación y configuración del ecosistema de Jupyter en su computadora personal</li>
+<li>Conocer como iniciar el servicio de Jupyter</li>
+<li>Conocer como abrir una libreta de Jupyter</li>
+<li>Conocer como ejecutar código en una libreta de Jupyter</li>
+</ul>
+<h2><strong>Qué haremos</strong></h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Vamos a instalar y configurar las herramientas necesarias para contar con el ecosistema de Jupyter en su computadora personal</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/dea569844508de9.png"></p>
+</td></tr>
+</table>
+<h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
+<ul class="checklist">
+<li>Cómo instalar y configurar Jupyter en una computadora personal</li>
+<li>Como configurar el sistema para conectarse al dispositivo móvil </li>
+<li>Como interactuar con el dispositivo móvil usando Python</li>
+</ul>
+<h2>Que vamos a necesitar</h2>
+<ul>
+<li>Una computadora personal con un sistema operativo funcional</li>
+<li>Conexión a internet</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Descarga el software" duration="5">
+        <p>Utiliza el enlace siguiente para la descarga de Anaconda la versión de <strong>Python 2.7</strong> apropiada para tu sistema operativo.</p>
+<p><a href="https://www.anaconda.com/download/" target="_blank"><paper-button class="colored" raised>Descarga Anaconda Python</paper-button></a></p>
+<aside class="warning"><p><strong>Importante: </strong>Asegúrate de descargar la versión de Python 2.7 apropiada para tu Sistema Operativo. Debido al corto tiempo disponible para el curso, no será posible proporcionar soporte a instalaciones o configuraciones de Python fuera de la distribución de Anaconda.</p>
+</aside>
+<p>Ejecuta el programa que acabas de descargar y sigue las instrucciones de instalación.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Verifica que Anaconda2 esta instalado" duration="5">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>En Windows, abre el menú de sistema y localiza el folder Anaconda2. </p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 175.50px" src="img/68abec2dde420d6a.png"></p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Inicia el servicio de Jupyter notebook" duration="5">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>Selecciona Anaconda Prompt y espera un momento. Una nueva ventana se abrirá donde pueden ingresar instrucciones.</p>
+<p>Si tu sistema operativo es alguna variante *NIX abre una terminal (consola).</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 334.14px" src="img/b34b14feb16b60c9.png"></p>
+</td></tr>
+</table>
+<p>En la ventana que se abrió (o en la consola si no estás usando Windows), escribe el siguiente comando: </p>
+<pre><code>jupyter notebook</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Jupyter Notebook" duration="5">
+        <p>Después de unos minutos deberá abrirse una nueva ventana en su navegador de preferencia apuntando a la dirección <a href="http://localhost:8888" target="_blank"><code>http://localhost:8888</code></a>. Si no se abre de manera automática utiliza el enlace anterior.</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>En su navegador verás algo similar a la imagen. Esta es la ventana inicial de la aplicación Jupyter Notebooks. Toma unos minutos para conocer el ambiente y familiarizarte con el contenido. Observa que en primer nivel tienes lo que es básicamente un navegador de archivos. </p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/888bc7fd4d98bfab.png"></p>
+</td></tr>
+</table>
+<aside class="special"><p>Más información sobre la aplicación la pueden consultar en la <a href="https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html" target="_blank">documentación de Jupyter Notebooks</a></p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Abre una libreta de Jupyter" duration="5">
+        <p>En la ventana del navegador mostrando el árbol de documentos, busca el siguiente botón cerca de la esquina superior derecha:</p>
+<p><img style="max-width: 1310.51px" src="img/888bc7fd4d98bfab.png"></p>
+<p>Selecciona <code>New</code> y después <code>Python 2</code></p>
+<p><img style="max-width: 1064.63px" src="img/3ce9e644c96581e2.png"></p>
+<p>Esta acción abrirá una nueva pestaña con una libreta de Jupyter en blanco como la que se muestra en la siguiente imagen<img style="max-width: 624.00px" src="img/8f52ffed898fd0c0.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ejecuta código en la libreta" duration="5">
+        <p>El recuadro que aparece color verde con el texto <code>In [ ]</code> es una celda de código. Escribe el código siguiente en la celda y cuando termines presiona simultáneamente las teclas <code>Alt+Enter</code></p>
+<pre><code>import sys
+sys.platform</code></pre>
+<p>Al ejecutar el código, el intérprete debe mostrar una línea con información del sistema operativo sobre el que se ejecuta la aplicación (win32, posix, linux, etc.). Si lograste ver el resultado, felicidades, has terminado la primera parte de la configuración de nuestro sistema.</p>
+<aside class="warning"><p>Si no lograste evaluar el código anterior en una libreta de Jupyter en tu sistema, o si tuviste algún problema en alguno de los pasos anteriores, revisa nuevamente cada uno de ellos. Dependiendo de el problema puede ser que el servicio no haya iniciado correctamente o que la instalación no haya sido exitosa. Si continuas teniendo problemas visita el foro del curso y revisa si alguien ya pudo solucionarlo. Si no existe el tema en el foro puedes iniciarlo.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = 'UA-134300173-1';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>
