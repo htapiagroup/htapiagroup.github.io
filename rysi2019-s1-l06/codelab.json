@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "source": "1H84cqMSHO31kbpb-x9_Sl5748BJfxXY21BmsFYlbgTI",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-02-12T20:50:05Z",
+  "id": "rysi2019-s1-l06",
+  "duration": 3,
+  "title": "Lab 6: Ejecutando Python en el dispositivo móvil",
+  "author": "htapia",
+  "summary": "En este lab vamos a comunciarnos con el movil via python",
+  "theme": "python",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "python"
+  ],
+  "tags": [
+    "jupyter",
+    "python",
+    "rysi"
+  ],
+  "feedback": "https://github.com/htapia/damju/issues",
+  "url": "rysi2019-s1-l06"
+}

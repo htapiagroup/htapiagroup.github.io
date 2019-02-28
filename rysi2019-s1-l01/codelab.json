@@ -4,7 +4,7 @@
   "format": "html",
   "prefix": "../../",
   "mainga": "UA-49880327-14",
-  "updated": "2019-02-11T21:21:10Z",
+  "updated": "2019-02-25T18:32:29Z",
   "id": "rysi2019-s1-l01",
   "duration": 33,
   "title": "Lab 1: Instalación local de Jupyter vía Anaconda",
@@ -12,7 +12,7 @@
   "summary": "En este lab vamos a instalar y configurar el ecosistema de programación de Jupyter en su computadora local usando Anaconda",
   "theme": "python",
   "status": [
-    "draft"
+    "complete"
   ],
   "category": [
     "python"

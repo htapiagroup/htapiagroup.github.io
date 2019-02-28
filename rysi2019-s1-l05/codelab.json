@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "source": "1hskIF1NEQNbXQTOZ2tHcPA3aJb0OC_VWKj16W1i-v0o",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-02-13T15:23:37Z",
+  "id": "rysi2019-s1-l05",
+  "duration": 23,
+  "title": "Lab 5: Python en dispositivo móvil",
+  "author": "htapia",
+  "summary": "En este lab vamos a instalar SL4A y Python en el dispositivo móvil",
+  "theme": "python",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "python"
+  ],
+  "tags": [
+    "jupyter",
+    "python",
+    "rysi"
+  ],
+  "feedback": "https://github.com/htapia/damju/issues",
+  "url": "rysi2019-s1-l05"
+}

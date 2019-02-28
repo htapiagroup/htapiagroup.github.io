@@ -4,15 +4,15 @@
   "format": "html",
   "prefix": "../../",
   "mainga": "UA-49880327-14",
-  "updated": "2019-02-11T21:21:23Z",
+  "updated": "2019-02-12T21:15:55Z",
   "id": "rysi2019-s1-l02",
-  "duration": 33,
+  "duration": 11,
   "title": "Lab 2: Instalación del módulo android.py",
   "author": "htapia",
   "summary": "En este lab vamos a usar Jupyter para programáticamente obtener el módulo, guarlarlo localmente y configurar el acceso",
   "theme": "python",
   "status": [
-    "draft"
+    "complete"
   ],
   "category": [
     "python"

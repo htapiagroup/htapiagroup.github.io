@@ -1,0 +1,272 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Aplicaciones con los sensores embebidos</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Aplicaciones con los sensores embebidos"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introduccion" duration="1">
+        <p>Los dispositivos modernos contienen arreglos de sensores embebidos. Una de las funcionalidades de acceder programaticamente al dispositivo usando Python es que podemos interactuar directamente con los sensores. En esta libreta vamos a aprender como determinar que sensores se tienen en el dispositivo y como tomar lecturas de ellos. Posterioremente usaremos estas lecturas para algunas aplicaciones.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lectura de sensores" duration="0">
+        <aside class="special"><p><strong>Nota:</strong> Siempre es buena idea revisar que la comunicacion con el dispositivo sige activa al comienzo de una nueva libreta. Aun cuando la conexion a traves de <code>tcp</code> deberia seguir activa mientras el servicio siga vigente en el dispositivo, no es necesario volver a establecerla. Sin embargo, en cada nueva libreta <strong>sí</strong> se tiene que importar el modulo <code>android</code>.</p>
+</aside>
+<p>lo <code>android</code>.</p>
+<p>Vamos a seguir la recomendacion de la nota anterior y verificar que el dispositivo esta conectado a la computadora.</p>
+<pre><code>!adb forward tcp:9999 tcp:2222
+</code></pre>
+<pre><code>import android
+droide=android.Android()
+droide.makeToast(&#34;Hola desde Jupyter!&#34;)
+</code></pre>
+<p>Usaremos dos de las funciones para capturar eventos que construimos en el laboratorio anterior. La primera de ellas <code>event_loop</code> es una funcion auxiliar  para captar eventos vaciando el buffer de eventos y capturando el evento mas reciente. Hemos modificado la version presentada antes para que regrese los valores resultantes de la ejecucion.</p>
+<pre><code>import time
+
+def event_loop():
+  for i in range(10):
+    time.sleep(1)
+    droide.eventClearBuffer()
+    time.sleep(1)
+    e = droide.eventPoll(1)
+    if e.result is not None:
+      return e.result
+  return False
+</code></pre>
+<p>La segunda funcion retorna lectura de los sensores de aceleracion con una frecuencia de una lectura por segundo. Recordemos que de acuerdo <a href="http://www.mithril.com.au/android/doc/SensorManagerFacade.html" target="_blank">a la documentacion</a>, el primer valor dentro del llamado a <code>startSensingTimed</code> corresponde al sensor y el valor 2 representa el acelerometro del dispositivo.</p>
+<pre><code>def prueba_sensor():
+  # 2: acelerometro; 1000 milisegundos entre lectura
+  droide.startSensingTimed(2, 1000)
+  try:
+    return event_loop()
+  finally:
+    droide.stopSensing()
+
+prueba_sensor()
+</code></pre>
+<p>El programa anterior es util cuando necesitamos abrir una sola conexion con el sensor para obtener una lectura de su estado. Este modelo forza la utilizacion de un controlador central. Antes de continuar vamos a determinar que sensores tenemos disponibles en nuestro dispositivo.</p>
+<aside class="special"><p>Cada modelo de dispositivo movil contienen arreglos de sensores diferentes. Tradicionalmente los dispositivos Android tienen un acelerometro, un giroscopo y un sensor de campo magnetico, y por esto existe una funcion en la API de Python especifica para estos sensores.</p>
+</aside>
+<pre><code>def prueba_acelerometro():
+    # 2: acelerometro; 1000 milisegundos entre lectura
+    droide.makeToast(&#34;Prueba de acelerometro...&#34;)
+    droide.startSensingTimed(2, 1000)
+    try:
+        return droide.sensorsReadAccelerometer().result
+    finally:
+        droide.stopSensing()
+
+prueba_acelerometro()
+</code></pre>
+<p>positive<br>:El resultado de la ejecucion anterior es una lista con tres valores que corresponden a las lecturas de la aceleracion en cada direccion del espacio tridimensional usando un sistema de coordenadas situadas en el dispositivo como se muestra en el esquema. | <img alt="CoordSys" src="img/d34f2309c1ca2e06.png"></p>
+<p>Vamos a modificar las funciones de la API para leer los datos del sensor de campo magnetico (magnetometro)</p>
+<pre><code>def prueba_magnetometro():
+    # 3: magnetometro; 1000 milisegundos entre lectura
+    droide.makeToast(&#34;Prueba de magnetometro...&#34;)
+    droide.startSensingTimed(3, 1000)
+    try:
+        return droide.sensorsReadMagnetometer().result
+    finally:
+        droide.stopSensing()
+
+prueba_magnetometro()
+</code></pre>
+<p>y del sensor de orientacion (giroscopo):</p>
+<pre><code>def prueba_orientacion():
+    # 1: todos los sensores; 1000 milisegundos entre lectura
+    droide.makeToast(&#34;Prueba de orientacion...&#34;)
+    droide.startSensingTimed(1, 1000)
+    try:
+        return droide.sensorsReadOrientation().result
+    finally:
+        droide.stopSensing()
+
+prueba_orientacion()
+</code></pre>
+<p>En todos los casos obtnemos una lista con los tres valores correspondientes a cada una de las direcciones de acuerdo al diagrama anterior. La interpretacion fisica de cada lectura se deja para mas adelante y es importante saber como interpretar las lecturas ya que los valores dan informacion sobre el contexto del dispositivo: movimiento (aceleracion), orientacion (giroscopo) y posicion respecto al norte magnetico de la Tierra (magnetometro).</p>
+<p>Algunos dispositivos incluyen mas sensores, tipicamente todos tienen ademas de los tres ya indicados un sensor de luminosidad. La API proporciona una forma de saber que otros sensores se tienen y veremo ademas la ventaja de usar nuestra funcion <code>event_poll</code>.</p>
+<p>Evaluen la siguiente funcion una vez, registren el numero que resulta y despues  cubran la pantalla de su dispositivo y vuelvan a evaluar. Que ocurre?</p>
+<pre><code>def prueba_iluminacion():
+    # 4: sensor luminosidad; 1000 milisegundos entre lectura
+    droide.makeToast(&#34;Prueba de luminosidad...&#34;)
+    droide.startSensingTimed(4, 1000)
+    try:
+        return droide.sensorsGetLight().result
+    finally:
+        droide.stopSensing()
+
+prueba_iluminacion()
+</code></pre>
+<p>Evaluen nuevamente la funcion pero con la pantalla cubierta...</p>
+<pre><code>prueba_iluminacion()
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lectura de sensores usando 
+readSensors" duration="0">
+        <p>La API incluye una funcion nombrada <code>readSensors</code> que regresa los valores mas recientes que se han registrado por los sensores. Esta funcion se invoca primero indicando que los sensores deben estar &#34;atentos&#34; a censar:</p>
+<pre><code>droide.startSensingTimed(1, 1000)
+</code></pre>
+<p>el llamado de la funcion es como sigue:</p>
+<pre><code>lecturas = droide.readSensors().result
+</code></pre>
+<p>y finalmente no debemos olvidar indicar al dispositivo que deje de tomar lecturas de los sensores, de otro modo puede interferir con otras actividades:</p>
+<pre><code>droide.stopSensing()
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Usando controlador central via 
+event_loop" duration="0">
+        <p>La funcion <code>event_loop</code> que construimos previamente nos permite acceder a las lecturas de los sensores disponibles pero ya controla los pasos anteriores:</p>
+<pre><code>def prueba_sensores():
+  # 1: todos los sensores; 1000 milisegundos entre lectura
+  droide.startSensingTimed(1, 1000)
+  try:
+    return event_loop()
+  finally:
+    droide.stopSensing()
+
+lecturas2 = prueba_sensores()
+</code></pre>
+<p>Comparemos los sensores disponibles entre ambos metodos:</p>
+<pre><code>print(lecturas.keys())
+</code></pre>
+<pre><code>print(lecturas2[0][&#39;data&#39;].keys())
+</code></pre>
+<aside class="special"><p><strong>Nota:</strong> Como mencionamos, cada dispositivo contiene un arreglo diferente de sensores, asi que los resultados que observen dependeran de su modelo. En el fondo del alma la funcion <code>readSensors</code> utiliza <code>eventPoll</code> para tomar las lecturas, sin embargo <code>eventPoll</code> permite un control mas fino de los eventos que se estan registrando.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Visualizando las lecturas del acelerometro" duration="0">
+        <p>Vamos a realizar un programa que registre los datos del acelerometro. Este sera util para conocer el estado de movimiento del dispositivo (y por lo tanto del usuario).</p>
+<p>La estructura del programa es como sigue: primero definimos el tiempo entre lecturas del sensor y lo nombramos <code>dt</code>.</p>
+<pre><code>dt = 100 # 100ms entre lecturas
+</code></pre>
+<aside class="special"><p>Mientras mas pequeno es el intervalo entre lecturas, es mas probable que puedan detectarse eventos importantes o de interes. El tiempo entre lecturas lo deben determinar de acuerdo a lo que quieren detectar. Pero recuerden que mientras mas corto este tiempo, mas gasto de bateria pues el sensor esta tomando lecturas con mas frecuencia.</p>
+</aside>
+<p>Ahora vamos a definir el tiempo total que el dispositivo estara registrando valores, en este caso por segundos:</p>
+<pre><code>tfin = 3000 # toma lecturas por 3 segundos
+</code></pre>
+<p>El dispositivo va a tomar lecturas del estado del sensor en el siguiente segmento de codigo,</p>
+<pre><code>tiempo = 0
+
+droide.startSensingTimed(2, dt)
+
+while tiempo &lt;= tfin:
+    print droide.sensorsReadAccelerometer().result
+    time.sleep(dt/1000.0)
+    tiempo += dt
+droide.stopSensing()
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Visualizando los valores" duration="0">
+        <p>Como tenemos acceso a las lecturas, podemos visualizar los tres valores de las aceleraciones captadas por el sensor en el sistema local. Para eso vamos a usar una libreria especializada para hacer graficass y que deben tener instalada. Primero modificamos el programa como sigue:</p>
+<pre><code>acel = []
+tiempo = 0
+
+droide.startSensingTimed(2, dt)
+
+while tiempo &lt;= tfin:
+    acel.append(droide.sensorsReadAccelerometer().result)
+    tiempo += dt
+droide.stopSensing()
+</code></pre>
+<p>Donde hemos definido la lista <code>acel</code> inicialmente vacia, y a la que iremos agregando los valores del sensor dentro del <code>while</code>. Ahora evaluen lo siguiente</p>
+<pre><code>import pandas as pd
+%matplotlib inline
+</code></pre>
+<p>La libreria <code>pandas</code> contiene metodos y clases para un tipo de estructuras de datos llamadas <code>DataFrames</code> que permiten la manipulacion y el analisis de datos de manera eficiente. La segunda linea nos permite visualizar las graficas en la libreta. Ahora evaluen lo que sigue</p>
+<pre><code>a = pd.DataFrame(acel, columns=[&#34;ax&#34;,&#34;ay&#34;,&#34;az&#34;])
+</code></pre>
+<p>La estructura <code>a</code> contiene los datos del sensor obtenidos de la lista <code>acel</code> en un formato similar a las tablas de columnas y renglones tradicionalmente usadas en software de oficina. Pero ademas contiene metodos heradados que permiten la manipulacion eficiente de los datos. Por ejemplo podemos graficarlos evaluando</p>
+<pre><code>a.plot()
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Entrega" duration="0">
+        <p>Van a modificar los programas necesarios para graficar los valores de orientacion, campo magnetico y luminosidad de sus dispositivos.</p>
+<p>La libreta de entrega de este laboratorio debe mostrar los programas y las tres graficas correspondientes a los sensores.</p>
+<google-codelab-survey survey-id="rysi2019-s2-l02-1">
+<h4>La funcion</h4>
+<paper-radio-group>
+<paper-radio-button>Un diccionario larousse</paper-radio-button>
+<paper-radio-button>Una matrix aleatoria</paper-radio-button>
+<paper-radio-button>Una lista de tres numeros</paper-radio-button>
+<paper-radio-button>Nada</paper-radio-button>
+</paper-radio-group>
+<h4>Mi dispositivo cuenta con al menos los siguientes sensores</h4>
+<paper-radio-group>
+<paper-radio-button>Luminosidad, Aceleracion, Campo magnetico y orientacion</paper-radio-button>
+<paper-radio-button>Luminosidad y orientacion</paper-radio-button>
+<paper-radio-button>Luminosidad, Aceleracion, Campo magnetico, Orientacion, Presion barometrica y bioxido de carbono</paper-radio-button>
+<paper-radio-button>No tiene sensores</paper-radio-button>
+</paper-radio-group>
+</google-codelab-survey>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

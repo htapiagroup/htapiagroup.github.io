@@ -1,0 +1,145 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Lab 3: Configuracion local de  adb</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Lab 3: Configuracion local de  adb"
+                  environment="web"
+                  feedback-link="https://github.com/htapia/damju/issues">
+    
+      <google-codelab-step label="Introducción" duration="1">
+        <p><code>adb</code> es el programa proporcionado por los desarrolladores de Android para detectar dispositivo móvil en el sistema local. Puede obtenerse <a href="https://developer.android.com/studio/releases/platform-tools#download" target="_blank">en este enlace</a>. La documentación de <code>adb </code><a href="https://developer.android.com/studio/command-line/adb?hl=es" target="_blank">puede consultarse aqui</a>. </p>
+<aside class="special"><p>Es altamente probable que ya tengan instalado el programa de <code>adb</code>, de modo que antes de descargarlo, revisen si configuración. Si no lo tienen instalado entonces sigan las instrucciones de descarga e instalación en los enlaces anteriores.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Objetivos de aprendizaje" duration="1">
+        <ul>
+<li>Preparar el sistema para establecer comunicación entre Python y el dispositivo móvil</li>
+<li>Configurar sistema local para conectarse con el dispositivo móvil</li>
+</ul>
+<h2><strong>Qué haremos</strong></h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>En este laboratorio vamo a asegurarnos que el ejecutable de adb esta disponible en el sistema, y también vamos a crear variables de entornos apropiadas para tener la configuración lista y poder establecer conexiones entre el sistema local y el dispositivo móvil.</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 458.88px" src="img/230dd15a1ae7eb1.png"></p>
+</td></tr>
+</table>
+<h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
+<ul class="checklist">
+<li>Cómo configurar un variable del sistema en Windows</li>
+<li>Como preparar el sistema para establecer comunicación entre Python y el dispositivo móvil</li>
+</ul>
+<h2>Que vamos a necesitar</h2>
+<ul>
+<li>Una computadora personal con <code>adb</code> instalado android-platform-tools</li>
+<li>Conexión a internet</li>
+</ul>
+<h2>Video</h2>
+<p><a href="https://laniaedu.sharepoint.com/:v:/s/TopicosSelectosVideos/EYKxLc1o6edIlN5WuvxYSFsBtAdqCZeQuJ-jzlhvTsK0DA?e=1xGbhX" target="_blank"><paper-button class="colored" raised>Mira el video</paper-button></a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Verifica si tienes adb instalado en tu sistema" duration="2">
+        <p>Para verificar si tienes instalado el programa, abre otra ventana de Anaconda Prompt o terminal y en la línea de comando escribe lo siguiente:</p>
+<pre><code>adb --version</code></pre>
+<p>Debes ver como salida de este comando algo parecido a lo siguiente, que indica la versión del ejecutable y la ruta de instalación.</p>
+<pre><code>Android Debug Bridge version 1.0.40
+Version 4986621
+Installed as C:\Android\platform-tools\adb.exe</code></pre>
+<p>Si el comando anterior no regresa la información del programa, puede ser posible que no lo tengas en la ruta de acceso del sistema. La clave para encontrar el ejecutable es localizar los directorios <code>Android</code> y <code>platform-tools</code> pues es ahí donde tradicionalmente se localiza el ejecutable. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Agrega adb al PATH de windows" duration="5">
+        <aside class="warning"><p><strong>Atención</strong>: NO es necesario realizar los pasos siguientes si el comando anterior ejecuta exitosamente.</p>
+</aside>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Una vez que hayas localizado el ejecutable, asegurate que la ruta está disponible en las variables de entorno del sistema operativo. Si estas en Windows, abre la configuración avanzada del sistema -&gt; propiedades del sistema y en la pestaña de opciones avanzadas selecciones variables de entorno</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 412.00px" src="img/1b540fce1c192d44.png"></p>
+</td></tr>
+</table>
+<table>
+<tr><td colspan="1" rowspan="1"><ul>
+<li>Localiza Path en variables del sistema y selecciona editar. </li>
+<li>Si no la tienes, agrega la ruta del ejecutable de <code>adb </code></li>
+<li>Presiona Aceptar para regresar a la ventana de variables de entorno</li>
+</ul>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 409.75px" src="img/31f873a4a05d5cab.png"></p>
+<p><img style="max-width: 298.00px" src="img/2f980b99c5214a8f.png"></p>
+</td></tr>
+</table>
+<table>
+<tr><td colspan="1" rowspan="1"><ul>
+<li>Finalmente, en la ventana variables de entorno, agrega una nueva variable del sistema con el nombre <code>AP_PORT</code> y valor <code>9999</code>.</li>
+<li>Presiona Aceptar y cierra las ventanas de configuración.</li>
+</ul>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/230dd15a1ae7eb1.png"></p>
+</td></tr>
+</table>
+<p>Vuelve a escribir en la consola el comando <code>adb --version</code>, esta vez debería funcionar si no lo ha hecho ya.</p>
+<p><br>En este punto, debes tener configurado tu sistema local con el ecosistema de Jupyter y Python disponibles y el programa <code>adb</code> accesible por el sistema operativo.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Siguientes pasos" duration="1">
+        <p>Felicidades! Has terminado otro laboratorio para la configuración de nuestra herramienta de trabajo. En el siguiente laboratorio vamos a instalar y configurar </p>
+<p>Python en el dispositivo móvil.</p>
+<p><a href="https://htapiagroup.github.io/rysi2019-s1-l05" target="_blank"><paper-button class="colored" raised>Siguiente laboratorio</paper-button></a></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

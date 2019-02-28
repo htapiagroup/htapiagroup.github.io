@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "source": "DAMJuv1_Sem2_Lab1.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-02-28T15:17:31-06:00",
+  "id": "rysi2019-s2-l01",
+  "duration": 176,
+  "title": "Explorando la API de Python en Android",
+  "author": "HTM",
+  "summary": "En este laboratorio vamos a conectar el dispositivo movil con el sistema local a traves del servicio de Python que se ejecuta en el dispotivo por medio de SL4A y explorar la API de Python en Android.",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "android"
+  ],
+  "tags": [
+    "adb",
+    "forward",
+    "ports",
+    "python",
+    "sl4a"
+  ],
+  "url": "rysi2019-s2-l01"
+}

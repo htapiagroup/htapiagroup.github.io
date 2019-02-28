@@ -1,0 +1,181 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Lab 5: Python en dispositivo móvil</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Lab 5: Python en dispositivo móvil"
+                  environment="web"
+                  feedback-link="https://github.com/htapia/damju/issues">
+    
+      <google-codelab-step label="Introducción" duration="1">
+        <p>Para ejecutar Python en Android vamos a utilizar un software que se llama Scripting Layer 4 Android. Esta tecnología permite ejecutar lenguajes programáticos e interactivos en el dispositivo móvil, tales como Lua, Ruby y por supuesto Python.</p>
+<p>La configuración del dispositivo móvil consta de tres pasos principales, los cuales vamos a realizar en esta laboratorio.</p>
+<p>Los pasos principales son </p>
+<ol type="1" start="1">
+<li>Instalar SL4A en el dispositivo</li>
+<li>Instalar Python en el dispositivo</li>
+<li>Configurar el servicio de Python en el dispositivo</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Objetivos de aprendizaje" duration="1">
+        <ul>
+<li>Instalar y configurar Python en un dispositivo móvil</li>
+</ul>
+<h2><strong>Qué haremos</strong></h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Vamos a realizar los pasos necesarios para tener disponible el intérprete de Python en nuestro dispositivo móvil.</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 230.50px" src="img/91f638ebc6ed29c2.png"></p>
+</td></tr>
+</table>
+<h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
+<ul class="checklist">
+<li>Cómo instalar y configurar Python  en un dispositivo Android</li>
+<li>Como configurar el sistema ejecutar el servicio de Python</li>
+</ul>
+<h2>Que vamos a necesitar</h2>
+<ul>
+<li>Un dispositivo móvil con Android &gt;= 4 instalado y con las siguientes características:</li>
+<li>con acceso a internet</li>
+<li>Habilitado en modo desarrollador</li>
+<li>Habilitado para instalar fuentes externas</li>
+<li>Cable USB de datos </li>
+<li>Conexión a internet</li>
+<li>Computadora con <code>adb</code> instalado y accesible </li>
+</ul>
+<h2>Video</h2>
+<p><a href="https://laniaedu.sharepoint.com/:v:/s/TopicosSelectosVideos/EYKxLc1o6edIlN5WuvxYSFsBtAdqCZeQuJ-jzlhvTsK0DA?e=1xGbhX" target="_blank"><paper-button class="colored" raised>Mira el video</paper-button></a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instalación de SL4A" duration="5">
+        <p>Para poder ejecutar comandos de Python en Android usaremos una tecnología que permite acceder a la mayoría de las funcionalidades de Android a través de <em>fachadas</em>. </p>
+<p>Los pasos siguientes tienen que realizarse en el dispositivo móvil. La instalación es muy sencilla y automática. </p>
+<h2><strong>Descarga el software de SL4A</strong></h2>
+<p>Captura la siguiente imagen con la cámara de tu dispositivo para descargar el <a href="https://github.com/kuri65536/sl4a" target="_blank">Scripting Layer For Android</a></p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><img style="max-width: 200.00px" src="img/fcb42bde018fa2.png"></p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/bae2d7196aeee3e3.png"></p>
+</td></tr>
+</table>
+<h3><strong>Instala sl4a</strong></h3>
+<p>Para instalar el software debes tener habilitada la opción de permitir instalación de software externo bajo la configuración de opciones de desarrollador del dispositivo.</p>
+<p>Ejecuta el programa que descargaste y sigue las instrucciones en la pantalla del dispositivo.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instalación de Python para Android" duration="5">
+        <h2><strong>Descarga el software de Python</strong></h2>
+<p>Captura la siguiente imagen con la cámara de tu dispositivo para descargar <a href="https://github.com/kuri65536/python-for-android" target="_blank">Python for Android</a></p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><img style="max-width: 148.00px" src="img/9486a5761cbf1323.png"></p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/70cc1e69e6aba823.png"></p>
+</td></tr>
+</table>
+<h3><strong>Instala python</strong></h3>
+<p>Para instalar el software debes tener habilitada la opción de permitir instalación de software externo bajo la configuración de opciones de desarrollador del dispositivo.</p>
+<p>Ejecuta el programa que descargaste y sigue las instrucciones en la pantalla del dispositivo. El programa descarga archivos adicionales y completa la instalación. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Inicia el servicio de Python en el dispositivo móvil" duration="5">
+        <p>Abre la aplicación SL4A identificada por el icono</p>
+<p><img style="max-width: 67.50px" src="img/8e86a0cba74f67f0.png"> </p>
+<p>en la pantalla de tu dispositivo. </p>
+<table>
+<tr><td colspan="1" rowspan="1"><ul>
+<li>Del menú navega a Preferences-&gt;Server Port y escribe 2222 en la caja correspondiente.</li>
+<li>Después regresa al menú y navega a View-&gt;Interpreters, </li>
+<li>nuevamente menú y </li>
+<li>elige Start Server. </li>
+</ul>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/ac0913b38ec96e8a.png"></p>
+</td></tr>
+</table>
+<p>El servicio Público permite comunicarse con el dispositivo vía WiFi. Elige iniciar un servicio  Privado y conecta tu dispositivo a un puerto USB de tu computadora.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Revisión configuración" duration="5">
+        <p>Vamos a revisar que localmente podemos identificar el dispositivo y que podemos comunicarnos con él a través del servicio de Python. Con el dispositivo conectado a un puerto USB de tu computadora, escribe lo siguiente en la ventana de comando:</p>
+<pre><code>adb devices</code></pre>
+<p>El resultado de dicha instrucción debe dar información sobre el dispositivo conectado a la computadora, por ejemplo</p>
+<pre><code>List of devices attached
+98f2eeee        device</code></pre>
+<p>Si el comando no regresa información revisa la conexión del dispositivo al puerto USB y asegurate que está autorizado por el sistema para comunicarse con la computadora. </p>
+<p>Después escribe</p>
+<pre><code>adb forward tcp:9999 tcp:2222</code></pre>
+<p>Finalmente, ejecuta el siguiente comando y observa la pantalla de tu móvil:</p>
+<pre>python -c &#34;import sys; sys.path.append(u&#39;C:\\Users\\HoracioTapiaMcClung\\.ipython&#39;); import android; droid=android.Android(); droid.makeToast(&#39;Hola desde Python&#39;)&#34;</pre>
+<p>Asegúrate de modificar la ruta del directorio donde copiaste el módulo android.py en un laboratorio anterior, en mi caso particular <code>&#39;C:\\Users\\HoracioTapiaMcClung\\.ipython</code></p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Si el comando anterior arroja error, hay algún problema con la configuración, de otro modo debes ver un mensaje en la pantalla con el texto <code>&#34;Hola desde Python&#34;</code>.</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/48a1aac16ee3534d.png"></p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Siguientes pasos" duration="1">
+        <p>Felicidades! Has completado los laboratorios de la Semana 1. En los proximos laboratorios vamos a utilizar nuestro sistema para establecer una comunicación entre el dispositivo y Jupyter y explorar la API de Python en Android para desarrollar nuestras primeras aplicaciones.</p>
+<p>Te solicito por favor responder las siguientes preguntas.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

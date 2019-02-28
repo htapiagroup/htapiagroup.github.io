@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "source": "DAMJuv1_Sem2_Lab2.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-02-27T11:59:17-06:00",
+  "id": "rysi2019-s2-l02",
+  "duration": 1,
+  "title": "Aplicaciones con los sensores embebidos",
+  "author": "HTM",
+  "summary": "En este laboratorio",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "android"
+  ],
+  "tags": [
+    "adb",
+    "forward",
+    "ports",
+    "python",
+    "sl4a"
+  ],
+  "url": "rysi2019-s2-l02"
+}

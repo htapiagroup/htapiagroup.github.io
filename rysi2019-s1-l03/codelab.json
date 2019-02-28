@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "source": "1pMWjh8rjlbZgFOAItN9rnohD-dbJBUFOUN9up7DMtwE",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-02-12T21:17:21Z",
+  "id": "rysi2019-s1-l03",
+  "duration": 10,
+  "title": "Lab 3: Configuracion local de  adb",
+  "author": "htapia",
+  "summary": "En este lab vamos configurar la ruta local de adb para que el sistema pueda accederlo",
+  "theme": "python",
+  "status": [
+    "complete"
+  ],
+  "category": [
+    "python"
+  ],
+  "tags": [
+    "jupyter",
+    "python",
+    "rysi"
+  ],
+  "feedback": "https://github.com/htapia/damju/issues",
+  "url": "rysi2019-s1-l03"
+}

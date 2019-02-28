@@ -1,0 +1,432 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Aplicaciones de geolocalizacion</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Aplicaciones de geolocalizacion"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introduccion" duration="1">
+        <p>Ademas de los sensores embebidos, los dispositivos modernos contienen antenas que se utilizan para la comunicacion. En este laboratorio vamos a enfocarnos particularmente en la antena de GPS, utilizada para determinar la ubicacion del dispositivo.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Antenas y radios" duration="0">
+        <aside class="special"><p><strong>Nota:</strong> Siempre es buena idea revisar que la comunicacion con el dispositivo sige activa al comienzo de una nueva libreta. Aun cuando la conexion a traves de <code>tcp</code> deberia seguir activa mientras el servicio siga vigente en el dispositivo, no es necesario volver a establecerla. Sin embargo, en cada nueva libreta <strong>sí</strong> se tiene que importar el modulo <code>android</code>.</p>
+</aside>
+<p>lo <code>android</code>.</p>
+<p>Vamos a seguir la recomendacion de la nota anterior y verificar que el dispositivo esta conectado a la computadora.</p>
+<h2>Estableciendo conexion con el dispositivo</h2>
+<pre><code>!adb forward tcp:9999 tcp:2222
+</code></pre>
+<pre><code>import android
+droide=android.Android()
+droide.makeToast(&#34;Hola desde Jupyter!&#34;)
+</code></pre>
+<pre><code>Result(id=0, result=None, error=None)
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Localizacion" duration="0">
+        <p>En 1995 existen en operacion satelites que proporcionan a los civiles un <a href="https://es.wikipedia.org/wiki/GPS" target="_blank">Sstema de Posicionamiento Global (en inglés, <br>GPS; Global Positioning System)</a> que permite determinar la posicion de cualquier objeto sobre la Tierra.</p>
+<p>Los dispositivos moviles modernos tienen una antena receptora de GPS y la API de Python ofrece algunas funciones para extraer valores de ella que permiten conocer la geoposicion actual del dispositivo. Una de ellas es</p>
+<h2>getLastKnownLocation</h2>
+<pre><code>getLastKnownLocation()
+
+Returns the last known location of the device.
+
+Returns:
+  A map of location information by provider.
+</code></pre>
+<pre><code>droide.getLastKnownLocation()
+</code></pre>
+<pre><code>Result(id=1, result={u&#39;passive&#39;: {u&#39;bearing&#39;: 81, u&#39;altitude&#39;: 1381, u&#39;provider&#39;: u&#39;fused&#39;, u&#39;longitude&#39;: -96.9155753776431, u&#39;time&#39;: 1551204503400L, u&#39;latitude&#39;: 19.519595811143517, u&#39;speed&#39;: 0, u&#39;accuracy&#39;: 9367.2490234375}, u&#39;network&#39;: {u&#39;bearing&#39;: 0, u&#39;altitude&#39;: 1348.0999755859375, u&#39;provider&#39;: u&#39;network&#39;, u&#39;longitude&#39;: -96.915587, u&#39;time&#39;: 1551195658939L, u&#39;latitude&#39;: 19.5196228, u&#39;speed&#39;: 0, u&#39;accuracy&#39;: 22.746000289916992}, u&#39;gps&#39;: {u&#39;bearing&#39;: 6.123749256134033, u&#39;altitude&#39;: 1330.932861328125, u&#39;provider&#39;: u&#39;gps&#39;, u&#39;longitude&#39;: -96.9156464323333, u&#39;time&#39;: 1551194104500L, u&#39;latitude&#39;: 19.520619408385585, u&#39;speed&#39;: 7, u&#39;accuracy&#39;: 1681.982421875}}, error=None)
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Parentesis" duration="0">
+        <p>Para desarrollar aplicaciones relacionadas a informacion de geoposicion es util contar con una herramienta para visualizar mapas. La libreria <code>matplotlib</code> cuenta con funcionalidad elemental para graficos simples, por ejemplo graficas de dispersion, barras, etc. Por supuesto los pares de latitud,longitud pueden visualizarse con funnciones disponibles en esta libreria sin embargo, no muestran capas de referencia a la geolocalizacion (mapas). Aunque existen varias librearias que proporcionan funciones utiles y flexibles para visualizar mapas, entre ellas <code>basemaps</code>, <code>ipyleaflet</code>, <code>bokeh</code>, <code>gmaps</code>, etc. vamos a utilizar nuestro dispositivo que ya contiene un a &#34;libreria&#34; de mapas instalada: la aplicacion de mapas de Google.</p>
+<h2>Abrir una aplicacion en el dispositivo</h2>
+<p>Primero veamos como abrir una aplicacion en el dispositivo desde Python. Podemos ver la lista de aplicaciones en el dispositivo con la siguiente instruccion:</p>
+<pre><code>droide.getLaunchableApplications().result
+</code></pre>
+<pre><code>{u&#39;Actualizar sistema&#39;: u&#39;com.tcl.fota.FotaClientActivity&#39;,
+ u&#39;Ajustes&#39;: u&#39;com.android.settings.Settings&#39;,
+ u&#39;Ajustes de Google&#39;: u&#39;com.google.android.gms.app.settings.GoogleSettingsActivity&#39;,
+ u&#39;Asistente&#39;: u&#39;com.google.android.apps.gsa.staticplugins.opa.EnterOpaActivityFromLauncher&#39;,
+ u&#39;Book Cr...&#39;: u&#39;com.appli.bookcr.WelcomeActivity&#39;,
+ u&#39;B\xfasqueda por voz&#39;: u&#39;com.google.android.googlequicksearchbox.VoiceSearchActivity&#39;,
+ u&#39;Calculadora&#39;: u&#39;com.tct.calculator.Calculator&#39;,
+ u&#39;Calendario&#39;: u&#39;com.android.calendar.AllInOneActivity&#39;,
+ u&#39;Cars Racing&#39;: u&#39;com.gameloft.android.GloftCRSM.Start&#39;,
+ u&#39;Chrome&#39;: u&#39;com.google.android.apps.chrome.Main&#39;,
+ u&#39;Claro juegos&#39;: u&#39;com.gameloft.android.gdc.GDCMainShop&#39;,
+ u&#39;Claro m\xfasica&#39;: u&#39;com.telcel.imk.MainActivity&#39;,
+ u&#39;ClaroVideo&#39;: u&#39;com.clarovideo.app.ui.activities.SplashActivity&#39;,
+ u&#39;Clarokids&#39;: u&#39;com.movile.playkids.UnityPlayerActivity&#39;,
+ u&#39;Clarosalud&#39;: u&#39;com.elunviersal.isalud.ClarosaludActivity&#39;,
+ u&#39;Clarosync&#39;: u&#39;com.fsecure.mobile.sync.StartupActivity&#39;,
+ u&#39;Consumo&#39;: u&#39;telcel.net.MainActivity&#39;,
+ u&#39;Contactos&#39;: u&#39;com.android.contacts.activities.PeopleActivity&#39;,
+ u&#39;Correo electr\xf3nico&#39;: u&#39;com.tct.email.activity.Welcome&#39;,
+ u&#39;C\xe1mara&#39;: u&#39;com.android.camera.CameraLauncher&#39;,
+ u&#39;DCI&#39;: u&#39;appinventor.ai_horaciotmc.DCI2.Screen1&#39;,
+ u&#39;DU Recorder&#39;: u&#39;com.duapps.screen.recorder.SplashActivity&#39;,
+ u&#39;Descargas&#39;: u&#39;com.android.providers.downloads.ui.DownloadList&#39;,
+ u&#39;Drive&#39;: u&#39;com.google.android.apps.docs.app.NewMainProxyActivity&#39;,
+ u&#39;Duo&#39;: u&#39;com.google.android.apps.tachyon.MainActivity&#39;,
+ u&#39;Facebook&#39;: u&#39;com.facebook.katana.LoginActivity&#39;,
+ u&#39;Fotos&#39;: u&#39;com.google.android.apps.photos.home.HomeActivity&#39;,
+ u&#39;Galer\xeda&#39;: u&#39;com.tct.gallery3d.app.PermissionActivity&#39;,
+ u&#39;Gesti\xf3n de archivos&#39;: u&#39;com.jrdcom.filemanager.activity.FileBrowserActivity&#39;,
+ u&#39;Gmail&#39;: u&#39;com.google.android.gm.ConversationListActivityGmail&#39;,
+ u&#39;Google&#39;: u&#39;com.google.android.googlequicksearchbox.SearchActivity&#39;,
+ u&#39;Google+&#39;: u&#39;com.google.android.apps.plus.phone.HomeActivity&#39;,
+ u&#39;Grabador de sonido&#39;: u&#39;com.tct.soundrecorder.activity.SoundRecorderMainActivity&#39;,
+ u&#39;Hangouts&#39;: u&#39;com.google.android.talk.SigningInActivity&#39;,
+ u&#39;IMU+GPS-Stream&#39;: u&#39;de.lorenz_fenster.sensorstreamgps.SensorStreamActivity&#39;,
+ u&#39;Keep (notas)&#39;: u&#39;com.google.android.keep.activities.BrowseActivity&#39;,
+ u&#39;Kingdoms &amp; Lords&#39;: u&#39;com.gameloft.android.GloftKLMF.Start&#39;,
+ u&#39;Lithium&#39;: u&#39;com.faultexception.reader.MainActivity&#39;,
+ u&#39;Little Big City&#39;: u&#39;com.gameloft.android.GloftLCEF.Start&#39;,
+ u&#39;Maps&#39;: u&#39;com.google.android.maps.MapsActivity&#39;,
+ u&#39;Mensajes&#39;: u&#39;com.android.mms.ui.ConversationList&#39;,
+ u&#39;Mi Telcel&#39;: u&#39;com.speedymovil.wire.Login&#39;,
+ u&#39;M\xfasica&#39;: u&#39;com.alcatel.music5.activities.Music5WelcomeActivity&#39;,
+ u&#39;NFC&#39;: u&#39;com.jrdcom.apps.tag.MainMenu&#39;,
+ u&#39;Navegaci\xf3n Segura&#39;: u&#39;com.fsecure.browser.BrowserActivity&#39;,
+ u&#39;Navegador&#39;: u&#39;com.android.browser.BrowserActivity&#39;,
+ u&#39;Notas&#39;: u&#39;com.tct.note.ui.NotesListActivity&#39;,
+ u&#39;Noticias&#39;: u&#39;com.google.apps.dots.android.app.activity.CurrentsStartActivity&#39;,
+ u&#39;Onetouch Care&#39;: u&#39;com.alcatel.alcatelonetouch.SplashScreenActivity&#39;,
+ u&#39;Phonto&#39;: u&#39;com.youthhr.phonto.PhontoActivity&#39;,
+ u&#39;Play Juegos&#39;: u&#39;com.google.android.gms.games.ui.destination.main.MainActivity&#39;,
+ u&#39;Play Libros&#39;: u&#39;com.google.android.apps.books.app.BooksActivity&#39;,
+ u&#39;Play M\xfasica&#39;: u&#39;com.android.music.activitymanagement.TopLevelActivity&#39;,
+ u&#39;Play Pel\xedculas&#39;: u&#39;com.google.android.youtube.videos.EntryPoint&#39;,
+ u&#39;Play Store&#39;: u&#39;com.android.vending.AssetBrowserActivity&#39;,
+ u&#39;Portal Claroideas&#39;: u&#39;com.portal.Portal&#39;,
+ u&#39;Puzzle Pets&#39;: u&#39;com.gameloft.android.GloftDBMF.Start&#39;,
+ u&#39;Python for Android&#39;: u&#39;com.googlecode.pythonforandroid.PythonMain&#39;,
+ u&#39;QPython&#39;: u&#39;org.qpython.qpy.main.activity.SplashActivity&#39;,
+ u&#39;Radio&#39;: u&#39;com.tct.fmradio.ui.FMActivity&#39;,
+ u&#39;Reloj&#39;: u&#39;com.tct.timetool.DeskClock&#39;,
+ u&#39;SIM Telcel&#39;: u&#39;com.android.stk.StkLauncherActivity&#39;,
+ u&#39;SL4A&#39;: u&#39;com.googlecode.android_scripting.activity.ScriptManager&#39;,
+ u&#39;SPIDER-MAN: ULTIMATE POWER&#39;: u&#39;com.gameloft.android.GloftSMIM.Start&#39;,
+ u&#39;Seguridad Total&#39;: u&#39;com.fsecure.ms.ui.LauncherActivity&#39;,
+ u&#39;Smart Suite&#39;: u&#39;com.tcl.smartsuite.MainActivity&#39;,
+ u&#39;Support&#39;: u&#39;com.rsupport.rs.activity.edit.IntroActivity&#39;,
+ u&#39;Telcel&#39;: u&#39;com.telcel.contenedor.gui.activities.AppsContainerActivity&#39;,
+ u&#39;Tel\xe9fono&#39;: u&#39;com.android.dialer.DialtactsActivity&#39;,
+ u&#39;TfLiteCameraDemo&#39;: u&#39;com.example.android.tflitecamerademo.CameraActivity&#39;,
+ u&#39;Video Comprimir&#39;: u&#39;com.melgames.videocompress.AlbumListActivity&#39;,
+ u&#39;Vysor&#39;: u&#39;com.koushikdutta.vysor.StartActivity&#39;,
+ u&#39;WA Business&#39;: u&#39;com.whatsapp.Main&#39;,
+ u&#39;Walli&#39;: u&#39;com.shanga.walli.mvp.splash.SplashActivity&#39;,
+ u&#39;Wi-Fi Display&#39;: u&#39;com.android.settings.wfd.WifiDisplayEnableActivity&#39;,
+ u&#39;Wi-Fi Transfer&#39;: u&#39;com.jrdcom.wifitransfer.welcome.LauncherActivity&#39;,
+ u&#39;YouTube&#39;: u&#39;com.google.android.youtube.app.honeycomb.Shell$HomeActivity&#39;,
+ u&#39;wecourses&#39;: u&#39;net.wecourses.mobile.wecourses&#39;}
+</code></pre>
+<aside class="special"><p>La lista de aplicaciones varia de acuerdo al modelo y version de sistema que tenga el dispositivo movil.</p>
+</aside>
+<p>Podemos ver que la estructura del diccionario es un par de llave:valor de la forma <code>{u&#39;AppName&#39;:u&#39;ClassName&#39;}</code>. En algunas ocasiones es posible iniciar las aplicaciones usando la instruccion <code>launch(u&#39;ClassName&#39;)</code>, por ejemplo</p>
+<pre><code>fb = droide.getLaunchableApplications().result[&#39;Facebook&#39;]
+print(fb)
+</code></pre>
+<pre><code>com.facebook.katana.LoginActivity
+</code></pre>
+<pre><code>droide.launch(fb)
+</code></pre>
+<pre><code>Result(id=50, result=None, error=None)
+</code></pre>
+<p>Sin embargo no todos las clases que se obtienen del comando <code>getLaunchableApplications</code> se ejecutan directamente, por ejemplo no es posible iniciar la aplicacion de mapas si usamos la misma estrategia. Ejecuten el siguiente codigo y observen que no se abre la aplicacion esperada en el dispositivo.</p>
+<pre><code>mapas = droide.getLaunchableApplications().result[&#39;Maps&#39;]
+print(mapas)
+droide.launch(mapas)
+</code></pre>
+<pre><code>com.google.android.maps.MapsActivity
+
+
+
+
+
+Result(id=52, result=None, error=None)
+</code></pre>
+<p>La razon es que la clase a la que esta ligada la aplicacion <code>Maps</code> no es un programa sino una <em>actividad</em>. Para iniciar el programa de mapas podemos usar</p>
+<h2>startActivity</h2>
+<pre><code>startActivity(
+ String action,
+ String uri[optional],
+ String type[optional]: MIME type/subtype of the URI,
+ JSONObject extras[optional]: a Map of extras to add to the Intent,
+ Boolean wait[optional]: block until the user exits the started activity,
+ String packagename[optional]: name of package. If used, requires classname to  
+be useful,
+ String classname[optional]: name of class. If used, requires packagename to be 
+useful)
+
+Starts an activity.
+</code></pre>
+<p>como sigue:</p>
+<pre><code>droide.startActivity(
+                    &#39;android.intent.action.MAIN&#39;,
+                    None,
+                    None,
+                    None,
+                    False,
+                    &#39;com.google.android.apps.maps&#39;,
+                    &#39;com.google.android.maps.MapsActivity&#39;
+                    )
+</code></pre>
+<pre><code>Result(id=60, result=None, error=None)
+</code></pre>
+<p>La aplicacion inicia desplegando el mapa mas reciente. Es posible especificar una localizacion para el mapa si se espcifica el segundo argumneto <code>uri</code> de la funcion. Por ejemplo:</p>
+<pre><code>uri = &#34;geo:19.024666568 -97.268665592&#34;
+droide.startActivity(
+                    &#39;android.intent.action.VIEW&#39;,
+                    uri,
+                    None,
+                    None,
+                    False,
+                    &#39;com.google.android.apps.maps&#39;,
+                    &#39;com.google.android.maps.MapsActivity&#39;
+                    )
+</code></pre>
+<pre><code>Result(id=4, result=None, error=None)
+</code></pre>
+<p>Para obtener la mas reciente geolocalizacion del dispositivo podemos usar la siguiente instruccion:</p>
+<pre><code>droide.getLastKnownLocation().result
+</code></pre>
+<pre><code>{u&#39;gps&#39;: {u&#39;accuracy&#39;: 48,
+  u&#39;altitude&#39;: 1359,
+  u&#39;bearing&#39;: 0,
+  u&#39;latitude&#39;: 19.51968751,
+  u&#39;longitude&#39;: -96.91547261,
+  u&#39;provider&#39;: u&#39;gps&#39;,
+  u&#39;speed&#39;: 0,
+  u&#39;time&#39;: 1551212647000L},
+ u&#39;network&#39;: {u&#39;accuracy&#39;: 23.569000244140625,
+  u&#39;altitude&#39;: 0,
+  u&#39;bearing&#39;: 0,
+  u&#39;latitude&#39;: 19.5195932,
+  u&#39;longitude&#39;: -96.9155206,
+  u&#39;provider&#39;: u&#39;network&#39;,
+  u&#39;speed&#39;: 0,
+  u&#39;time&#39;: 1551212669686L},
+ u&#39;passive&#39;: {u&#39;accuracy&#39;: 23.569000244140625,
+  u&#39;altitude&#39;: 0,
+  u&#39;bearing&#39;: 0,
+  u&#39;latitude&#39;: 19.5195932,
+  u&#39;longitude&#39;: -96.9155206,
+  u&#39;provider&#39;: u&#39;network&#39;,
+  u&#39;speed&#39;: 0,
+  u&#39;time&#39;: 1551212669686L}}
+</code></pre>
+<p>Observen que la funcion regresa un diccionario con tres llaves: <code>gps</code>, <code>network</code> y <code>passive</code>, cada una con valores que son nuevamente otro diccionario que contienen detalles de la localizacion. Por el momento nos interesan unicamente <code>latitude</code> y <code>longitude</code>de la informacion proporcionada por el GPS:</p>
+<pre><code>lon,lat=[droide.getLastKnownLocation().result[&#39;gps&#39;][l] for l in (&#39;longitude&#39;,&#39;latitude&#39;)]
+</code></pre>
+<pre><code>uri = &#34;geo:%s %s?z=15&#34;%(lat,lon)
+droide.startActivity(
+                    &#39;android.intent.action.VIEW&#39;,
+                    uri,
+                    None,
+                    None,
+                    False,
+                    &#39;com.google.android.apps.maps&#39;,
+                    &#39;com.google.android.maps.MapsActivity&#39;
+                    )
+</code></pre>
+<pre><code>Result(id=21, result=None, error=None)
+</code></pre>
+<h2>Invocando aplicaciones</h2>
+<p>la funcion <code>startActivity</code> puede usarse para iniciar aplicaciones usando las opciones de otras formas:</p>
+<pre><code>droide.startActivity(&#39;android.intent.action.VIEW&#39;, 
+      &#39;vnd.youtube:1_u0NmrFM0c&#39;, None, None, False, None, None)
+</code></pre>
+<pre><code>Result(id=22, result=None, error=None)
+</code></pre>
+<h2>Ejercicio</h2>
+<p>Busca en internet las coordenadas de alguna localizacion de interes para ti (puedes encontrar idean <a href="https://latitude.to/articles-by-country/mx/mexico/" target="_blank">en esta pagina</a>) y muestra en el mapa la posicion desde</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Navegacion" duration="0">
+        <p>En los ejemplos previos usamos la geolocalizacion mas reciente que &#34;recuerda&#34; el dispositivo. Podemos utilizar la informacion de GPS para conocer nuestra ubicacion actual y para darle seguimiento a cambios en la geolocalizacion.</p>
+<aside class="special"><p>El uso continuo del GPS puede reducir la bateria considerablemente. En el siguiente laboratorio vamos a monitorear la bateria y podran darse cuenta de esto con los datos de su dispositivo.</p>
+</aside>
+<p>Para conocer la posicion actual del dispositivo podemos usar</p>
+<h2>startLocating</h2>
+<pre><code>startLocating(
+ Integer minDistance[optional, default 60000]: minimum time between updates in  
+milliseconds,
+ Integer minUpdateDistance[optional, default 30]: minimum distance between      
+updates in meters)
+
+Starts collecting location data.
+
+Generates &#34;location&#34; events.
+</code></pre>
+<pre><code>!adb forward tcp:9999 tcp:2222
+import android
+droide=android.Android()
+droide.makeToast(&#34;Hola desde Jupyter!&#34;)
+</code></pre>
+<pre><code>Result(id=0, result=None, error=None)
+</code></pre>
+<pre><code>droide.startLocating()
+</code></pre>
+<pre><code>Result(id=1, result=None, error=None)
+</code></pre>
+<pre><code>print &#34;reading GPS ...&#34; 
+event = droide.eventWaitFor(&#39;location&#39;,10000).result
+</code></pre>
+<pre><code>reading GPS ...
+</code></pre>
+<pre><code>print event
+</code></pre>
+<pre><code>{u&#39;data&#39;: {u&#39;fused&#39;: {u&#39;bearing&#39;: 81, u&#39;altitude&#39;: 1381, u&#39;provider&#39;: u&#39;fused&#39;, u&#39;longitude&#39;: -96.91554019999998, u&#39;time&#39;: 1551215303000L, u&#39;latitude&#39;: 19.519610199999995, u&#39;speed&#39;: 0, u&#39;accuracy&#39;: 5733.21240234375}}, u&#39;name&#39;: u&#39;location&#39;, u&#39;time&#39;: 1551215299697000L}
+</code></pre>
+<pre><code>if event[&#39;name&#39;] == &#34;location&#34;: 
+    try: 
+        lat = str(event[&#39;data&#39;][&#39;gps&#39;][&#39;latitude&#39;]) 
+        lng = str(event[&#39;data&#39;][&#39;gps&#39;][&#39;longitude&#39;]) 
+    except KeyError: 
+        lat = str(event[&#39;data&#39;][&#39;fused&#39;][&#39;latitude&#39;]) 
+        lng = str(event[&#39;data&#39;][&#39;fused&#39;][&#39;longitude&#39;])
+    latlng = &#39;lat: &#39; + lat + &#39; lng: &#39; + lng 
+    print droide.makeToast(&#34;Coordenadas: %s&#34;%latlng)
+</code></pre>
+<pre><code>Result(id=3, result=None, error=None)
+</code></pre>
+<pre><code>droide.stopLocating()
+</code></pre>
+<pre><code>Result(id=4, result=None, error=None)
+</code></pre>
+<pre><code>droide.startLocating()
+
+event = droide.eventWaitFor(&#39;location&#39;,10000).result
+
+if event[&#39;name&#39;] == &#34;location&#34;: 
+    try: 
+        lat = str(event[&#39;data&#39;][&#39;gps&#39;][&#39;latitude&#39;]) 
+        lng = str(event[&#39;data&#39;][&#39;gps&#39;][&#39;longitude&#39;]) 
+    except KeyError: 
+        lat = str(event[&#39;data&#39;][&#39;fused&#39;][&#39;latitude&#39;]) 
+        lng = str(event[&#39;data&#39;][&#39;fused&#39;][&#39;longitude&#39;])
+    latlng = &#39;lat: &#39; + lat + &#39;\nlng: &#39; + lng 
+    print droide.makeToast(&#34;Coordenadas: \n %s&#34;%latlng)
+
+droide.stopLocating()
+</code></pre>
+<pre><code>Result(id=18, result=None, error=None)
+
+
+
+
+
+Result(id=19, result=None, error=None)
+</code></pre>
+<pre><code>droide.geocode(lat, lon).result
+</code></pre>
+<pre><code>[{u&#39;admin_area&#39;: u&#39;Veracruz&#39;,
+  u&#39;country_code&#39;: u&#39;MX&#39;,
+  u&#39;country_name&#39;: u&#39;M\xe9xico&#39;,
+  u&#39;feature_name&#39;: u&#39;80&#39;,
+  u&#39;locality&#39;: u&#39;Xalapa Enr\xedquez&#39;,
+  u&#39;postal_code&#39;: u&#39;91000&#39;,
+  u&#39;sub_admin_area&#39;: u&#39;Xalapa&#39;,
+  u&#39;thoroughfare&#39;: u&#39;Avenida Enrique C. R\xe9bsamen&#39;}]
+</code></pre>
+<pre><code>uri = &#34;google.navigation:q=Los Pinos CDMX&#34;
+droide.startActivity(
+                    &#39;android.intent.action.VIEW&#39;,
+                    uri,
+                    None,
+                    None,
+                    False,
+                    &#39;com.google.android.apps.maps&#39;,
+                    &#39;com.google.android.maps.MapsActivity&#39;
+                    )
+</code></pre>
+<pre><code>Result(id=16, result=None, error=None)
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Enlaces y recursos externos" duration="0">
+        <h2>Android</h2>
+<ul>
+<li>https://stackoverflow.com/questions/48502915/get-list-of-all-apps-with-qpython-sl4a</li>
+<li>https://stackoverflow.com/questions/2662531/launching-google-maps-directions-via-an-intent-on-android</li>
+<li>https://stackoverflow.com/questions/48978716/open-html-file-on-android-with-python-androidhelper-sl4a</li>
+<li>https://stackoverflow.com/questions/6205827/how-to-open-standard-google-map-application-from-my-application</li>
+<li>https://developer.android.com/guide/appendix/g-app-intents.html</li>
+<li>https://android.stackexchange.com/questions/119144/android-tethering-shell-to-python-code-sl4a-api</li>
+</ul>
+<h2>SL4A</h2>
+<ul>
+<li>https://www.pythoncentral.io/series/python-sl4a-android-scripting-layer-tutorial/</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

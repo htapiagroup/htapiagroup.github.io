@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Desarrollo de Aplicaciones Móviles con Jupyter</title>
+  <title>Tópicos Selectos en Aplicaciones Distribuidas Móviles</title>
   <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../../elements/codelab.html">
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
@@ -20,55 +20,21 @@
 </head>
 <body unresolved class="fullbleed">
 
-  <google-codelab title="Desarrollo de Aplicaciones Móviles con Jupyter"
+  <google-codelab title="Tópicos Selectos en Aplicaciones Distribuidas Móviles"
                   environment="web"
                   feedback-link="https://github.com/htapiagroup/htapiagroup.github.io/issues">
     
-      <google-codelab-step label="Encuesta" duration="1">
-        <p>Antes de comenzar, por favor respondan a la siguiente encuesta corta,  tiene como finalidad conocer cuáles son las características generales de los participantes del curso, en particular al conocimiento y uso de algunas de las tecnologías. Los resultados permitirán al instructor ofrecer mejor guia para algunos contenidos específicos. La información es confidencial y no será usada con otros fines fuera del curso sin consentimiento de los participantes.</p>
-<google-codelab-survey survey-id="rysi2019-intro-1">
-<h4>Qué sistema operativo utilizas</h4>
-<paper-radio-group>
-<paper-radio-button>Windows</paper-radio-button>
-<paper-radio-button>Mac OS X</paper-radio-button>
-<paper-radio-button>Linux</paper-radio-button>
-<paper-radio-button>No sé</paper-radio-button>
-</paper-radio-group>
-</google-codelab-survey>
-<google-codelab-survey survey-id="rysi2019-intro-2">
-<h4>Tienes un dispositivo móvil con Android instalado</h4>
-<paper-radio-group>
-<paper-radio-button>Si</paper-radio-button>
-<paper-radio-button>No</paper-radio-button>
-<paper-radio-button>No sé</paper-radio-button>
-</paper-radio-group>
-</google-codelab-survey>
-<google-codelab-survey survey-id="rysi2019-intro-3">
-<h4>Qué experiencia tienes con el lenguaje de programación Python</h4>
-<paper-radio-group>
-<paper-radio-button>Extensa</paper-radio-button>
-<paper-radio-button>Poca</paper-radio-button>
-<paper-radio-button>Ninguna</paper-radio-button>
-<paper-radio-button>Ni lo conozco</paper-radio-button>
-</paper-radio-group>
-</google-codelab-survey>
-<google-codelab-survey survey-id="rysi2019-intro-4">
-<h4>Qué experiencia tienes desarrollando aplicaciones móviles</h4>
-<paper-radio-group>
-<paper-radio-button>Extensa</paper-radio-button>
-<paper-radio-button>Poca</paper-radio-button>
-<paper-radio-button>Ninguna</paper-radio-button>
-</paper-radio-group>
-</google-codelab-survey>
-<google-codelab-survey survey-id="rysi2019-intro-5">
-<h4>Qué experiencia tienes con la línea de comando</h4>
-<paper-radio-group>
-<paper-radio-button>Extensa</paper-radio-button>
-<paper-radio-button>Poca</paper-radio-button>
-<paper-radio-button>Ninguna</paper-radio-button>
-<paper-radio-button>Ni lo conozco</paper-radio-button>
-</paper-radio-group>
-</google-codelab-survey>
+      <google-codelab-step label="Bienvenida" duration="1">
+        <table>
+<tr><td colspan="1" rowspan="1"><p><img style="max-width: 161.72px" src="img/f7a65d104510420c.png"></p>
+<p><a href="mailto:htapia@lania.edu.mx" target="_blank">htapia@lania.edu.mx</a></p>
+<p>Tel. +52 228 841-6100 ext. 1011</p>
+</td><td colspan="1" rowspan="1"><p>¡Bienvenidos al curso de Tópicos Selectos de Aplicaciones Distribuidas Móviles! Mi nombre es Horacio y seré su instructor durante las próximas semanas, en las que espero poderles contagiar el entusiasmo que tengo por el Desarrollo de Aplicaciones Móviles con Jupyter.</p>
+<p>En las siguientes semanas les mostraré cómo interactuar con su dispositivo móvil a través de Python y veremos cómo usar los dispositivos con aplicaciones de inteligencia artificial, para lo cual usaremos tecnologías de punta disponibles en la nube.</p>
+<p>En estas páginas podrán ver un resumen del curso. El contenido específico de cada semana se encuentra en la sección correspondiente </p>
+<p>Pueden leer sobre lo que hago haciendo click en mi  nombre. También pueden contactarme directamente a través de la página del curso o en caso de urgencia enviarme un mensaje de correo electrónico.</p>
+</td></tr>
+</table>
 
 
       </google-codelab-step>
@@ -230,6 +196,62 @@
 <p>Será deseable que el participante con alguna experiencia en programación de lenguajes interactivos como Python, aunque no es necesaria.</p>
 <p>Será de utilidad que el participante tenga conocimiento básico de interacción con sistemas operativos a través de la línea de comando.</p>
 <p>Experiencia con los principios fundamentales del Aprendizaje de Máquina e Inteligencia Artificial modernos es útil aunque no es fundamental ya que se espera que al término del curso el participante se lleve las bases.</p>
+<p>En términos de hardware, vamos a necesitar:</p>
+<ol type="1" start="1">
+<li>Computadora portátil moderna con cualquier sistema operativo reciente y capacidad de conectarse a internet</li>
+<li>Dispositivo móvil compatible con el SO Android versión superior a 4 configurado en modo desarrollador</li>
+<li>Cable USB de datos para conectar dispositivo a la computadora</li>
+</ol>
+<p>Los requerimientos de software se irán definiendo a lo largo del curso.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Encuesta" duration="1">
+        <p>Antes de comenzar, por favor respondan a la siguiente encuesta corta,  tiene como finalidad conocer cuáles son las características generales de los participantes del curso, en particular al conocimiento y uso de algunas de las tecnologías. Los resultados permitirán al instructor ofrecer mejor guia para algunos contenidos específicos. La información es confidencial y no será usada con otros fines fuera del curso sin consentimiento de los participantes.</p>
+<google-codelab-survey survey-id="rysi2019-intro-1">
+<h4>Qué sistema operativo utilizas</h4>
+<paper-radio-group>
+<paper-radio-button>Windows</paper-radio-button>
+<paper-radio-button>Mac OS X</paper-radio-button>
+<paper-radio-button>Linux</paper-radio-button>
+<paper-radio-button>No sé</paper-radio-button>
+</paper-radio-group>
+</google-codelab-survey>
+<google-codelab-survey survey-id="rysi2019-intro-2">
+<h4>Tienes un dispositivo móvil con Android instalado</h4>
+<paper-radio-group>
+<paper-radio-button>Si</paper-radio-button>
+<paper-radio-button>No</paper-radio-button>
+<paper-radio-button>No sé</paper-radio-button>
+</paper-radio-group>
+</google-codelab-survey>
+<google-codelab-survey survey-id="rysi2019-intro-3">
+<h4>Qué experiencia tienes con el lenguaje de programación Python</h4>
+<paper-radio-group>
+<paper-radio-button>Extensa</paper-radio-button>
+<paper-radio-button>Poca</paper-radio-button>
+<paper-radio-button>Ninguna</paper-radio-button>
+<paper-radio-button>Ni lo conozco</paper-radio-button>
+</paper-radio-group>
+</google-codelab-survey>
+<google-codelab-survey survey-id="rysi2019-intro-4">
+<h4>Qué experiencia tienes desarrollando aplicaciones móviles</h4>
+<paper-radio-group>
+<paper-radio-button>Extensa</paper-radio-button>
+<paper-radio-button>Poca</paper-radio-button>
+<paper-radio-button>Ninguna</paper-radio-button>
+</paper-radio-group>
+</google-codelab-survey>
+<google-codelab-survey survey-id="rysi2019-intro-5">
+<h4>Qué experiencia tienes con la línea de comando</h4>
+<paper-radio-group>
+<paper-radio-button>Extensa</paper-radio-button>
+<paper-radio-button>Poca</paper-radio-button>
+<paper-radio-button>Ninguna</paper-radio-button>
+<paper-radio-button>Ni lo conozco</paper-radio-button>
+</paper-radio-group>
+</google-codelab-survey>
 
 
       </google-codelab-step>
@@ -389,9 +411,10 @@
 <tr><td colspan="1" rowspan="1"><p><img style="max-width: 161.72px" src="img/f7a65d104510420c.png"></p>
 <p>htapia@lania.edu.mx</p>
 <p>Tel. +52 228 841-6100 ext. 1011</p>
-</td><td colspan="1" rowspan="1"><p><strong>Horacio Tapia-McClung</strong> es profesor/investigador del LANIA especializado en el análisis de grandes datos utilizando métodos de cómputo avanzado que permitan el procesamiento en tiempo real y con recursos limitados. </p>
-<p>También desarrolla y aplica técnicas para el análisis de imágenes usando procesadores gráficos (Redes Neuronales Convolucionales, Deep Learning, análisis morfológico) y utiliza principios y fundamentos fisicos y matematicos para analizar y estudiar sistemas complejos espacio-temporales.</p>
-<p>Algunas de las aplicaciones que ha desarrollado incluyen modelos de falla para motores de diesel, análisis de color en imágenes digitales, estudios sobre movilidad a partir de datos de geolocalización, adquisición y análisis de datos usando dispositivos móviles, aplicaciones del internet de las cosas, entre otros. Trabaja de cerca con empresas de diversos sectores industriales en temas relacionados al análisis de datos para impulsar la creación de valor a partir de la información digital. Es fundador y organizador del evento Data Challenge Industrial, una competencia de análisis de datos provenientes de la industria nacional.</p>
+</td><td colspan="1" rowspan="1"><p><strong>Horacio Tapia-McClung</strong> es profesor/investigador del LANIA especializado en el análisis de grandes datos utilizando métodos de cómputo avanzado que permitan el procesamiento en tiempo real y con recursos modestos... </p>
+<p>También desarrolla y aplica técnicas para el análisis de imágenes  (Redes Neuronales Convolucionales, Deep Learning, análisis morfológico) usando procesadores gráficos y utiliza principios y fundamentos fisicos y matematicos para analizar y estudiar sistemas complejos espacio-temporales a partir de datos.</p>
+<p>Algunas de las aplicaciones que ha desarrollado incluyen modelos de falla para motores, análisis de color en imágenes digitales, estudios sobre movilidad a partir de datos de geolocalización, adquisición y análisis de datos usando dispositivos móviles, aplicaciones del internet de las cosas, entre otros.</p>
+<p>Trabaja de cerca con empresas de diversos sectores industriales en temas relacionados al análisis de datos para impulsar la creación de valor a partir de la información digital. Es fundador y organizador del evento Data Challenge Industrial, una competencia de análisis de datos provenientes de la industria nacional.</p>
 </td></tr>
 </table>
 

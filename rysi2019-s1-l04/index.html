@@ -1,0 +1,227 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Lab 4: Configuración de Jupyter en la nube ejecutando con un entorno local</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Lab 4: Configuración de Jupyter en la nube ejecutando con un entorno local"
+                  environment="web"
+                  feedback-link="https://github.com/htapia/damju/issues">
+    
+      <google-codelab-step label="Introducción" duration="1">
+        <p><img style="max-width: 117.00px" src="img/9361ac53a1d5d1a1.png">El veloz desarrollo de Python y el ecosistema de Jupyter, en parte por su popularidad para desarrollo de aplicaciones de Ciencias de Datos y <em>Machine Learning</em>, ha generado un amplio espectro de servicios externos que ofrecen una configuración completa a un precio muy accesible. En particular una de ellas el <a href="https://colab.research.google.com/notebooks/welcome.ipynb" target="_blank">Google Colaboratory</a>, un sistema que ofrece un ambiente completo y gratuito de Jupyter para el desarrollo de aplicaciones de bajo, medio y alto nivel.</p>
+<p>Con este servicio reducimos la complejidad de gestionar y administrar una infraestructura de software y hardware. Es posible utilizar dicha infraestructura como reemplazo parcial de las libretas tradicionales (como la que usaron en la sección anterior), sin embargo, no podemos prescindir de la instalación local de Jupyter si queremos hacerlo.</p>
+<p>En este paso vamos a utilizar la infraestructura de la nube de Google para ejecutar las libretas utilizando dicha tecnología, pero cuando necesitemos comunicarnos con el dispositivo móvil, usaremos el entorno de ejecución local que ya tenemos configurado.</p>
+<p>Desafortunadamente las libretas en la nube de Google no son persistentes y el servicio cancela cualquier cálculo que dure más de 12 horas. Sin embargo nos permitirán desarrollar aplicaciones que de otra manera no podríamos generar con un costo mínimo (por ejemplo usaremos TensorFlow en un GPU sin costo alguno para entrenar un algoritmo de clasificación).</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Objetivos de aprendizaje" duration="1">
+        <ul>
+<li>Configurar el entorno de libretas de Jupyter disponible en la nube en Google Colaboratory para ejecutarse usando el entorno local instalado previamente</li>
+</ul>
+<h2><strong>Qué haremos</strong></h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Vamos configurar el entorno de Jupyter disponible en la nube de Google para ejectuar con el entorno local de Anaconda</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 117.00px" src="img/9361ac53a1d5d1a1.png"></p>
+</td></tr>
+</table>
+<h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
+<ul class="checklist">
+<li>Cómo instalar y configurar Jupyter en una computadora personal</li>
+<li>Como configurar el sistema para conectarse al dispositivo móvil </li>
+<li>Como interactuar con el dispositivo móvil usando Python</li>
+</ul>
+<h2>Que vamos a necesitar</h2>
+<ul>
+<li>Una computadora personal con Anaconda instalado localmente</li>
+<li>Conexión a internet</li>
+<li>Una cuenta de Google</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuración de Jupyter en la nube" duration="10">
+        <aside class="warning"><p><strong>Atención: </strong>Para este paso necesitan contar con una cuenta de Google.</p>
+</aside>
+<h2><strong>Primer paso</strong></h2>
+<p>Accede a la infraestructura con el siguiente botón. </p>
+<p><a href="https://colab.research.google.com" target="_blank"><paper-button class="colored" raised>Google Colaboratory</paper-button></a></p>
+<p>Si es necesario, ingresa tu información de usuario de Google. Una vez que hayas ingresado verás una pantalla como la siguiente:</p>
+<p><img style="max-width: 624.00px" src="img/dfa3ecdd136b21b5.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Libreta de ejemplo" duration="1">
+        <p>En ésta ventana pueden elegir una libreta previamente existente o abrir una desde un repositorio en Google Drive o en Github o por medio de un URL. Selecciona <code>NUEVO CUADERNO DE PYTHON 3</code> en la parte inferior derecha o <code>CANCELAR</code>. Esta última acción te mostrará una libreta con ejemplos. Se sugiere revisar para familiarizarse un poco con el sistema.</p>
+<p><img style="max-width: 624.00px" src="img/8fbc08bc7c0f3146.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instalación y configuración de Python en el dispositivo móvil" duration="10">
+        <p>Para poder ejecutar comandos de Python en Android usaremos una tecnología que permite acceder a la mayoría de las funcionalidades de Android a través de <em>fachadas</em>. </p>
+<p>Los pasos siguientes tienen que realizarse en el dispositivo móvil. La instalación es muy sencilla y automática. </p>
+<h2><strong>Descarga el software de SL4A</strong></h2>
+<p>Captura la siguiente imagen con la cámara de tu dispositivo para descargar el <a href="https://github.com/kuri65536/sl4a" target="_blank">Scripting Layer For Android</a></p>
+<p><img style="max-width: 200.00px" src="img/fcb42bde018fa2.png"></p>
+<h3><strong>Instala sl4a</strong></h3>
+<p>Para instalar el software debes tener habilitada la opción de permitir instalación de software externo bajo la configuración de opciones de desarrollador del dispositivo.</p>
+<p>Ejecuta el programa que descargaste y sigue las instrucciones en la pantalla del dispositivo.</p>
+<h2><strong>Descarga el software de Python</strong></h2>
+<p>Captura la siguiente imagen con la cámara de tu dispositivo para descargar <a href="https://github.com/kuri65536/python-for-android" target="_blank">Python for Android</a></p>
+<p><img style="max-width: 148.00px" src="img/9486a5761cbf1323.png"></p>
+<h3><strong>Instala python</strong></h3>
+<p>Para instalar el software debes tener habilitada la opción de permitir instalación de software externo bajo la configuración de opciones de desarrollador del dispositivo.</p>
+<p>Ejecuta el programa que descargaste y sigue las instrucciones en la pantalla del dispositivo. El programa descarga archivos adicionales y completa la instalación. </p>
+<h2><strong>Inicia el servicio de Python en el dispositivo móvil</strong></h2>
+<p>Abre la aplicacion SL4A identificada por el icono</p>
+<p><img style="max-width: 67.50px" src="img/8e86a0cba74f67f0.png"> </p>
+<p>en la pantalla de tu dispositivo. Del menú navega a Preferences-&gt;Server Port y escribe 2222 en la caja correspondiente.</p>
+<p>Después regresa al menú y navega a View-&gt;Interpreters, nuevamente menú y elige Start Server. El servicio Público permite comunicarse con el dispositivo vía WiFi. Elige iniciar un servicio  Privado y conecta tu dispositivo a un puerto USB de tu computadora.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Revisión configuración" duration="5">
+        <p>Vamos a revisar que localmente podemos identificar el dispositivo y que podemos comunicarnos con él a través del servicio de Python. Con el dispositivo conectado a un puerto USB de tu computadora, escribe lo siguiente en la ventana de comando:</p>
+<pre><code>&gt;adb devices</code></pre>
+<p>El resultado de dicha instrucción debe dar información sobre el dispositivo conectado a la computadora, por ejemplo</p>
+<pre><code>List of devices attached
+98f2eeee        device</code></pre>
+<p>Si el comando no regresa información revisa la conexión del dispositivo al puerto USB y asegurate que está autorizado por el sistema para comunicarse con la computadora. Después escribe</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Descarga el software" duration="5">
+        <p>Utiliza el enlace siguiente para la descarga de Anaconda la versión de <strong>Python 2.7</strong> apropiada para tu sistema operativo.</p>
+<p><a href="https://www.anaconda.com/download/" target="_blank"><paper-button class="colored" raised>Descarga Anaconda Python</paper-button></a></p>
+<aside class="warning"><p><strong>Importante: </strong>Asegúrate de descargar la versión de Python 2.7 apropiada para tu Sistema Operativo. Debido al corto tiempo disponible para el curso, no será posible proporcionar soporte a instalaciones o configuraciones de Python fuera de la distribución de Anaconda.</p>
+</aside>
+<p>Ejecuta el programa que acabas de descargar y sigue las instrucciones de instalación.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Verifica que Anaconda2 esta instalado" duration="5">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>En Windows, abre el menú de sistema y localiza el folder Anaconda2. Selecciona Anaconda Prompt y espera un momento. Una nueva ventana se abrirá donde pueden ingresar instrucciones.</p>
+<p>Si tu sistema operativo es alguna variante *NIX abre una terminal (consola).</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 172.50px" src="img/68abec2dde420d6a.png"></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Una ventana nueva con la consola de anaconda deberá hacerse visible en tu pantalla.</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/b34b14feb16b60c9.png"></p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Inicia el servicio de Jupyter notebook" duration="5">
+        <p>En la ventana que se abrió (o en la consola si no estás usando Windows), escribe el siguiente comando: </p>
+<pre><code>jupyter notebook</code></pre>
+<p>Después de unos minutos deberá abrirse una nueva ventana en su navegador de preferencia apuntando a la dirección <a href="http://localhost:8888" target="_blank"><code>http://localhost:8888</code></a>. Si no se abre de manera automática utiliza el enlace anterior.</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>En su navegador verás algo similar a la imagen. Esta es la ventana inicial de la aplicación Jupyter Notebooks. Toma unos minutos para conocer el ambiente y familiarizarte con el contenido. Observa que en primer nivel tienes lo que es básicamente un navegador de archivos. </p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/888bc7fd4d98bfab.png"></p>
+</td></tr>
+</table>
+<aside class="special"><p>Más información sobre la aplicación la pueden consultar en la <a href="https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html" target="_blank">documentación de Jupyter Notebooks</a></p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Abre una libreta de Jupyter" duration="5">
+        <p>En la ventana del navegador mostrando el árbol de documentos, busca el siguiente botón cerca de la esquina superior derecha:</p>
+<p><img style="max-width: 1310.51px" src="img/888bc7fd4d98bfab.png"></p>
+<p>Selecciona <code>New</code> y después <code>Python 2</code></p>
+<p><img style="max-width: 1064.63px" src="img/3ce9e644c96581e2.png"></p>
+<p>Esta acción abrirá una nueva pestaña con una libreta de Jupyter en blanco como la que se muestra en la siguiente imagen<img style="max-width: 624.00px" src="img/8f52ffed898fd0c0.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ejecuta código en la libreta" duration="5">
+        <p>El recuadro que aparece color verde con el texto <code>In [ ]</code> es una celda de código. Escribe el código siguiente en la celda y cuando termines presiona simultáneamente las teclas <code>Alt+Enter</code></p>
+<pre><code>import sys
+sys.platform</code></pre>
+<p>Al ejecutar el código, el intérprete debe mostrar una línea con información del sistema operativo sobre el que se ejecuta la aplicación (win32, posix, linux, etc.). Si lograste ver el resultado, felicidades, has terminado la primera parte de la configuración de nuestro sistema.</p>
+<aside class="warning"><p>Si no lograste evaluar el código anterior en una libreta de Jupyter en tu sistema, o si tuviste algún problema en alguno de los pasos anteriores, revisa nuevamente cada uno de ellos. Dependiendo de el problema puede ser que el servicio no haya iniciado correctamente o que la instalación no haya sido exitosa. Si continuas teniendo problemas visita el foro del curso y revisa si alguien ya pudo solucionarlo. Si no existe el tema en el foro puedes iniciarlo.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instala el modulo android.py desde Jupyter" duration="10">
+        <p>El módulo <code>android.py</code> es necesario para poder invocar objetos en Python que puedan acceder a la API de Android. A continuación están los enlaces donde podrás descargar los programas, sin embargo, haremos la configuración vía las libretas de Jupyter con el fin de familiarizarnos con el sistema y tener una evidencia de evaluación de los avances de la semana. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Siguientes pasos" duration="1">
+        <p><a href="https://htapiagroup.github.io/rysi2019-s1-l04" target="_blank"><paper-button class="colored" raised>Siguiente laboratorio</paper-button></a></p>
+<p>Presiona el siguiente botón para acceder a la libreta de Jupyter que contiene las instrucciones para instalar el módulo en tu sistema.</p>
+<p><a href="https://github.com/htapia/damju/blob/master/Semana1/DAMJu_S1_A1.ipynb" target="_blank"><paper-button class="colored" raised>Actividad 1</paper-button></a></p>
+<h2>Enlaces al módulo <code>android.py</code><strong> para descarga local</strong></h2>
+<p>En caso de tener problemas para ejecutar las instrucciones anteriores, abajo encontraran los enlaces para descargar los modulos.</p>
+<h3>Descarga el módulo <strong><code>android.py</code></strong></h3>
+<p><a href="https://raw.githubusercontent.com/damonkohler/sl4a/master/python/ase/android.py" target="_blank"><paper-button class="colored" raised>Descarga </paper-button><paper-button class="colored" raised>android.py</paper-button><paper-button class="colored" raised> </paper-button></a></p>
+<h3>Descarga el módulo <strong><code>androidhelper.py</code></strong></h3>
+<p><a href="https://raw.githubusercontent.com/isislovecruft/android-locale-hack/master/androidhelper.py" target="_blank"><paper-button class="colored" raised>Descarga </paper-button><paper-button class="colored" raised>androidhelper.py</paper-button><paper-button class="colored" raised> </paper-button></a></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

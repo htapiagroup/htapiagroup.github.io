@@ -25,7 +25,9 @@
                   feedback-link="https://github.com/htapia/damju/issues">
     
       <google-codelab-step label="Introducción" duration="1">
-        
+        <p>El módulo <code>android.py</code> es necesario para poder invocar objetos en Python que puedan acceder a la API de Android. A continuación están los enlaces donde podrás descargar los programas, sin embargo, haremos la configuración vía las libretas de Jupyter con el fin de familiarizarnos con el sistema y tener una evidencia de evaluación de los avances de la semana. </p>
+<p>En este laboratorio vamos a utilizar Jupyter para descargar, instalar y configurar el módulo en nuestro sistema local. Los pasos de este laboratorio deben realizarse una única vez, ya que guardado el módulo en el directorio adecuado de su sistema lo hace accesible para siempre (salvo que lo borren).</p>
+
 
       </google-codelab-step>
     
@@ -37,8 +39,8 @@
 </ul>
 <h2><strong>Qué haremos</strong></h2>
 <table>
-<tr><td colspan="1" rowspan="1"><p>En este laboratorio vamos a usar el ambiente de Jupyter que instalaron previamente para configurar el uso del módulo <code>android.py</code>, necesario para interactuar con el dispositivo móvil y el sistema local a través de Python.</p>
-</td><td colspan="1" rowspan="1"><p><img style="max-width: 297.00px" src="img/166c3b4982e4a0ad.png"></p>
+<tr><td colspan="1" rowspan="1"><p>En este laboratorio vamos a usar el ambiente de Jupyter que instalaron previamente para configurar el uso del módulo <code>android.py</code>, necesario para interactuar con el dispositivo móvil y el sistema local a través de Python. Vamos a describir paso a paso las instrucciones que iran ejecutando en la libreta de Jupyter.</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 230.50px" src="img/91f638ebc6ed29c2.png"></p>
 </td></tr>
 </table>
 <h2 class="checklist"><strong>What you&#39;ll learn</strong></h2>
@@ -53,116 +55,94 @@
 <li>Una computadora personal con la aplicación Jupyter Notebooks instalada</li>
 <li>Conexión a internet</li>
 </ul>
-<h2><strong>Actividades/Libretas</strong></h2>
-<p>Este semana se compone de una serie de tutoriales que deben seguir para poder configurar el sistema de trabajo. En cada tutorial hay un video corto que muestra los pasos principales y al final una libreta de codigo que deben ejecutar en su sistema para establecer la conexion entre su computadora y el dispositivo móvil.</p>
-<p>Las actividades de esta semana son:</p>
-<ol type="1" start="1">
-<li>Instalación local de Jupyter vía Anaconda</li>
-<li>Instalación/configuración local de <code>adb</code></li>
-<li>Instalación de Python en el dispositivo móvil</li>
-<li>Instalación y configuración local del módulo <code>androidhelper.py </code></li>
-<li>Comunicación entre el dispositivo móvil y el sistema local</li>
-<li>Configuración del ecosistema de Jupyter en la nube</li>
-</ol>
+<h2>Video</h2>
+<p><a href="https://laniaedu.sharepoint.com/:v:/s/TopicosSelectosVideos/EYKxLc1o6edIlN5WuvxYSFsBtAdqCZeQuJ-jzlhvTsK0DA?e=1xGbhX" target="_blank"><paper-button class="colored" raised>Mira el video</paper-button></a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Instala el modulo android.py desde Jupyter" duration="10">
-        <p>El módulo <code>android.py</code> es necesario para poder invocar objetos en Python que puedan acceder a la API de Android. A continuación están los enlaces donde podrás descargar los programas, sin embargo, haremos la configuración vía las libretas de Jupyter con el fin de familiarizarnos con el sistema y tener una evidencia de evaluación de los avances de la semana. </p>
-<p>Presiona el siguiente botón para acceder a la libreta de Jupyter que contiene las instrucciones para instalar el módulo en tu sistema.</p>
-<p><a href="https://github.com/htapia/damju/blob/master/Semana1/DAMJu_S1_A1.ipynb" target="_blank"><paper-button class="colored" raised>Actividad 1</paper-button></a></p>
-<h2>Enlaces al módulo <code>android.py</code><strong> para descarga local</strong></h2>
-<p>En caso de tener problemas para ejecutar las instrucciones anteriores, abajo encontraran los enlaces para descargar los modulos.</p>
-<h3>Descarga el módulo <strong><code>android.py</code></strong></h3>
-<p><a href="https://raw.githubusercontent.com/damonkohler/sl4a/master/python/ase/android.py" target="_blank"><paper-button class="colored" raised>Descarga </paper-button><paper-button class="colored" raised>android.py</paper-button><paper-button class="colored" raised> </paper-button></a></p>
-<h3>Descarga el módulo <strong><code>androidhelper.py</code></strong></h3>
-<p><a href="https://raw.githubusercontent.com/isislovecruft/android-locale-hack/master/androidhelper.py" target="_blank"><paper-button class="colored" raised>Descarga </paper-button><paper-button class="colored" raised>androidhelper.py</paper-button><paper-button class="colored" raised> </paper-button></a></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Instalación/configuración local de adb" duration="5">
-        <p><code>adb</code> es el programa proporcionado por los desarrolladores de Android para detectar dispositivo móvil en el sistema local. Puede obtenerse <a href="https://developer.android.com/studio/releases/platform-tools#download" target="_blank">en este enlace</a>. La documentación de <code>adb </code><a href="https://developer.android.com/studio/command-line/adb?hl=es" target="_blank">puede consultarse aqui</a>. </p>
-<aside class="special"><p>Es altamente probable que ya tengan instalado el programa de <code>adb</code>, de modo que antes de descargarlo, revisen si configuración. Si no lo tienen instalado entonces sigan las instrucciones de descarga e instalación en los enlaces anteriores.</p>
+      <google-codelab-step label="Identifica el directorio adecuado para colocar el modulo android.py" duration="2">
+        <p>Inicia una libreta de Jupyter y en una celda de código escribe el siguiente comando:</p>
+<pre><code>import sys
+sys.path</code></pre>
+<table>
+<tr><td colspan="1" rowspan="1"><p>El comando anterior importa la librería sys al espacio del intérprete y después regresa una lista que especifica los los directorios de búsqueda de módulos que el sistema utiliza.</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/972d811e0e1067d.png"></p>
+</td></tr>
+</table>
+<p>Dependiendo de su sistema verán algo similar a esto:</p>
+<pre>[&#39;&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2\\python27.zip&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2\\DLLs&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2\\lib&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2\\lib\\plat-win&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2\\lib\\lib-tk&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2\\lib\\site-packages&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2\\lib\\site-packages\\win32&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2\\lib\\site-packages\\win32\\lib&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2\\lib\\site-packages\\Pythonwin&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\Anaconda2\\lib\\site-packages\\IPython\\extensions&#39;,
+ &#39;C:\\Users\\HoracioTapiaMcClung\\.ipython&#39;]</pre>
+<p>Vamos a utilizar el último directorio de la lista anterior para alojar el módulo, de modo que el sistema pueda localizarlo durante la sesión. En otra celda de Python escribe </p>
+<pre><code>%cd C:\Users\HoracioTapiaMcClung\.ipython</code></pre>
+<aside class="warning"><p><strong>Atención</strong>: Sustituye la ruta por el resultado que tu sistema arroja. En Windows debes eliminar una de las diagonales del texto.</p>
 </aside>
-<h2><strong>Verifica si tienes adb instalado en tu sistema</strong></h2>
-<p>Para verificar si tienes instalado el programa, abre otra ventana de Anaconda Prompt o terminal y en la línea de comando escribe lo siguiente:</p>
-<pre><code>adb --version</code></pre>
-<p>Debes ver como salida de este comando algo parecido a lo siguiente, que indica la versión del ejecutable y la ruta de instalación.</p>
-<pre><code>Android Debug Bridge version 1.0.40
-Version 4986621
-Installed as C:\Android\platform-tools\adb.exe</code></pre>
-<p>Si el comando anterior no regresa la información del programa, puede ser posible que no lo tengas en la ruta de acceso del sistema. La clave para encontrar el ejecutable es localizar los directorios <code>Android</code> y <code>platform-tools</code> pues es ahí donde tradicionalmente se localiza el ejecutable. </p>
-<h2>Agrega adb al PATH de windows</h2>
-<aside class="warning"><p><strong>Atención</strong>: NO es necesario realizar los pasos siguientes si el comando anterior ejecuta exitosamente.</p>
+<p>El efecto de este comando es cambiar al directorio especificado.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Descarga el modulo android.py" duration="2">
+        <p>Una vez hecho el cambio a un directorio en el que el sistema busca módulos, vamos a descargar el módulo y colocarlo en la ruta especificada. En otra celda de código escribe el siguiente comando, con el cuál se descarga el módulo de un sitio especificado por el <em>url</em>:</p>
+<pre><code>%load https://raw.githubusercontent.com/damonkohler/sl4a/master/python/ase/android.py</code></pre>
+<aside class="special"><p>Las celdas de Jupyter también pueden ejecutar comandos específicos del sistema operativo y algunos comandos especiales, conocidos como <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html" target="_blank"><em>magic commands</em></a>. Estos usan una sintaxis que depende del entorno de ejecución (si el kernel es Python o R o Julia). En Python se usa <code>%</code> para especificar el comando mágico. Existen comandos mágicos en línea o en celda. Usaremos varios de ellos a lo largo del curso. El código anterior utiliza un comando mágico en línea, <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-load" target="_blank">%load</a>, que literalmente carga el contenido de un archivo a la celda en el que se evalúa.</p>
 </aside>
 <table>
-<tr><td colspan="1" rowspan="1"><p>Una vez que hayas localizado el ejecutable, asegurate que la ruta está disponible en las variables de entorno del sistema operativo. Si estas en Windows, abre la configuración avanzada del sistema -&gt; propiedades del sistema y en la pestaña de opciones avanzadas selecciones variables de entorno</p>
-</td><td colspan="1" rowspan="1"><p><img style="max-width: 412.00px" src="img/1b540fce1c192d44.png"></p>
+<tr><td colspan="1" rowspan="1"><p>El resultado de ejecutar la celda anterior será una nueva celda con el código del archivo especificado por la ruta. Observa que de manera automática la primera línea se comenta.</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/8c39523570d07267.png"></p>
 </td></tr>
 </table>
-<table>
-<tr><td colspan="1" rowspan="1"><ul>
-<li>Localiza Path en variables del sistema y selecciona editar. </li>
-<li>Si no la tienes, agrega la ruta del ejecutable de <code>adb </code></li>
-<li>Presiona Aceptar para regresar a la ventana de variables de entorno</li>
-</ul>
-</td><td colspan="1" rowspan="1"><p><img style="max-width: 409.75px" src="img/31f873a4a05d5cab.png"></p>
-<p><img style="max-width: 298.00px" src="img/2f980b99c5214a8f.png"></p>
-</td></tr>
-</table>
-<table>
-<tr><td colspan="1" rowspan="1"><ul>
-<li>Finalmente, en la ventana variables de entorno, agrega una nueva variable del sistema con el nombre <code>AP_PORT</code> y valor <code>9999</code>.</li>
-<li>Presiona Aceptar y cierra las ventanas de configuración.</li>
-</ul>
-</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/230dd15a1ae7eb1.png"></p>
-</td></tr>
-</table>
-<p>Vuelve a escribir en la consola el comando <code>adb --version</code>, esta vez debería funcionar si no lo ha hecho ya.</p>
-<p><br>En este punto, debes tener configurado tu sistema local con el ecosistema de Jupyter y Python disponibles y el programa <code>adb</code> accesible por el sistema operativo. A continuación vamos a configurar el dispositivo móvil.</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Instalación y configuración de Python en el dispositivo móvil" duration="10">
-        <p>Para poder ejecutar comandos de Python en Android usaremos una tecnología que permite acceder a la mayoría de las funcionalidades de Android a través de <em>fachadas</em>. </p>
-<p>Los pasos siguientes tienen que realizarse en el dispositivo móvil. La instalación es muy sencilla y automática. </p>
-<h2><strong>Descarga el software de SL4A</strong></h2>
-<p>Captura la siguiente imagen con la cámara de tu dispositivo para descargar el <a href="https://github.com/kuri65536/sl4a" target="_blank">Scripting Layer For Android</a></p>
-<p><img style="max-width: 200.00px" src="img/fcb42bde018fa2.png"></p>
-<h3><strong>Instala sl4a</strong></h3>
-<p>Para instalar el software debes tener habilitada la opción de permitir instalación de software externo bajo la configuración de opciones de desarrollador del dispositivo.</p>
-<p>Ejecuta el programa que descargaste y sigue las instrucciones en la pantalla del dispositivo.</p>
-<h2><strong>Descarga el software de Python</strong></h2>
-<p>Captura la siguiente imagen con la cámara de tu dispositivo para descargar <a href="https://github.com/kuri65536/python-for-android" target="_blank">Python for Android</a></p>
-<p><img style="max-width: 148.00px" src="img/9486a5761cbf1323.png"></p>
-<h3><strong>Instala python</strong></h3>
-<p>Para instalar el software debes tener habilitada la opción de permitir instalación de software externo bajo la configuración de opciones de desarrollador del dispositivo.</p>
-<p>Ejecuta el programa que descargaste y sigue las instrucciones en la pantalla del dispositivo. El programa descarga archivos adicionales y completa la instalación. </p>
-<h2><strong>Inicia el servicio de Python en el dispositivo móvil</strong></h2>
-<p>Abre la aplicacion SL4A identificada por el icono</p>
-<p><img style="max-width: 67.50px" src="img/8e86a0cba74f67f0.png"> </p>
-<p>en la pantalla de tu dispositivo. Del menú navega a Preferences-&gt;Server Port y escribe 2222 en la caja correspondiente.</p>
-<p>Después regresa al menú y navega a View-&gt;Interpreters, nuevamente menú y elige Start Server. El servicio Público permite comunicarse con el dispositivo vía WiFi. Elige iniciar un servicio  Privado y conecta tu dispositivo a un puerto USB de tu computadora.</p>
+      <google-codelab-step label="Guarda el modulo android.py en la ruta especificada" duration="2">
+        <p>Una vez descargado el código correspondiente al módulo, vamos a guardarlo en la ruta especificada. Para esto, incluye el código siguiente en la primera línea de la celda que contiene el código que acabamos de descargar.</p>
+<pre><code>%%file android.py
+# %load https://raw.githubusercontent.com/damonkohler/sl4a/master/python/ase/android.py
+# Copyright (C) 2009 Google Inc.
+# 
+...</code></pre>
+<aside class="special"><p>El código anterior utiliza un comando mágico en celda, <a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#cellmagic-writefile" target="_blank">%%file</a>, que guarda el contenido de la celda a un archivo especificado. Esta en una forma eficiente de descargar código de internet y guardarlo localmente.</p>
+</aside>
+<table>
+<tr><td colspan="1" rowspan="1"><p>El resultado de ejecutar la celda anterior será un mensaje indicando que el archivo android.py se ha guardado</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/f7310f90aba41efc.png"></p>
+</td></tr>
+</table>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Revisión configuración" duration="5">
-        <p>Vamos a revisar que localmente podemos identificar el dispositivo y que podemos comunicarnos con él a través del servicio de Python. Con el dispositivo conectado a un puerto USB de tu computadora, escribe lo siguiente en la ventana de comando:</p>
-<pre><code>&gt;adb devices</code></pre>
-<p>El resultado de dicha instrucción debe dar información sobre el dispositivo conectado a la computadora, por ejemplo</p>
-<pre><code>List of devices attached
-98f2eeee        device</code></pre>
-<p>Si el comando no regresa información revisa la conexión del dispositivo al puerto USB y asegurate que está autorizado por el sistema para comunicarse con la computadora. Después escribe</p>
+      <google-codelab-step label="Verifica que el módulo está disponible" duration="2">
+        <p>Verifica que el módulo es accesible por el intérprete escribiendo el siguiente código en un celda. Si evalúa correctamente significa que el módulo está disponible. De otro modo el sistema de arroja un error.</p>
+<pre><code>import android</code></pre>
+<aside class="warning"><p><strong>Atención</strong>: El comando anterior no da ninguna salida, salvo que el módulo no esté disponible. Si el sistema no lo encuentra tendrás que verificar que el módulo se guardó de manera correcta siguiendo nuevamente los pasos anteriores .</p>
+</aside>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Este es un ejemplo de la salida del comando anterior si el módulo no existe o no está disponible en un directorio adecuado. </p>
+<p>Observen que en este ejemplo el nombre del módulo no está bien escrito. Algo similar ocurre si no guardaron el módulo correctamente.</p>
+</td><td colspan="1" rowspan="1"><p><img style="max-width: 298.00px" src="img/786f22e826ed9105.png"></p>
+</td></tr>
+</table>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Siguientes pasos" duration="1">
-        <p><a href="https://htapiagroup.github.io/rysi2019-s1-l03" target="_blank"><paper-button class="colored" raised>Siguiente laboratorio</paper-button></a></p>
+        <p>Felicidades! Has terminado otro laboratorio para la configuración de nuestra herramienta de trabajo. En el siguiente laboratorio vamos a configurar el ejecutable <code>adb</code> para poder usarlo desde Jupyter.</p>
+<p><a href="https://htapiagroup.github.io/rysi2019-s1-l03" target="_blank"><paper-button class="colored" raised>Siguiente laboratorio</paper-button></a></p>
 
 
       </google-codelab-step>

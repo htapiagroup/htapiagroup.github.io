@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "source": "1zIxcPkMfdDFIJIZlqd5vpq09Ia9cmhrcSX9LsKrlROQ",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-02-11T21:23:19Z",
+  "id": "rysi2019-s1-l04",
+  "duration": 64,
+  "title": "Lab 4: Configuración de Jupyter en la nube ejecutando con un entorno local",
+  "author": "htapia",
+  "summary": "En este lab vamos a configurar el servicio de Jupyter en Google Colaboratory para ejecutar en el entorno local que instalamos en los laboratorios anteriores",
+  "theme": "python",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "python"
+  ],
+  "tags": [
+    "jupyter",
+    "python",
+    "rysi"
+  ],
+  "feedback": "https://github.com/htapia/damju/issues",
+  "url": "rysi2019-s1-l04"
+}
