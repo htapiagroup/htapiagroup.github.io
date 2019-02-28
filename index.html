@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!---DOCTYPE HTML>
 <html lang="en-US">
     <head>
         <meta charset="UTF-8">
@@ -12,4 +12,24 @@
         <!-- Note: don't tell people to `click` the link, just tell them that it is a link. -->
         If you are not redirected automatically, follow this <a href='http://www.lania.mx/lms/maestrias/course/view.php?id=430'>link</a>.
     </body>
-</html>
+</html--->
+
+<!DOCTYPE html>
+<head>
+<script>
+function initialize(){
+var submitBtn = document.getElementById("submitBtn");
+submitBtn.addEventListener("click",function(){
+alert("successfully submited");
+setTimeout(goBack,2000)
+});
+function goBack(){
+window.history.go(-1);
+}
+}
+window.addEventListener("load",initialize);
+</script>
+</head>
+<body>
+<button id="submitBtn">Submit</button>
+</body>
