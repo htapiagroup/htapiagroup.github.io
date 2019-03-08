@@ -5,7 +5,7 @@ categories: android
 status: draft
 feedback_url: https://github.com/htapiagroup/htapiagroup.github.io/issues
 tags: sl4a, python, adb, ports, forward
-difficulty: 3
+difficulty: 2
 published: 2019-02-20
 author: HTM <htapia@lania.edu.mx>
 
@@ -16,22 +16,22 @@ author: HTM <htapia@lania.edu.mx>
 ## Introduccion
 Duration: 1:00
 
-Llego el momento de poner todo nuestro sistema en accion! Ahora que cuentan con un sistema configurado con los elementos para programar en Python, vamos a usarlo para ejecutar acciones en el dispositivo movil pero desde su sistema local, generalmente una laptop con el software de Python y las configuraciones necesarias.
+¡Llegó el momento de ponernos en acción! Ahora que cuentan con un sistema configurado con los elementos para programar en Python, vamos a usarlo para ejecutar acciones en el dispositivo móvil desde su sistema local, generalmente una laptop con el software de Python y las configuraciones necesarias realizadas la semana anterior.
 
 ### Que haremos
-En el este laboratorio vamos a realizar un recorrido por la API de Python disponible a traves de SL4A para interactuar con el dispositivo. 
+En el este laboratorio vamos a realizar un recorrido por la API de Python disponible a través de SL4A para interactuar con el dispositivo. 
 
 ### What you’ll learn
   - Como ejecutar comandos de Python en el dispositivo movil de manera remota.
   - Como acceder a las diferentes funciones de Android a traves de la API de Python.
   - Como acceder a las aplicaciones del sistema, incluyendo el portapapeles, intenciones, vibraciones, estado de red, etc.
-  - Como interactuar con los componentes del sistema y el dispositivo, por ejemplo realizar lecturas de los diferentes sensores embebidos, señales, antenas, interfaces de usuario, etc.
+  - Como interactuar con los componentes del sistema y el dispositivo para realizar lecturas de los diferentes sensores embebidos, señales, antenas, interfaces de usuario, etc.
   - Como crear una aplicacion simple basada en comandos de Python que integran funcionalidades del sistema operativo
 
-Aunque esta no es la manera tradicional en que desarrollarían una aplicación móvil, al final del laboratorio verán la flexibilidad que proporciona un lenguaje interpretado para el prototipado de ideas, además de permitirles un control mucho mas avanzado de las funciones de su dispositivo móvil.
+Aunque esta no es la manera tradicional en que desarrollarían una aplicación móvil, al final del laboratorio verán la flexibilidad que proporciona un lenguaje interpretado para el prototipado de ideas, además de permitirles un control mucho más avanzado de las funciones de su dispositivo móvil.
 
 ### Que vamos a necesitar
-  - Dispositivo "[móvil con las configuraciones]" realizadas la semana anterior.
+  - Dispositivo [móvil con las configuraciones]() realizadas la semana anterior.
   - "[Computadora con las configuraciones]" realizadas la semana anterior.
   - Cable USB de datos
   - Conexión a internet
@@ -58,7 +58,7 @@ Survey
 
 
 ## Estableciendo contacto con el droide
-Duration: 7:00
+Duration: 5:00
 
 Revisemos primero los requerimentos para conectarse al dispositivo desde su sistema local. Cabe recordar que necesitaremos
 * adb
@@ -69,11 +69,15 @@ Revisemos primero los requerimentos para conectarse al dispositivo desde su sist
 
 |Video: Iniciar y configurar servicio de Python en Android | |
 |-----|-----|
-| 1. Antes de comenzar, conectar el dispositivo movil a su computadora con un cable USB y asegurarse que el servicio de Python esta ejecutandose \\ 2. Abre una libreta de Jupyter en tu sistema local y en un celda de codigo ejecuta las instrucciones que siguen | ![check_config.gif](attachment:check_config.gif)  |
+| 1. Antes de comenzar, conectar el dispositivo movil a su computadora con un cable USB y asegurarse que el servicio de Python esta ejecutandose 
+<br>
+2. Abre una libreta de Jupyter en tu sistema local y en un celda de codigo ejecuta las instrucciones que siguen | ![check_config.gif](attachment:check_config.gif)  |
 
 
 Revisar que el dispositivo esta conectado a la computadora
 
+positive
+: **Importante:** El signo de admiración que precede a los siguientes comandos NO es error del instructor. Si los ejecutas en una celda de Jupyter, deben incluir el símbolo ! para que el intérprete pueda pasar la instrucción al SO.
 
 ```python
 !adb devices
@@ -145,7 +149,7 @@ Survey
  - El dispositivo no realiza ninguna accion
 
 ## Estructura de los comando de Python ejecutados por Android
-Duration: 15:00
+Duration: 5:00
 
 Ejecuten los siguientes comandos, observen lo que hace su dispositivo y vean la salida que se obtiene por el interprete:
 
@@ -171,8 +175,8 @@ droide.wifiGetConnectionInfo()
 
 Todos los comandos ejecutados por el interprete de Python en Android regresan con la misma estructura: un objeto identificado por `Result` con tres diccionarios, `id`, `result` y `error`. Si observan los diferentes valores del ientificador `id` en las salidas de los comandos anteriores, pueden notar que van incrementando en una unidad a partir de `id=0`. El objeto `result` consiste en un diccionario (pares llaves/valores) que contiene la informacion que la funcion regresa. En caso que la funcion no regresa nada, este diccionario tiene el valor `None`. Finalmente, `error` indica si se detecto algun error durante la ejecucion. 
 
-## Paréntesis...
-Duration 5:00
+## Paréntesis (...
+Duration: 10:00
 
 positive
 : **Nota:** Vamos a hacer un pequeño paréntesis para describir algunas de las funcionalidades del lenguaje Python. Este paso no es esencial para el resto del laboratorio pero las ideas mostradas pueden ser útiles en algún momento.
@@ -269,17 +273,23 @@ El metodo usado regresa una vista del conjunto de elementos del diccionario. Otr
 
 
 ```python
-wifiConnectionInfo.items()
+wifiConnectionInfo.viewitems()
 ```
 
-## Explorando la API de Python: AndroidFacade
-Duration: 7:00
+```python
+for items in wifiConnectionInfo.iteritems():
+    print items
+```
 
-Vamos a explorar varios de los comandos disponibles en la API y ejecutarlos de manera que puedan emplearlos en aplicaciones futuras. Vamos a utilizar la estructura de programacion modular que se emplea tradicionalmente con Python, de modo que encapsulamos cada llamada a la funcion de la API en una funcion que nos permite evaluar si se ejecuta correctamente. Todas las notas se obtuvieron de [la documentacion de la API.](https://github.com/damonkohler/sl4a/blob/wiki/ApiReference.md)
+### Fin del paréntesis...) 
+
+## Explorando la API de Python: AndroidFacade
+Duration: 5:00
+
+Vamos a explorar varios de los comandos disponibles en la API y ejecutarlos de manera que puedan emplearlos en aplicaciones futuras. Vamos a utilizar la estructura de programacion modular que se emplea tradicionalmente con Python, de modo que encapsulamos cada llamada a la función de la API en una función que nos permite evaluar si se ejecuta correctamente. Todas las notas se obtuvieron de [la documentación de la API.](https://github.com/damonkohler/sl4a/blob/wiki/ApiReference.md)
 
 Comenzaremos con algunos ejemplos de [rutinas generales de Android](http://www.mithril.com.au/android/doc/AndroidFacade.html):
 
-### Vibracion
 ### <sub>vibrate</sub> ###
 ```
 vibrate(
@@ -288,16 +298,15 @@ vibrate(
 Vibrates the phone or a specified duration in milliseconds.
 ```
 
-
+### <sub>Ejemplo</sub> ###
 ```python
 def test_vibrate():
   result = droide.vibrate()
   return result.error is None
 
 test_vibrate()
-```
 
-### Brindis
+```
 ### <sub>makeToast</sub> ###
 ```
 makeToast(
@@ -306,6 +315,7 @@ makeToast(
 Displays a short-duration Toast notification.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_make_toast():
@@ -315,7 +325,6 @@ def test_make_toast():
 test_make_toast()
 ```
 
-### Notificacion
 ### <sub>notify</sub> ###
 ```
 notify(
@@ -325,6 +334,7 @@ notify(
 Displays a notification that will be canceled when the user clicks on it.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_notify():
@@ -334,7 +344,6 @@ def test_notify():
 test_notify()
 ```
 
-### Portapapeles
 ### <sub>getClipboard</sub> ###
 ```
 getClipboard()
@@ -353,6 +362,7 @@ setClipboard(
 Put text in the clipboard.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_clipboard():
@@ -367,9 +377,8 @@ test_clipboard()
 ```
 
 ## Explorando la API de Python: TextToSpeechFacade
-Duration: 1:00
+Duration: 2:00
 
-### Texto a voz
 ### <sub>ttsSpeak</sub> ###
 ```
 ttsSpeak(
@@ -380,6 +389,7 @@ Speaks the provided message via TTS.
 Requires API Level 4.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_speak():
@@ -390,9 +400,8 @@ test_speak()
 ```
 
 ## Explorando la API de Python: UiFacade
-Duration: 20:00
+Duration: 10:00
 
-### Dialogo simple
 ### <sub>dialogCreateAlert</sub> ###
 ```
 dialogCreateAlert(
@@ -424,7 +433,7 @@ dialogGetResponse()
 Returns dialog response.
 ```
 
-
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_alert_dialog():
@@ -439,7 +448,6 @@ def test_alert_dialog():
 test_alert_dialog()
 ```
 
-### Dialogo con botones
 ### <sub>dialogSetNegativeButtonText</sub> ###
 ```
 dialogSetNegativeButtonText(
@@ -456,6 +464,7 @@ dialogSetNeutralButtonText(
 Set alert dialog button text.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_alert_dialog_with_buttons():
@@ -473,7 +482,6 @@ def test_alert_dialog_with_buttons():
 test_alert_dialog_with_buttons()
 ```
 
-### Dialogo con una lista
 ### <sub>dialogSetItems</sub> ###
 ```
 dialogSetItems(
@@ -482,6 +490,7 @@ dialogSetItems(
 Set alert dialog list items.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_alert_dialog_with_list():
@@ -495,7 +504,6 @@ def test_alert_dialog_with_list():
 test_alert_dialog_with_list()
 ```
 
-### Dialogo con una sola opcion
 ### <sub>dialogSetSingleChoiceItems</sub> ###
 ```
 dialogSetSingleChoiceItems(
@@ -505,6 +513,7 @@ dialogSetSingleChoiceItems(
 Set dialog single choice items and selected item.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_alert_dialog_with_single_choice_list():
@@ -519,7 +528,6 @@ def test_alert_dialog_with_single_choice_list():
 test_alert_dialog_with_single_choice_list()
 ```
 
-### Dialogo con opcion multiple
 ### <sub>dialogSetMultiChoiceItems</sub> ###
 ```
 dialogSetMultiChoiceItems(
@@ -529,6 +537,7 @@ dialogSetMultiChoiceItems(
 Set dialog multiple choice items and selection.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_alert_dialog_with_multi_choice_list():
@@ -543,7 +552,6 @@ def test_alert_dialog_with_multi_choice_list():
 test_alert_dialog_with_multi_choice_list()
 ```
 
-### Rueda de progreso
 ### <sub>dialogCreateSpinnerProgress</sub> ###
 ```
 dialogCreateSpinnerProgress(
@@ -561,6 +569,7 @@ dialogDismiss()
 Dismiss dialog.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 import time
@@ -577,7 +586,6 @@ def test_spinner_progress():
 test_spinner_progress()
 ```
 
-### Barra horizontal de progreso
 ### <sub>dialogCreateHorizontalProgress</sub> ###
 ```
 dialogCreateHorizontalProgress(
@@ -596,6 +604,7 @@ dialogSetCurrentProgress(
 Set progress dialog current value.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_horizontal_progress():
@@ -613,11 +622,10 @@ test_horizontal_progress()
 ```
 
 ## Explorando la API de Python: ApplicationManagerFacade
-Duration: 20:00
+Duration: 5:00
 
 [Application Manager Facade](http://www.mithril.com.au/android/doc/ApplicationManagerFacade.html)
 
-### Aplicaciones ejecutandose
 ### <sub>getRunningPackages</sub> ###
 ```
 getRunningPackages()
@@ -628,6 +636,7 @@ Returns:
   List of packages running activities.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_get_running_packages():
@@ -636,10 +645,10 @@ def test_get_running_packages():
 ```
 
 ## Explorando la API de Python: BatteryManagerFacade
+Duration: 5:00
 
 [Battery Manager Facade](http://www.mithril.com.au/android/doc/BatteryManagerFacade.html)
 
-### Estado de la bateria
 ### <sub>batteryStartMonitoring</sub> ###
 ```
 batteryStartMonitoring()
@@ -668,6 +677,7 @@ batteryStopMonitoring()
 Stops tracking battery state.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_battery():
@@ -682,12 +692,11 @@ test_battery()
 ```
 
 ## Explorando la API de Python: EventFacade y SensorManagerFacade
-Duration: 20:00
+Duration: 10:00
 
 [Event Facade](http://www.mithril.com.au/android/doc/EventFacade.html)
 [Sensor Manager Facade](http://www.mithril.com.au/android/doc/SensorManagerFacade.html)
 
-### Eventos
 ### <sub>eventClearBuffer</sub> ###
 ```
 eventClearBuffer()
@@ -707,6 +716,7 @@ Returns:
   A List of Maps of event properties.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def event_loop():
@@ -720,7 +730,6 @@ def event_loop():
   return False    
 ```
 
-### Lectura de sensores
 ### <sub>startSensingTimed</sub> ###
 ```
 startSensingTimed(
@@ -740,6 +749,7 @@ stopSensing()
 Stops collecting sensor data.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_sensor():
@@ -752,12 +762,11 @@ def test_sensor():
 ```
 
 ## Explorando la API de Python: EventFacade y LocationFacade
-Duration: 20:00
+Duration: 10:00
 
 [Event Facade](http://www.mithril.com.au/android/doc/EventFacade.html)
 [Location Facade](http://www.mithril.com.au/android/doc/LocationFacade.html)
 
-### Lectura de GPS
 ### <sub>startLocating</sub> ###
 ```
 startLocating(
@@ -778,7 +787,7 @@ stopLocating()
 Stops collecting location data.
 ```
 
-
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_gps():
@@ -789,7 +798,6 @@ def test_gps():
     droid.stopLocating()
 ```
 
-### Geolocalizacion
 ### <sub>getLastKnownLocation</sub> ###
 ```
 getLastKnownLocation()
@@ -800,7 +808,7 @@ Returns:
   A map of location information by provider.
 ```
 
-
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_get_last_known_location():
@@ -808,7 +816,7 @@ def test_get_last_known_location():
   return result.error is None
 ```
 
-### Geolocalizacion
+
 ### <sub>geocode</sub> ###
 ```
 geocode(
@@ -822,6 +830,7 @@ Returns:
   A list of addresses.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_geocode():
@@ -830,12 +839,11 @@ def test_geocode():
 ```
 
 ## Explorando la API de Python: EventFacade y PhoneFacade
-Duration: 20:00
+Duration: 5:00
 
 [Event Facade](http://www.mithril.com.au/android/doc/EventFacade.html)
 [Phone Facade](http://www.mithril.com.au/android/doc/PhoneFacade.html)
 
-### Estado del telefono
 ### <sub>startTrackingPhoneState</sub> ###
 ```
 startTrackingPhoneState()
@@ -852,6 +860,7 @@ stopTrackingPhoneState()
 Stops tracking phone state.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_phone_state():
@@ -863,12 +872,11 @@ def test_phone_state():
 ```
 
 ## Explorando la API de Python: EventFacade y SettingsFacade
-Duration: 20:00
+Duration: 5:00
 
 [Event Facade](http://www.mithril.com.au/android/doc/EventFacade.html)
 [Settings Facade](http://www.mithril.com.au/android/doc/SettingsFacade.html)
 
-### Enciende/Apaga Timbre
 ### <sub>toggleRingerSilentMode</sub> ###
 ```
 toggleRingerSilentMode(
@@ -880,6 +888,7 @@ Returns:
   True if ringer silent mode is enabled.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_ringer_silent():
@@ -888,7 +897,6 @@ def test_ringer_silent():
   return result1.error is None and result2.error is None
 ```
 
-### Volumen del timbre
 ### <sub>getRingerVolume</sub> ###
 ```
 getRingerVolume()
@@ -904,6 +912,7 @@ setRingerVolume(
 Sets the ringer volume.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_ringer_volume():
@@ -918,12 +927,11 @@ def test_ringer_volume():
 ```
 
 ## Explorando la API de Python: EventFacade y WifiFacade
-Duration: 20:00
+Duration: 5:00
 
 [Event Facade](http://www.mithril.com.au/android/doc/EventFacade.html)
 [Wifi Facade](http://www.mithril.com.au/android/doc/WifiFacade.html)
 
-### Estado del Wifi
 ### <sub>toggleWifiState</sub> ###
 ```
 toggleWifiState(
@@ -935,6 +943,7 @@ Returns:
   True if Wifi is enabled.
 ```
 
+### <sub>Ejemplo</sub> ###
 
 ```python
 def test_wifi():
@@ -944,13 +953,14 @@ def test_wifi():
   return result1.error is None and result2.error is None
 ```
 
-## Todas las Facades
-Wow! Eso fue mucho trabajo! Pero para ahora saben un poco mas como utilizar las diferentes llamadas a la API. Por supuesto no hemos revisado ni una cuarta parte de la funcionalidad disponible! hay mas de 20 fachadas que integran las diferentes funcionalidades de la API, listadas a continuacion. 
+## Documentacion de todas las Facades
+Duration: 1:00
+
+¡Wow! ¡Eso fue mucho trabajo! Pero para ahora saben un poco mas como utilizar las diferentes llamadas a la API. Por supuesto no hemos revisado ni una cuarta parte de la funcionalidad disponible! hay mas de 20 fachadas que integran las diferentes funcionalidades de la API, listadas a continuacion. 
 
 
 <html><head><title>SL4A API Help</title></head>
 <body>
-<h1>SL4A API Help</h1>
 <table border=1>
 <tr><td><a href="http://www.mithril.com.au/android/doc/ActivityResultFacade.html">ActivityResultFacade</a></td><td>Allows you to return results to a startActivityForResult call</td></tr>
 <tr><td><a href="http://www.mithril.com.au/android/doc/AndroidFacade.html">AndroidFacade</a></td><td>Some general purpose Android routines</td></tr>
@@ -979,3 +989,33 @@ Wow! Eso fue mucho trabajo! Pero para ahora saben un poco mas como utilizar las 
 <tr><td><a href="http://www.mithril.com.au/android/doc/WebCamFacade.html">WebCamFacade</a></td><td>Manages access to camera streaming</td></tr>
 <tr><td><a href="http://www.mithril.com.au/android/doc/WifiFacade.html">WifiFacade</a></td><td>Wifi functions</td></tr>
 </body></html>
+    
+## Retroalimentación
+Duration: 1:00
+Survey
+: La API de Python en Android proporciona una estructura de acceso a
+ - Una radiografía de los sensores
+ - Un mundo donde reina la oscuridad y el caos
+ - Una serie de funciones para interactuar de forma interactiva con el sistema operativo Android
+ - Nada
+: El comando `droide.startSensingTimed(2, 1000)` 
+ - indica al dispositivo que comience a tomar datos del estado de red local usando un paquete de 1000 bytes
+ - indica al dispositivo que tenga la sensitividad relativa de 2 en 1000
+ - indica al dispositivo que una lectura del sensor del aceleromentro deberá realizarse cada segundo
+ - india al dispositivo que una lectura del sensor del magentómetro deberá realizarse cada 1000 mili segundos
+ - No indica nada ni genera ningun sentimiento en el dispositivo
+ 
+## Entregas
+Duration: 1:00
+
+Las entregas se especifican empezando con el nombre del archivo y la descripción del contenido.
+
+positive
+: 1. Sem2Lab1_notify.gif: Captura de pantalla del dispositivo móvil mostrando una notificación.
+2. Sem2Lab1_ui.gif: Animacion que muestra una interacción entre el dispositivo móvil y el usuario donde haga lo siguiente:
+    * pregunte al usuario su nombre
+    * le pida ingresar su nombre
+    * le pida ingresar su fecha de nacimiento dialogCreateDatePicker()
+    * muestre una rueda de progreso mientras calcula la edad
+    * emita una notificación al terminar de calcular la edad
+    * convierta el siguiente texto a voz: "Hola $NOMBRE, tu fecha de nacimiento es $DOB y tu edad es $EDAD"

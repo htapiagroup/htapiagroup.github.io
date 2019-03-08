@@ -284,12 +284,7 @@ La estructura `a` contiene los datos del sensor obtenidos de la lista `acel` en 
 a.plot()
 ```
 
-## Entrega
-
-Van a modificar los programas necesarios para graficar los valores de orientacion, campo magnetico y luminosidad de sus dispositivos.
-
-La libreta de entrega de este laboratorio debe mostrar los programas y las tres graficas correspondientes a los sensores.
-
+## Retroalimentación
 
 Survey
 : La funcion `sensorsReadAccelerometer` regresa
@@ -302,3 +297,11 @@ Survey
  - Luminosidad y orientacion
  - Luminosidad, Aceleracion, Campo magnetico, Orientacion, Presion barometrica y bioxido de carbono
  - No tiene sensores
+ 
+## Entrega
+
+Van a modificar los programas necesarios para graficar los valores de orientación, campo magnetico y luminosidad de sus dispositivos.
+
+La libreta de entrega de este laboratorio debe mostrar los programas y las tres graficas correspondientes a los sensores.
+
+
