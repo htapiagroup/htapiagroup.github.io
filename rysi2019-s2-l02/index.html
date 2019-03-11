@@ -24,16 +24,15 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="Introduccion" duration="1">
+      <google-codelab-step label="Introducción" duration="1">
         <p>Los dispositivos modernos contienen arreglos de sensores embebidos. Una de las funcionalidades de acceder programaticamente al dispositivo usando Python es que podemos interactuar directamente con los sensores. En esta libreta vamos a aprender como determinar que sensores se tienen en el dispositivo y como tomar lecturas de ellos. Posterioremente usaremos estas lecturas para algunas aplicaciones.</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Lectura de sensores" duration="0">
-        <aside class="special"><p><strong>Nota:</strong> Siempre es buena idea revisar que la comunicacion con el dispositivo sige activa al comienzo de una nueva libreta. Aun cuando la conexion a traves de <code>tcp</code> deberia seguir activa mientras el servicio siga vigente en el dispositivo, no es necesario volver a establecerla. Sin embargo, en cada nueva libreta <strong>sí</strong> se tiene que importar el modulo <code>android</code>.</p>
+      <google-codelab-step label="Lectura de sensores" duration="15">
+        <aside class="special"><p><strong>Nota:</strong> Siempre es buena idea revisar que la comunicacion con el dispositivo sige activa al comienzo de una nueva libreta. Aun cuando la conexion a traves de <code>tcp</code> deberia seguir activa mientras el servicio siga vigente en el dispositivo, no es necesario volver a establecerla. Sin embargo, en cada nueva libreta <strong>sí</strong> se tiene que importar el modulo <code>android</code> ya que cada libreta es un espacio de ejecucion independiente.</p>
 </aside>
-<p>lo <code>android</code>.</p>
 <p>Vamos a seguir la recomendacion de la nota anterior y verificar que el dispositivo esta conectado a la computadora.</p>
 <pre><code>!adb forward tcp:9999 tcp:2222
 </code></pre>
@@ -126,7 +125,7 @@ prueba_iluminacion()
       </google-codelab-step>
     
       <google-codelab-step label="Lectura de sensores usando 
-readSensors" duration="0">
+readSensors" duration="1">
         <p>La API incluye una funcion nombrada <code>readSensors</code> que regresa los valores mas recientes que se han registrado por los sensores. Esta funcion se invoca primero indicando que los sensores deben estar &#34;atentos&#34; a censar:</p>
 <pre><code>droide.startSensingTimed(1, 1000)
 </code></pre>
@@ -141,7 +140,7 @@ readSensors" duration="0">
       </google-codelab-step>
     
       <google-codelab-step label="Usando controlador central via 
-event_loop" duration="0">
+event_loop" duration="2">
         <p>La funcion <code>event_loop</code> que construimos previamente nos permite acceder a las lecturas de los sensores disponibles pero ya controla los pasos anteriores:</p>
 <pre><code>def prueba_sensores():
   # 1: todos los sensores; 1000 milisegundos entre lectura
@@ -164,7 +163,7 @@ lecturas2 = prueba_sensores()
 
       </google-codelab-step>
     
-      <google-codelab-step label="Visualizando las lecturas del acelerometro" duration="0">
+      <google-codelab-step label="Visualizando las lecturas del acelerometro" duration="2">
         <p>Vamos a realizar un programa que registre los datos del acelerometro. Este sera util para conocer el estado de movimiento del dispositivo (y por lo tanto del usuario).</p>
 <p>La estructura del programa es como sigue: primero definimos el tiempo entre lecturas del sensor y lo nombramos <code>dt</code>.</p>
 <pre><code>dt = 100 # 100ms entre lecturas
@@ -189,7 +188,7 @@ droide.stopSensing()
 
       </google-codelab-step>
     
-      <google-codelab-step label="Visualizando los valores" duration="0">
+      <google-codelab-step label="Visualizando los valores" duration="3">
         <p>Como tenemos acceso a las lecturas, podemos visualizar los tres valores de las aceleraciones captadas por el sensor en el sistema local. Para eso vamos a usar una libreria especializada para hacer graficass y que deben tener instalada. Primero modificamos el programa como sigue:</p>
 <pre><code>acel = []
 tiempo = 0
@@ -215,7 +214,7 @@ droide.stopSensing()
 
       </google-codelab-step>
     
-      <google-codelab-step label="Retroalimentación" duration="0">
+      <google-codelab-step label="Retroalimentación" duration="1">
         <google-codelab-survey survey-id="rysi2019-s2-l02-1">
 <h4>La funcion</h4>
 <paper-radio-group>
@@ -236,9 +235,13 @@ droide.stopSensing()
 
       </google-codelab-step>
     
-      <google-codelab-step label="Entrega" duration="0">
-        <p>Van a modificar los programas necesarios para graficar los valores de orientación, campo magnetico y luminosidad de sus dispositivos.</p>
-<p>La libreta de entrega de este laboratorio debe mostrar los programas y las tres graficas correspondientes a los sensores.</p>
+      <google-codelab-step label="Entrega" duration="2">
+        <p>Las entregas se especifican empezando con el nombre del archivo y la descripción del contenido.</p>
+<aside class="special"><ol type="1">
+<li>Sem2Lab2_orientationPlot.gif: Imagen con la grafica de orientacion del dispositivo</li>
+<li>Sem2Lab2_magnetoPlot.gif: Imagen con la grafica de magnetometro del dispositivo</li>
+</ol>
+</aside>
 
 
       </google-codelab-step>
