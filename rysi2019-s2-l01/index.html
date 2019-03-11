@@ -25,21 +25,21 @@
                   feedback-link="">
     
       <google-codelab-step label="Introduccion" duration="1">
-        <p>Llego el momento de poner todo nuestro sistema en accion! Ahora que cuentan con un sistema configurado con los elementos para programar en Python, vamos a usarlo para ejecutar acciones en el dispositivo movil pero desde su sistema local, generalmente una laptop con el software de Python y las configuraciones necesarias.</p>
+        <p>¡Llegó el momento de ponernos en acción! Ahora que cuentan con un sistema configurado con los elementos para programar en Python, vamos a usarlo para ejecutar acciones en el dispositivo móvil desde su sistema local, generalmente una laptop con el software de Python y las configuraciones necesarias realizadas la semana anterior.</p>
 <h2>Que haremos</h2>
-<p>En el este laboratorio vamos a realizar un recorrido por la API de Python disponible a traves de SL4A para interactuar con el dispositivo.</p>
+<p>En el este laboratorio vamos a realizar un recorrido por la API de Python disponible a través de SL4A para interactuar con el dispositivo.</p>
 <h2 class="checklist">What you&#39;ll learn</h2>
 <ul class="checklist">
 <li>Como ejecutar comandos de Python en el dispositivo movil de manera remota.</li>
 <li>Como acceder a las diferentes funciones de Android a traves de la API de Python.</li>
 <li>Como acceder a las aplicaciones del sistema, incluyendo el portapapeles, intenciones, vibraciones, estado de red, etc.</li>
-<li>Como interactuar con los componentes del sistema y el dispositivo, por ejemplo realizar lecturas de los diferentes sensores embebidos, señales, antenas, interfaces de usuario, etc.</li>
+<li>Como interactuar con los componentes del sistema y el dispositivo para realizar lecturas de los diferentes sensores embebidos, señales, antenas, interfaces de usuario, etc.</li>
 <li>Como crear una aplicacion simple basada en comandos de Python que integran funcionalidades del sistema operativo</li>
 </ul>
-<p>Aunque esta no es la manera tradicional en que desarrollarían una aplicación móvil, al final del laboratorio verán la flexibilidad que proporciona un lenguaje interpretado para el prototipado de ideas, además de permitirles un control mucho mas avanzado de las funciones de su dispositivo móvil.</p>
+<p>Aunque esta no es la manera tradicional en que desarrollarían una aplicación móvil, al final del laboratorio verán la flexibilidad que proporciona un lenguaje interpretado para el prototipado de ideas, además de permitirles un control mucho más avanzado de las funciones de su dispositivo móvil.</p>
 <h2>Que vamos a necesitar</h2>
 <ul>
-<li>Dispositivo &#34;[móvil con las configuraciones]&#34; realizadas la semana anterior.</li>
+<li>Dispositivo [móvil con las configuraciones]() realizadas la semana anterior.</li>
 <li>&#34;[Computadora con las configuraciones]&#34; realizadas la semana anterior.</li>
 <li>Cable USB de datos</li>
 <li>Conexión a internet</li>
@@ -71,7 +71,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Estableciendo contacto con el droide" duration="7">
+      <google-codelab-step label="Estableciendo contacto con el droide" duration="5">
         <p>Revisemos primero los requerimentos para conectarse al dispositivo desde su sistema local. Cabe recordar que necesitaremos</p>
 <ul>
 <li>adb</li>
@@ -81,11 +81,15 @@
 </ul>
 <table>
 <tr></tr>
-<tr><td colspan="1" rowspan="1"><p>1. Antes de comenzar, conectar el dispositivo movil a su computadora con un cable USB y asegurarse que el servicio de Python esta ejecutandose \ 2. Abre una libreta de Jupyter en tu sistema local y en un celda de codigo ejecuta las instrucciones que siguen</p>
-</td><td colspan="1" rowspan="1"><p><img alt="check_config.gif" src="img/48a1aac16ee3534d.gif"></p>
+<tr><td colspan="1" rowspan="1"><p>1. Antes de comenzar, conectar el dispositivo movil a su computadora con un cable USB y asegurarse que el servicio de Python esta ejecutandose</p>
 </td></tr>
 </table>
+<ol type="1">
+<li>Abre una libreta de Jupyter en tu sistema local y en un celda de codigo ejecuta las instrucciones que siguen | <img alt="check_config.gif" src="img/48a1aac16ee3534d.gif">  |</li>
+</ol>
 <p>Revisar que el dispositivo esta conectado a la computadora</p>
+<aside class="special"><p><strong>Importante:</strong> El signo de admiración que precede a los siguientes comandos NO es error del instructor. Si los ejecutas en una celda de Jupyter, deben incluir el símbolo ! para que el intérprete pueda pasar la instrucción al SO.</p>
+</aside>
 <pre><code>!adb devices
 </code></pre>
 <p>Una vez iniciado el servicio de Python en el dispositivo, ejecuta lo siguiente</p>
@@ -132,7 +136,7 @@ droide.makeToast(&#34;Hola desde Jupyter!&#34;)
 
       </google-codelab-step>
     
-      <google-codelab-step label="Estructura de los comando de Python ejecutados por Android" duration="15">
+      <google-codelab-step label="Estructura de los comando de Python ejecutados por Android" duration="5">
         <p>Ejecuten los siguientes comandos, observen lo que hace su dispositivo y vean la salida que se obtiene por el interprete:</p>
 <pre><code>droide.makeToast(&#34;RySi coloca texto aqui&#34;)
 </code></pre>
@@ -147,9 +151,8 @@ droide.makeToast(&#34;Hola desde Jupyter!&#34;)
 
       </google-codelab-step>
     
-      <google-codelab-step label="Paréntesis..." duration="0">
-        <p>Duration 5:00</p>
-<aside class="special"><p><strong>Nota:</strong> Vamos a hacer un pequeño paréntesis para describir algunas de las funcionalidades del lenguaje Python. Este paso no es esencial para el resto del laboratorio pero las ideas mostradas pueden ser útiles en algún momento.</p>
+      <google-codelab-step label="Paréntesis (..." duration="10">
+        <aside class="special"><p><strong>Nota:</strong> Vamos a hacer un pequeño paréntesis para describir algunas de las funcionalidades del lenguaje Python. Este paso no es esencial para el resto del laboratorio pero las ideas mostradas pueden ser útiles en algún momento.</p>
 </aside>
 <p>Podemos acceder a los valores que resulta del llamado a Android si asignamos una variable a la funcion. Ejecuten el siguiente codigo</p>
 <pre><code>wifiConnectionInfo = droide.wifiGetConnectionInfo()
@@ -193,42 +196,46 @@ print(result)
     print(v)
 </code></pre>
 <p>El metodo usado regresa una vista del conjunto de elementos del diccionario. Otra forma de acceder a los contenidos es usando <code>iteritems()</code>, <code>viewitems()</code>.</p>
-<pre><code>wifiConnectionInfo.items()
+<pre><code>wifiConnectionInfo.viewitems()
 </code></pre>
+<pre><code>for items in wifiConnectionInfo.iteritems():
+    print items
+</code></pre>
+<h2>Fin del paréntesis...)</h2>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Explorando la API de Python: AndroidFacade" duration="7">
-        <p>Vamos a explorar varios de los comandos disponibles en la API y ejecutarlos de manera que puedan emplearlos en aplicaciones futuras. Vamos a utilizar la estructura de programacion modular que se emplea tradicionalmente con Python, de modo que encapsulamos cada llamada a la funcion de la API en una funcion que nos permite evaluar si se ejecuta correctamente. Todas las notas se obtuvieron de <a href="https://github.com/damonkohler/sl4a/blob/wiki/ApiReference.md" target="_blank">la documentacion de la API.</a></p>
+      <google-codelab-step label="Explorando la API de Python: AndroidFacade" duration="5">
+        <p>Vamos a explorar varios de los comandos disponibles en la API y ejecutarlos de manera que puedan emplearlos en aplicaciones futuras. Vamos a utilizar la estructura de programacion modular que se emplea tradicionalmente con Python, de modo que encapsulamos cada llamada a la función de la API en una función que nos permite evaluar si se ejecuta correctamente. Todas las notas se obtuvieron de <a href="https://github.com/damonkohler/sl4a/blob/wiki/ApiReference.md" target="_blank">la documentación de la API.</a></p>
 <p>Comenzaremos con algunos ejemplos de <a href="http://www.mithril.com.au/android/doc/AndroidFacade.html" target="_blank">rutinas generales de Android</a>:</p>
-<h2>Vibracion</h2>
 <h2>vibrate</h2>
 <pre><code>vibrate(
  Integer duration[optional, default 300]: duration in milliseconds)
 
 Vibrates the phone or a specified duration in milliseconds.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_vibrate():
   result = droide.vibrate()
   return result.error is None
 
 test_vibrate()
+
 </code></pre>
-<h2>Brindis</h2>
 <h2>makeToast</h2>
 <pre><code>makeToast(
   String message)
 
 Displays a short-duration Toast notification.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_make_toast():
   result = droide.makeToast(&#39;Un brindis por ustedes!&#39;)
   return result.error is None
 
 test_make_toast()
 </code></pre>
-<h2>Notificacion</h2>
 <h2>notify</h2>
 <pre><code>notify(
  String title: title,
@@ -236,13 +243,13 @@ test_make_toast()
 
 Displays a notification that will be canceled when the user clicks on it.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_notify():
   result = droid.notify(&#39;Primero el Titulo&#39;, &#39;Despues el mensaje de notificacion!&#39;)
   return result.error is None
 
 test_notify()
 </code></pre>
-<h2>Portapapeles</h2>
 <h2>getClipboard</h2>
 <pre><code>getClipboard()
 
@@ -257,6 +264,7 @@ Returns:
 
 Put text in the clipboard.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_clipboard():
   previous = droide.getClipboard().result
   msg = &#39;Hola, clase!&#39;
@@ -271,9 +279,8 @@ test_clipboard()
 
       </google-codelab-step>
     
-      <google-codelab-step label="Explorando la API de Python: TextToSpeechFacade" duration="1">
-        <h2>Texto a voz</h2>
-<h2>ttsSpeak</h2>
+      <google-codelab-step label="Explorando la API de Python: TextToSpeechFacade" duration="2">
+        <h2>ttsSpeak</h2>
 <pre><code>ttsSpeak(
   String message)
 
@@ -281,6 +288,7 @@ Speaks the provided message via TTS.
 
 Requires API Level 4.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_speak():
   result = droide.ttsSpeak(&#39;Hola, clase&#39;)
   return result.error is None
@@ -291,9 +299,8 @@ test_speak()
 
       </google-codelab-step>
     
-      <google-codelab-step label="Explorando la API de Python: UiFacade" duration="20">
-        <h2>Dialogo simple</h2>
-<h2>dialogCreateAlert</h2>
+      <google-codelab-step label="Explorando la API de Python: UiFacade" duration="10">
+        <h2>dialogCreateAlert</h2>
 <pre><code>dialogCreateAlert(
  String title[optional],
   String message[optional])
@@ -316,6 +323,7 @@ Show dialog.
 
 Returns dialog response.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_alert_dialog():
   title = &#39;Interfaz de usuario&#39;
   message = &#39;Bienvenidos a la prueba de integracion del curso.&#39;
@@ -327,7 +335,6 @@ Returns dialog response.
 
 test_alert_dialog()
 </code></pre>
-<h2>Dialogo con botones</h2>
 <h2>dialogSetNegativeButtonText</h2>
 <pre><code>dialogSetNegativeButtonText(
   String text)
@@ -340,6 +347,7 @@ Set alert dialog button text.
 
 Set alert dialog button text.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_alert_dialog_with_buttons():
   title = &#39;Alerta!&#39;
   message = (&#39;Esta alerta tiene 3 botones y &#39;
@@ -354,13 +362,13 @@ Set alert dialog button text.
 
 test_alert_dialog_with_buttons()
 </code></pre>
-<h2>Dialogo con una lista</h2>
 <h2>dialogSetItems</h2>
 <pre><code>dialogSetItems(
   JSONArray items)
 
 Set alert dialog list items.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_alert_dialog_with_list():
   title = &#39;Alerta&#39;
   droide.dialogCreateAlert(title)
@@ -371,7 +379,6 @@ Set alert dialog list items.
 
 test_alert_dialog_with_list()
 </code></pre>
-<h2>Dialogo con una sola opcion</h2>
 <h2>dialogSetSingleChoiceItems</h2>
 <pre><code>dialogSetSingleChoiceItems(
  JSONArray items,
@@ -379,6 +386,7 @@ test_alert_dialog_with_list()
 
 Set dialog single choice items and selected item.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_alert_dialog_with_single_choice_list():
   title = &#39;Alert&#39;
   droide.dialogCreateAlert(title)
@@ -390,7 +398,6 @@ Set dialog single choice items and selected item.
 
 test_alert_dialog_with_single_choice_list()
 </code></pre>
-<h2>Dialogo con opcion multiple</h2>
 <h2>dialogSetMultiChoiceItems</h2>
 <pre><code>dialogSetMultiChoiceItems(
  JSONArray items,
@@ -398,6 +405,7 @@ test_alert_dialog_with_single_choice_list()
 
 Set dialog multiple choice items and selection.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_alert_dialog_with_multi_choice_list():
   title = &#39;Alert&#39;
   droide.dialogCreateAlert(title)
@@ -409,7 +417,6 @@ Set dialog multiple choice items and selection.
 
 test_alert_dialog_with_multi_choice_list()
 </code></pre>
-<h2>Rueda de progreso</h2>
 <h2>dialogCreateSpinnerProgress</h2>
 <pre><code>dialogCreateSpinnerProgress(
  String title[optional],
@@ -423,6 +430,7 @@ Create a spinner progress dialog.
 
 Dismiss dialog.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>import time
 
 def test_spinner_progress():
@@ -436,7 +444,6 @@ def test_spinner_progress():
 
 test_spinner_progress()
 </code></pre>
-<h2>Barra horizontal de progreso</h2>
 <h2>dialogCreateHorizontalProgress</h2>
 <pre><code>dialogCreateHorizontalProgress(
  String title[optional],
@@ -451,6 +458,7 @@ Create a horizontal progress dialog.
 
 Set progress dialog current value.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_horizontal_progress():
   title = &#39;Horizontal&#39;
   message = &#39;Esta es simplemente una barra de progreso horizontal simple.&#39;
@@ -468,9 +476,8 @@ test_horizontal_progress()
 
       </google-codelab-step>
     
-      <google-codelab-step label="Explorando la API de Python: ApplicationManagerFacade" duration="20">
+      <google-codelab-step label="Explorando la API de Python: ApplicationManagerFacade" duration="5">
         <p><a href="http://www.mithril.com.au/android/doc/ApplicationManagerFacade.html" target="_blank">Application Manager Facade</a></p>
-<h2>Aplicaciones ejecutandose</h2>
 <h2>getRunningPackages</h2>
 <pre><code>getRunningPackages()
 
@@ -479,6 +486,7 @@ Returns a list of packages running activities or services.
 Returns:
   List of packages running activities.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_get_running_packages():
   result = droid.getRunningPackages()
   return result.error is None
@@ -487,9 +495,8 @@ Returns:
 
       </google-codelab-step>
     
-      <google-codelab-step label="Explorando la API de Python: BatteryManagerFacade" duration="0">
+      <google-codelab-step label="Explorando la API de Python: BatteryManagerFacade" duration="5">
         <p><a href="http://www.mithril.com.au/android/doc/BatteryManagerFacade.html" target="_blank">Battery Manager Facade</a></p>
-<h2>Estado de la bateria</h2>
 <h2>batteryStartMonitoring</h2>
 <pre><code>batteryStartMonitoring()
 
@@ -512,6 +519,7 @@ Returns  the most recently received battery status data:
 
 Stops tracking battery state.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_battery():
   droide.batteryStartMonitoring()
   time.sleep(1)
@@ -526,9 +534,8 @@ test_battery()
 
       </google-codelab-step>
     
-      <google-codelab-step label="Explorando la API de Python: EventFacade y SensorManagerFacade" duration="20">
+      <google-codelab-step label="Explorando la API de Python: EventFacade y SensorManagerFacade" duration="10">
         <p><a href="http://www.mithril.com.au/android/doc/EventFacade.html" target="_blank">Event Facade</a><a href="http://www.mithril.com.au/android/doc/SensorManagerFacade.html" target="_blank">Sensor Manager Facade</a></p>
-<h2>Eventos</h2>
 <h2>eventClearBuffer</h2>
 <pre><code>eventClearBuffer()
 
@@ -544,6 +551,7 @@ from the event buffer.
 Returns:
   A List of Maps of event properties.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def event_loop():
   for i in range(10):
     time.sleep(1)
@@ -554,7 +562,6 @@ Returns:
       return True
   return False    
 </code></pre>
-<h2>Lectura de sensores</h2>
 <h2>startSensingTimed</h2>
 <pre><code>startSensingTimed(
  Integer sensorNumber: 1 = All, 2 = Accelerometer, 3 = Magnetometer and 4 =     
@@ -570,6 +577,7 @@ Generates &#34;sensors&#34; events.
 
 Stops collecting sensor data.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_sensor():
   # acelerometro 1 lectura por segundo
   droid.startSensingTimed(2, 1000)
@@ -582,9 +590,8 @@ Stops collecting sensor data.
 
       </google-codelab-step>
     
-      <google-codelab-step label="Explorando la API de Python: EventFacade y LocationFacade" duration="20">
+      <google-codelab-step label="Explorando la API de Python: EventFacade y LocationFacade" duration="10">
         <p><a href="http://www.mithril.com.au/android/doc/EventFacade.html" target="_blank">Event Facade</a><a href="http://www.mithril.com.au/android/doc/LocationFacade.html" target="_blank">Location Facade</a></p>
-<h2>Lectura de GPS</h2>
 <h2>startLocating</h2>
 <pre><code>startLocating(
  Integer minDistance[optional, default 60000]: minimum time between updates in  
@@ -601,6 +608,7 @@ Generates &#34;location&#34; events.
 
 Stops collecting location data.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_gps():
   droid.startLocating()
   try:
@@ -608,7 +616,6 @@ Stops collecting location data.
   finally:
     droid.stopLocating()
 </code></pre>
-<h2>Geolocalizacion</h2>
 <h2>getLastKnownLocation</h2>
 <pre><code>getLastKnownLocation()
 
@@ -617,11 +624,11 @@ Returns the last known location of the device.
 Returns:
   A map of location information by provider.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_get_last_known_location():
   result = droid.getLastKnownLocation()
   return result.error is None
 </code></pre>
-<h2>Geolocalizacion</h2>
 <h2>geocode</h2>
 <pre><code>geocode(
  Double latitude,
@@ -633,6 +640,7 @@ Returns a list of addresses for the given latitude and longitude.
 Returns:
   A list of addresses.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_geocode():
   result = droid.geocode(0.0, 0.0, 1)
   return result.error is None
@@ -641,9 +649,8 @@ Returns:
 
       </google-codelab-step>
     
-      <google-codelab-step label="Explorando la API de Python: EventFacade y PhoneFacade" duration="20">
+      <google-codelab-step label="Explorando la API de Python: EventFacade y PhoneFacade" duration="5">
         <p><a href="http://www.mithril.com.au/android/doc/EventFacade.html" target="_blank">Event Facade</a><a href="http://www.mithril.com.au/android/doc/PhoneFacade.html" target="_blank">Phone Facade</a></p>
-<h2>Estado del telefono</h2>
 <h2>startTrackingPhoneState</h2>
 <pre><code>startTrackingPhoneState()
 
@@ -656,6 +663,7 @@ Generates &#34;phone&#34; events.
 
 Stops tracking phone state.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_phone_state():
   droid.startTrackingPhoneState()
   try:
@@ -667,9 +675,8 @@ Stops tracking phone state.
 
       </google-codelab-step>
     
-      <google-codelab-step label="Explorando la API de Python: EventFacade y SettingsFacade" duration="20">
+      <google-codelab-step label="Explorando la API de Python: EventFacade y SettingsFacade" duration="5">
         <p><a href="http://www.mithril.com.au/android/doc/EventFacade.html" target="_blank">Event Facade</a><a href="http://www.mithril.com.au/android/doc/SettingsFacade.html" target="_blank">Settings Facade</a></p>
-<h2>Enciende/Apaga Timbre</h2>
 <h2>toggleRingerSilentMode</h2>
 <pre><code>toggleRingerSilentMode(
  Boolean enabled[optional])
@@ -679,12 +686,12 @@ Toggles ringer silent mode on and off.
 Returns:
   True if ringer silent mode is enabled.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_ringer_silent():
   result1 = droid.toggleRingerSilentMode()
   result2 = droid.toggleRingerSilentMode()
   return result1.error is None and result2.error is None
 </code></pre>
-<h2>Volumen del timbre</h2>
 <h2>getRingerVolume</h2>
 <pre><code>getRingerVolume()
 
@@ -696,6 +703,7 @@ Returns the current ringer volume.
 
 Sets the ringer volume.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_ringer_volume():
   get_result = droid.getRingerVolume()
   if get_result.error is not None:
@@ -710,9 +718,8 @@ Sets the ringer volume.
 
       </google-codelab-step>
     
-      <google-codelab-step label="Explorando la API de Python: EventFacade y WifiFacade" duration="20">
+      <google-codelab-step label="Explorando la API de Python: EventFacade y WifiFacade" duration="5">
         <p><a href="http://www.mithril.com.au/android/doc/EventFacade.html" target="_blank">Event Facade</a><a href="http://www.mithril.com.au/android/doc/WifiFacade.html" target="_blank">Wifi Facade</a></p>
-<h2>Estado del Wifi</h2>
 <h2>toggleWifiState</h2>
 <pre><code>toggleWifiState(
  Boolean enabled[optional])
@@ -722,6 +729,7 @@ Toggle Wifi on and off.
 Returns:
   True if Wifi is enabled.
 </code></pre>
+<h2>Ejemplo</h2>
 <pre><code>def test_wifi():
   result1 = droid.toggleWifiState()
   result2 = droid.toggleWifiState()
@@ -732,10 +740,41 @@ Returns:
 
       </google-codelab-step>
     
-      <google-codelab-step label="Todas las Facades" duration="0">
-        <p>Wow! Eso fue mucho trabajo! Pero para ahora saben un poco mas como utilizar las diferentes llamadas a la API. Por supuesto no hemos revisado ni una cuarta parte de la funcionalidad disponible! hay mas de 20 fachadas que integran las diferentes funcionalidades de la API, listadas a continuacion.</p>
+      <google-codelab-step label="Documentacion de todas las Facades" duration="1">
+        <p>¡Wow! ¡Eso fue mucho trabajo! Pero para ahora saben un poco mas como utilizar las diferentes llamadas a la API. Por supuesto no hemos revisado ni una cuarta parte de la funcionalidad disponible! hay mas de 20 fachadas que integran las diferentes funcionalidades de la API, listadas a continuacion.</p>
 <p>SL4A API Help</p>
-<p>SL4A API Help</p>
+<p>Retroalimentación</p>
+<google-codelab-survey survey-id="rysi2019-s2-l01-3">
+<h4>La API de Python en Android proporciona una estructura de acceso a</h4>
+<paper-radio-group>
+<paper-radio-button>Una radiografía de los sensores</paper-radio-button>
+<paper-radio-button>Un mundo donde reina la oscuridad y el caos</paper-radio-button>
+<paper-radio-button>Una serie de funciones para interactuar de forma interactiva con el sistema operativo Android</paper-radio-button>
+<paper-radio-button>Nada</paper-radio-button>
+</paper-radio-group>
+<h4>El comando</h4>
+<paper-radio-group>
+<paper-radio-button>indica al dispositivo que comience a tomar datos del estado de red local usando un paquete de 1000 bytes</paper-radio-button>
+<paper-radio-button>indica al dispositivo que tenga la sensitividad relativa de 2 en 1000</paper-radio-button>
+<paper-radio-button>indica al dispositivo que una lectura del sensor del aceleromentro deberá realizarse cada segundo</paper-radio-button>
+<paper-radio-button>india al dispositivo que una lectura del sensor del magentómetro deberá realizarse cada 1000 mili segundos</paper-radio-button>
+<paper-radio-button>No indica nada ni genera ningun sentimiento en el dispositivo</paper-radio-button>
+</paper-radio-group>
+</google-codelab-survey>
+<p>dispositivo</p>
+<p>Entregas</p>
+<p>Las entregas se especifican empezando con el nombre del archivo y la descripción del contenido.</p>
+<aside class="special"><p>1. Sem2Lab1_notify.gif: Captura de pantalla del dispositivo móvil mostrando una notificación.</p>
+</aside>
+<p>Sem2Lab1_ui.gif: Animacion que muestra una interacción entre el dispositivo móvil y el usuario donde haga lo siguiente:<br><br></p>
+<ul>
+<li>pregunte al usuario su nombre</li>
+<li>le pida ingresar su nombre</li>
+<li>le pida ingresar su fecha de nacimiento dialogCreateDatePicker()</li>
+<li>muestre una rueda de progreso mientras calcula la edad</li>
+<li>emita una notificación al terminar de calcular la edad</li>
+<li>convierta el siguiente texto a voz: &#34;Hola $NOMBRE, tu fecha de nacimiento es $DOB y tu edad es $EDAD&#34;</li>
+</ul>
 <table>
 <tr><td colspan="1" rowspan="1"><p><a href="http://www.mithril.com.au/android/doc/ActivityResultFacade.html" target="_blank">ActivityResultFacade</a></p>
 </td><td colspan="1" rowspan="1"><p>Allows you to return results to a startActivityForResult call</p>
