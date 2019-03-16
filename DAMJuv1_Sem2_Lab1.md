@@ -8,6 +8,7 @@ tags: sl4a, python, adb, ports, forward
 difficulty: 2
 published: 2019-02-20
 author: HTM <htapia@lania.edu.mx>
+analytics account: UA-134300173-1
 
 ---
 
@@ -71,7 +72,7 @@ Revisemos primero los requerimentos para conectarse al dispositivo desde su sist
 |-----|-----|
 | 1. Antes de comenzar, conectar el dispositivo movil a su computadora con un cable USB y asegurarse que el servicio de Python esta ejecutandose 
 <br>
-2. Abre una libreta de Jupyter en tu sistema local y en un celda de codigo ejecuta las instrucciones que siguen | ![check_config.gif](attachment:check_config.gif)  |
+2. Abre una libreta de Jupyter en tu sistema local y en un celda de codigo ejecuta las instrucciones que siguen | ![check_config.gif](check_config.gif)  |
 
 
 Revisar que el dispositivo esta conectado a la computadora
@@ -953,6 +954,40 @@ def test_wifi():
   return result1.error is None and result2.error is None
 ```
 
+    
+## Retroalimentación
+Duration: 1:00
+
+Survey
+: La API de Python en Android proporciona una estructura de acceso a
+ - Una radiografía de los sensores
+ - Un mundo donde reina la oscuridad y el caos
+ - Una serie de funciones para interactuar de forma interactiva con el sistema operativo Android
+ - Nada
+: El comando droide.startSensingTimed(2, 1000)
+ - indica al dispositivo que comience a tomar datos del estado de red local usando un paquete de 1000 bytes
+ - indica al dispositivo que tenga la sensitividad relativa de 2 en 1000
+ - indica al dispositivo que una lectura del sensor del aceleromentro deberá realizarse cada segundo
+ - india al dispositivo que una lectura del sensor del magentómetro deberá realizarse cada 1000 mili segundos
+ - No indica nada ni genera ningun sentimiento en el dispositivo
+ 
+## Entregas
+Duration: 1:00
+
+Las entregas se especifican empezando con el nombre del archivo y la descripción del contenido.
+
+positive
+: 
+	1. Sem2Lab1_notify.gif: Captura de pantalla del dispositivo móvil mostrando una notificación.
+
+	2. Sem2Lab1_ui.gif: Animacion que muestra una interacción entre el dispositivo móvil y el usuario donde haga lo siguiente:
+	    * pregunte al usuario su nombre
+	    * le pida ingresar su nombre
+	    * le pida ingresar su fecha de nacimiento dialogCreateDatePicker()
+	    * muestre una rueda de progreso mientras calcula la edad
+	    * emita una notificación al terminar de calcular la edad
+	    * convierta el siguiente texto a voz: "Hola $NOMBRE, tu fecha de nacimiento es $DOB y tu edad es $EDAD"
+
 ## Documentacion de todas las Facades
 Duration: 1:00
 
@@ -989,33 +1024,3 @@ Duration: 1:00
 <tr><td><a href="http://www.mithril.com.au/android/doc/WebCamFacade.html">WebCamFacade</a></td><td>Manages access to camera streaming</td></tr>
 <tr><td><a href="http://www.mithril.com.au/android/doc/WifiFacade.html">WifiFacade</a></td><td>Wifi functions</td></tr>
 </body></html>
-    
-## Retroalimentación
-Duration: 1:00
-Survey
-: La API de Python en Android proporciona una estructura de acceso a
- - Una radiografía de los sensores
- - Un mundo donde reina la oscuridad y el caos
- - Una serie de funciones para interactuar de forma interactiva con el sistema operativo Android
- - Nada
-: El comando `droide.startSensingTimed(2, 1000)` 
- - indica al dispositivo que comience a tomar datos del estado de red local usando un paquete de 1000 bytes
- - indica al dispositivo que tenga la sensitividad relativa de 2 en 1000
- - indica al dispositivo que una lectura del sensor del aceleromentro deberá realizarse cada segundo
- - india al dispositivo que una lectura del sensor del magentómetro deberá realizarse cada 1000 mili segundos
- - No indica nada ni genera ningun sentimiento en el dispositivo
- 
-## Entregas
-Duration: 1:00
-
-Las entregas se especifican empezando con el nombre del archivo y la descripción del contenido.
-
-positive
-: 1. Sem2Lab1_notify.gif: Captura de pantalla del dispositivo móvil mostrando una notificación.
-2. Sem2Lab1_ui.gif: Animacion que muestra una interacción entre el dispositivo móvil y el usuario donde haga lo siguiente:
-    * pregunte al usuario su nombre
-    * le pida ingresar su nombre
-    * le pida ingresar su fecha de nacimiento dialogCreateDatePicker()
-    * muestre una rueda de progreso mientras calcula la edad
-    * emita una notificación al terminar de calcular la edad
-    * convierta el siguiente texto a voz: "Hola $NOMBRE, tu fecha de nacimiento es $DOB y tu edad es $EDAD"

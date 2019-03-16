@@ -8,21 +8,25 @@ tags: sl4a, python, adb, ports, forward
 difficulty: 3
 published: 2019-02-21
 author: HTM <htapia@lania.edu.mx>
+analytics account: UA-134300173-1
 
 ---
 
 # Aplicaciones con los sensores embebidos
 
-## Introduccion
+## Introducción
 Duration: 1:00
 
 Los dispositivos modernos contienen arreglos de sensores embebidos. Una de las funcionalidades de acceder programaticamente al dispositivo usando Python es que podemos interactuar directamente con los sensores. En esta libreta vamos a aprender como determinar que sensores se tienen en el dispositivo y como tomar lecturas de ellos. Posterioremente usaremos estas lecturas para algunas aplicaciones.
 
 
 ## Lectura de sensores
-Duration: 7:00
-positive
-: **Nota:** Siempre es buena idea revisar que la comunicacion con el dispositivo sige activa al comienzo de una nueva libreta. Aun cuando la conexion a traves de `tcp` deberia seguir activa mientras el servicio siga vigente en el dispositivo, no es necesario volver a establecerla. Sin embargo, en cada nueva libreta **sí** se tiene que importar el modulo `android`.
+Duration: 15:00
+
+Positive
+: **Nota:** Siempre es buena idea revisar que la comunicacion con el dispositivo sige activa al comienzo de una nueva libreta. Aun cuando la conexion a traves de `tcp` deberia seguir activa mientras el servicio siga vigente en el dispositivo, no es necesario volver a establecerla. Sin embargo, en cada nueva libreta **sí** se tiene que importar el modulo ```android``` ya que cada libreta es un espacio de ejecucion independiente.
+
+
 
 Vamos a seguir la recomendacion de la nota anterior y verificar que el dispositivo esta conectado a la computadora. 
 
@@ -155,6 +159,7 @@ prueba_iluminacion()
 ```
 
 ## Lectura de sensores usando `readSensors`
+Duration: 1:00
 
 La API incluye una funcion nombrada `readSensors` que regresa los valores mas recientes que se han registrado por los sensores. Esta funcion se invoca primero indicando que los sensores deben estar "atentos" a censar:
 
@@ -178,6 +183,7 @@ droide.stopSensing()
 ```
 
 ## Usando controlador central via `event_loop`
+Duration: 2:00
 
 La funcion `event_loop` que construimos previamente nos permite acceder a las lecturas de los sensores disponibles pero ya controla los pasos anteriores:
 
@@ -210,6 +216,7 @@ positive
 : **Nota:** Como mencionamos, cada dispositivo contiene un arreglo diferente de sensores, asi que los resultados que observen dependeran de su modelo. En el fondo del alma la funcion `readSensors` utiliza `eventPoll` para tomar las lecturas, sin embargo `eventPoll` permite un control mas fino de los eventos que se estan registrando.
 
 ## Visualizando las lecturas del acelerometro
+Duration: 2:00
 
 Vamos a realizar un programa que registre los datos del acelerometro. Este sera util para conocer el estado de movimiento del dispositivo (y por lo tanto del usuario).
 
@@ -246,6 +253,7 @@ droide.stopSensing()
 ```
 
 ## Visualizando los valores
+Duration: 3:00
 
 Como tenemos acceso a las lecturas, podemos visualizar los tres valores de las aceleraciones captadas por el sensor en el sistema local. Para eso vamos a usar una libreria especializada para hacer graficass y que deben tener instalada. Primero modificamos el programa como sigue:
 
@@ -285,6 +293,7 @@ a.plot()
 ```
 
 ## Retroalimentación
+Duration: 1:00
 
 Survey
 : La funcion `sensorsReadAccelerometer` regresa
@@ -299,9 +308,12 @@ Survey
  - No tiene sensores
  
 ## Entrega
+Duration: 2:00
 
-Van a modificar los programas necesarios para graficar los valores de orientación, campo magnetico y luminosidad de sus dispositivos.
+Las entregas se especifican empezando con el nombre del archivo y la descripción del contenido.
 
-La libreta de entrega de este laboratorio debe mostrar los programas y las tres graficas correspondientes a los sensores.
+positive
+: 
+  1. Sem2Lab2_orientationPlot.gif: Imagen con la grafica de orientacion del dispositivo
 
-
+  1. Sem2Lab2_magnetoPlot.gif: Imagen con la grafica de magnetometro del dispositivo
