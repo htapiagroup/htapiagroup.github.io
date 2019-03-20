@@ -1,0 +1,303 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Modelo de Identificación de Objetos en Imágenes</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Modelo de Identificación de Objetos en Imágenes"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="TensorFlow" duration="1">
+        <p><a href="https://www.tensorflow.org/" target="_blank">TensorFlow</a> es una librería especializada en aprendizaje de máquina.</p>
+<h2>Que vamos a hacer</h2>
+<p>En este laboratorio vamos a usar TensorFlow para crear una aplicación que identifique objetos a partir de imagenes.</p>
+<p><img style="max-width: 200.00px" src="img/3021186b83bc90c2.png"></p>
+<pre><code>  Evaluation time (1-image): 0.110s
+
+  daisy (score=0.99712)
+  tulips (score=0.00286)
+  dandelion (score=0.00001)
+  roses (score=0.00001)
+  sunflowers (score=0.00000)
+</code></pre>
+<h2 class="checklist">What you&#39;ll Learn</h2>
+<ul class="checklist">
+<li>Como usar Colaboratory con Python y TensorFlow para entrenar un clasificador de imagenes</li>
+<li>Como clasificar imagens con el algoritmo entrenado</li>
+</ul>
+<h2>Que vamos a necesitar</h2>
+<ul>
+<li>Computadora con conexión a internet</li>
+<li>Cuenta de Google</li>
+<li>Dispositivo móvil con SO Android &gt; 4 en modo desarrollador</li>
+<li>Cable USB de datos</li>
+<li>Android Studio instalado y configurado en computadora local</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuración" duration="2">
+        <h2>Instalar TensorFlow</h2>
+<p>Vamos a utilzar Colaboratory porque la configuración del ecosistema de programación, incluyendo la librería <code>tensorflow</code> y el acceso a un procesador gráfico GPU no requieren de ninguna configuración avanzada. La librería <code>tensorflow</code> está disponible en el sistema de Colaboratory de forma directa. El siguiente enlace los llevará a una libreta donde podrán evaluar el código de este laboratorio: <a href="https://colab.research.google.com/drive/132BaEyPn08mNrZKWisuwjsIJT5aFcUxi" target="_blank">Sem3_Lab1_Entrenamiento.ipynb</a></p>
+<pre><code>import tensorflow as tf
+print(tf.__version__)
+</code></pre>
+<h2>Clonar el repositorio</h2>
+<p>En la libreta anterior, escriban el siguiente código que descarga los programas que se van a utilzar en este y el siguiente laboratorio. Los programas estaán alojados en un repositorio en GitHub. Clona el repositorio y una vez hecho, cambia la ruta a ese directorio, que es en el cual estaremos trabajando.</p>
+<pre><code>!git clone https://github.com/htapiagroup/tensorflow-for-lania
+</code></pre>
+<pre><code>cd tensorflow-for-lania/
+</code></pre>
+<h2>Descargar datos</h2>
+<p>Antes de entrenar un modelo, necesitamos datos con las categorias que quisieramos que el modelo pudiera identificar. Este conjunto de datos se conoce tambien como la base de conocimiento para el modelo. El siguiente comando descarga una base de datos con imagenes de flores:</p>
+<pre><code>!curl http://download.tensorflow.org/example_images/flower_photos.tgz \
+    | tar xz -C tf_files
+</code></pre>
+<p>Las imagenes representan cinco categorias de flores: margaritas (daisy), dientes de leon (dandelion), rosas (roses), girasoles (sunflowers y tulipanes (tulips):</p>
+<pre><code>ls tf_files/flower_photos
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="(Re)entrenando la red neuronal" duration="5">
+        <h2>Configura MobileNet</h2>
+<p>En este laboratorio usaremos <a href="https://research.googleblog.com/2017/06/mobilenets-open-source-models-for.html" target="_blank">MobileNet</a>, una red neuronal ligera y eficiente. Esta red puede configurarse de dos formas:</p>
+<ul>
+<li>Resolucion de la imagen de entrada: Si las imagenes que alimentan al modelo son de mayor resolucion, necesitamos mayor poder de procesamiento y el modelo clasifica con mayor exactitud</li>
+<li>Tamaño relativo del modelo: 1.0, 0.75, 0.50 o 0.25.</li>
+</ul>
+<p>Vamos a usar 224 y 0.50 como los parametros del modelo en este laboratorio. El siguiente script ejecuta el codigo a nivel de computadora, noten el comando magico <code>%%bash</code> en la primera linea.</p>
+<pre><code>%%bash
+ 
+IMAGE_SIZE=224
+ARCHITECTURE=&#34;mobilenet_0.50_${IMAGE_SIZE}&#34;
+
+python -m scripts.retrain \
+  --bottleneck_dir=tf_files/bottlenecks \
+  --how_many_training_steps=500 \
+  --model_dir=tf_files/models/ \
+  --summaries_dir=tf_files/training_summaries/&#34;${ARCHITECTURE}&#34; \
+  --output_graph=tf_files/retrained_graph.pb \
+  --output_labels=tf_files/retrained_labels.txt \
+  --architecture=&#34;${ARCHITECTURE}&#34; \
+  --image_dir=tf_files/flower_photos
+</code></pre>
+<p>Este paso puede demorar algunos minutos.</p>
+<p>El script descarga un modelo pre-entrenado, agrega una nueva capa final y entrena esta capa en el conjunto de entrenamiento de las imagenes que descargaste previamente.</p>
+<p>El modelo que acabamos de usar no tiene ninguna de las especies de flores que hemos especificado. Sin embargo, la informacion que hace posible que el modelo pueda distinguir entre 1000 clases de objetos puede usarse para nuestros propositos. Toda esta informacion es usada inicialmente para alimentar una red neuronal cuya ultima capa de clasificacion distingue entre las clases de flores.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Usando el nuevo modelo" duration="5">
+        <p>El script de reentrenamiento guarda los datos en los siguientes archivos:</p>
+<ul>
+<li><code>tf_files/retrained_graph.pb</code>, que contiene una version de la red neuronal con la capa final reentrenada usando las nuevas categorias,</li>
+<li><code>tf_files/retrained_labels.txt</code>, un archivo de texto que contiene las etiquetas</li>
+</ul>
+<h2>Clasificando una imagen</h2>
+<p>Vamos a usar en modelo re-entrenado para identificar la flor en la siguiente imagen</p>
+<pre><code>from IPython.display import display, Image
+display(Image(filename=&#34;tf_files/flower_photos/daisy/301964511_fab84ea1c1.jpg&#34;,  width=200))
+</code></pre>
+<p><img style="max-width: 200.00px" src="img/af35e6195e44a4ed.jpeg"></p>
+<p>Esto puede lograrse con el siguiente codigo</p>
+<pre><code>%run scripts/label_image.py \
+ --graph=tf_files/retrained_graph.pb  \
+ --image=tf_files/flower_photos/daisy/301964511_fab84ea1c1.jpg
+
+</code></pre>
+<p>y la salida del mismo sera algo parecido a</p>
+<pre><code>Evaluation time (1-image): 0.174s
+
+daisy (score=0.99732)
+tulips (score=0.00268)
+sunflowers (score=0.00000)
+dandelion (score=0.00000)
+roses (score=0.00000)
+</code></pre>
+<h2>Parentesis (...</h2>
+<p>Tambien puede evaluarse usando la siguiente sintaxis</p>
+<pre><code>!python -m scripts.label_image \
+    --graph=tf_files/retrained_graph.pb  \
+    --image=tf_files/flower_photos/daisy/301964511_fab84ea1c1.jpg
+</code></pre>
+<p>Adicionalmente la sintaxis que sigue tambien funciona</p>
+<pre><code>%%python
+
+scripts.label_image \
+    --graph=tf_files/retrained_graph.pb  \
+    --image=tf_files/flower_photos/daisy/301964511_fab84ea1c1.jpg
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ejemplos adicionales tomados del conjunto de entrenamiento" duration="2">
+        <p>En cada ejecucion se va a mostrar una lista de flores, en la mayoria de los casos con la flor correcta en la primera linea. En este caso el resultado indica que con un 99.017% de probabilidad, la imagen representa una flor &#34;daisy&#34; (margarita). Podemos usar este script cambiando la ruta del archivo en la opcion <code>--image</code> para determinar que flor hay en alguna imagen:</p>
+<h2>Ejemplo 1</h2>
+<pre><code>display(Image(filename=&#34;tf_files/flower_photos/roses/2888138918_402096c7fb.jpg&#34;))
+%run scripts/label_image.py \
+    --graph=tf_files/retrained_graph.pb  \
+    --image=tf_files/flower_photos/roses/2888138918_402096c7fb.jpg
+</code></pre>
+<p><img style="max-width: 200.00px" src="img/8c22063ea886fcd5.jpeg"></p>
+<h2>Ejemplo 2</h2>
+<pre><code>display(Image(filename=&#34;tf_files/flower_photos/roses/2863863372_605e29c03e_m.jpg&#34;))
+%run scripts/label_image.py \
+    --graph=tf_files/retrained_graph.pb  \
+    --image=tf_files/flower_photos/roses/2863863372_605e29c03e_m.jpg
+
+</code></pre>
+<p><img style="max-width: 200.00px" src="img/e5e8083507ef8c74.jpeg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Probando con imagenes nuevas" duration="2">
+        <p>Las imagenes anteriores pertencen a la base de conocimiento del modelo. Evaluar el modelo usando los datos con los que el mismo se genera no ofrece una validez adecuada del mismo. Vamos a probar usando imagenes de flores que el modelo en principio no conoce. Para esto hacemos una busqueda rapida y descargamos las siguientes imagenes:</p>
+<h2>Ejemplo 1</h2>
+<pre><code>!wget http://expertofdreams.com/data_images/daisy/daisy-7.jpg
+  
+</code></pre>
+<pre><code>display(Image(filename=&#34;daisy-7.jpg&#34;, width=128, height=128))
+%run scripts/label_image.py \
+    --graph=tf_files/retrained_graph.pb  \
+    --image=daisy-7.jpg
+</code></pre>
+<p><img style="max-width: 200.00px" src="img/7478136c40d6cc7f.jpeg"></p>
+<pre><code>Evaluation time (1-image): 0.170s
+
+daisy (score=0.99950)
+sunflowers (score=0.00047)
+tulips (score=0.00003)
+roses (score=0.00000)
+dandelion (score=0.00000)
+</code></pre>
+<h2>Ejemplo 2</h2>
+<pre><code>!wget https://parkseed.com/images/xxl/00989-pk-p1.jpg
+
+display(Image(filename=&#34;00989-pk-p1.jpg&#34;, width=128, height=128))
+%run scripts/label_image.py \
+    --graph=tf_files/retrained_graph.pb  \
+    --image=00989-pk-p1.jpg
+
+</code></pre>
+<p><img style="max-width: 200.00px" src="img/22d69cd759b68f0d.jpeg"></p>
+<pre><code>Evaluation time (1-image): 0.173s
+
+sunflowers (score=0.99999)
+dandelion (score=0.00000)
+roses (score=0.00000)
+daisy (score=0.00000)
+tulips (score=0.00000)
+</code></pre>
+<h2>Ejemplo 3</h2>
+<pre><code>!wget http://barmac.com.au/wp-content/uploads/sites/3/2016/01/dandelion.jpg
+
+
+display(Image(filename=&#34;dandelion.jpg&#34;, width=128, height=128))
+%run scripts/label_image.py \
+    --graph=tf_files/retrained_graph.pb  \
+    --image=dandelion.jpg
+
+</code></pre>
+<p><img style="max-width: 200.00px" src="img/a56c20c32f59f4d0.jpeg"></p>
+<pre><code>Evaluation time (1-image): 0.167s
+
+dandelion (score=0.99750)
+sunflowers (score=0.00211)
+daisy (score=0.00039)
+tulips (score=0.00000)
+roses (score=0.00000)
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Retroalimentación" duration="1">
+        <google-codelab-survey survey-id="rysi2019-s3-l01-1">
+<h4>TensorFlow es una libreria</h4>
+<paper-radio-group>
+<paper-radio-button>para calculos numericos de matrices aleatorias</paper-radio-button>
+<paper-radio-button>para calculos numericos especilizada en aprendizaje de maquina</paper-radio-button>
+<paper-radio-button>con articulos de superacion personal</paper-radio-button>
+<paper-radio-button>de flujos operacionales</paper-radio-button>
+</paper-radio-group>
+<h4>El numero que arroja nuestro modelo reentrenado junto a la etiqueta</h4>
+<paper-radio-group>
+<paper-radio-button>indica el marcador de la ultima serie del caribe</paper-radio-button>
+<paper-radio-button>indica el porcentaje de confidencia del modelo en que la imagen representa la clase indicada por la etiqueta</paper-radio-button>
+<paper-radio-button>indica un marcador que no significa nada</paper-radio-button>
+</paper-radio-group>
+<h4>El resultado obtenido en el Ejemplo 2 del Paso 5 no es una flor, sin embargo el modelo identifica una rosa porque</h4>
+<paper-radio-group>
+<paper-radio-button>en ese edificio habita una persona con el nombre de Rose</paper-radio-button>
+<paper-radio-button>las rosas espinan en las esquinas</paper-radio-button>
+<paper-radio-button>la imagen forma parte de la base de conocimiento empleada para entrenar el modelo</paper-radio-button>
+<paper-radio-button>asi debe de ser</paper-radio-button>
+</paper-radio-group>
+</google-codelab-survey>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Entregas" duration="1">
+        <p>Las entregas se especifican empezando con el nombre del archivo y la descripción del contenido.</p>
+<aside class="special"><p>1. Sem3Lab1_classify.ipynb: Acceso a la libreta elaborada en la plataforma de Colaboratory. La libreta debe tener el nombre indicado y ser accesible para evaluarse si es necesario.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

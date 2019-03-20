@@ -1,0 +1,220 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Modelo de Identificación de Objetos en Imágenes 2</title>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../elements/codelab.html">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <style is="custom-style">
+    body {
+      font-family: "Roboto",sans-serif;
+      background: var(--google-codelab-background, #F8F9FA);
+    }
+  </style>
+  
+</head>
+<body unresolved class="fullbleed">
+
+  <google-codelab title="Modelo de Identificación de Objetos en Imágenes 2"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="TensorFlow" duration="1">
+        <p>En este laboratorio vamos a repetir los pasos del laboratorio anterior para re-entrenar el modelo pero en esta ocasion usaremos una base de conocimiento diferente. El modelo que se va a generar puede usarse para iedntificar frutas a partir de imagenes.</p>
+<p>Este laboratorio se ejecutara en un entorno de ejecucino diferente y nuevo. Puesto que cada entorno de ejecucion es independiente, necesitamos volver a descargar el repositorio y configurar el entorno que usaremos. Ademas de la diferencia en la base de conocimiento que usaremos para entrenar el modelo, este laboratorio expone tecnicas para interactuar con la maquina virtual y move archivos entre ella, Google Drive y el sistema local.</p>
+<h2>Que vamos a hacer</h2>
+<p>En este laboratorio vamos a usar TensorFlow para crear una aplicación que identifique objetos a partir de imagenes.</p>
+<p><img alt="fresa" title="Que fruta es esta?" style="max-width: 200.00px" src="img/b6f2bb69b34487bc.png"></p>
+<h2 class="checklist">What you&#39;ll Learn</h2>
+<ul class="checklist">
+<li>Como acceder al espacio de disco de GDrive desde Colaboratory</li>
+<li>Como mover archivos entre la maquina virtual de Colaboratory al espacio de GDrive</li>
+<li>Como usar Colaboratory con Python y TensorFlow para entrenar un clasificador de imagenes</li>
+<li>Como clasificar imagenes con el algoritmo entrenado</li>
+</ul>
+<h2>Que vamos a necesitar</h2>
+<ul>
+<li>Computadora con conexión a internet</li>
+<li>Cuenta de Google</li>
+<li>Dispositivo móvil con SO Android &gt; 4 en modo desarrollador</li>
+<li>Cable USB de datos</li>
+<li>Android Studio instalado y configurado en computadora local</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Configuración" duration="2">
+        <h2>Instalar TensorFlow</h2>
+<p>Vamos a utilzar Colaboratory porque la configuración del ecosistema de programación, incluyendo la librería <code>tensorflow</code> y el acceso a un procesador gráfico GPU no requieren de ninguna configuración avanzada. La librería <code>tensorflow</code> está disponible en el sistema de Colaboratory de forma directa. El siguiente enlace los llevará a una libreta donde podrán evaluar el código de este laboratorio: <a href="https://colab.research.google.com/drive/132BaEyPn08mNrZKWisuwjsIJT5aFcUxi" target="_blank">Sem3_Lab1_Entrenamiento.ipynb</a></p>
+<pre><code>import tensorflow as tf
+print(tf.__version__)
+</code></pre>
+<h2>Clonar el repositorio</h2>
+<p>En la libreta anterior, escriban el siguiente código que descarga los programas que se van a utilzar en este y el siguiente laboratorio. Los programas estaán alojados en un repositorio en GitHub. Clona el repositorio y una vez hecho, cambia la ruta a ese directorio, que es en el cual estaremos trabajando.</p>
+<pre><code>!git clone https://github.com/htapiagroup/tensorflow-for-lania
+</code></pre>
+<pre><code>cd tensorflow-for-lania/
+</code></pre>
+<h2>Descargar datos</h2>
+<p>Antes de entrenar un modelo, necesitamos datos con las categorias que quisieramos que el modelo pudiera identificar. El conjunto de datos que usaremos esta alojado en una carpeta de GDrive a la que les proporcionare acceso. Para leer el contenido hay tres opciones</p>
+<ol type="1">
+<li>Usar la <a href="https://developers.google.com/drive/v3/web/about-sdk" target="_blank">REST API</a>;</li>
+<li>Usar una envoltura de la API como por ejemplo <a href="https://gsuitedevs.github.io/PyDrive/docs/build/html/index.html" target="_blank">PyDrive</a>; o</li>
+<li>Montando Google Drive en la maquina virtual donde estamos ejecutando.</li>
+</ol>
+<p>Vamos a usar el tercer metodo e interactuar directamente con GDrive desde el entorno de ejecucion.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Montando GDrive localmente" duration="5">
+        <p>El ejemplo siguiente muestra como montar Google Drive localmente usando un codigo de autorizacion.</p>
+<pre><code>from google.colab import drive
+drive.mount(&#34;/content/gdrive&#34;)
+</code></pre>
+<p>Una vez autorizado el acceso, tendran a su disposicion acceso al espacio de GDrive asociado a su cuenta. Pueden ver el contenido en una celda de codigo escribiendo</p>
+<pre><code>ls /content/gdrive/My\ Drive/
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Descargando la base de conocimiento" duration="5">
+        <aside class="special"><p>Si tienes problemas, dudas o confusion sobre este paso abre una discusion en el foro y te apoyaresmo para encontrar una solucion .</p>
+</aside>
+<p>El archivo que contiene la base de conocimiento para este modelo <a href="https://drive.google.com/file/d/18xOa4H7WVSMyXcyyfOfF8Makf_9TfoeR/view?usp=sharing" target="_blank">esta disponible siguiendo este enlace</a>.</p>
+<aside class="warning"><p>No es necesario que descarguen el archivo a su disco local. La base de datos completa contiene alrededor de 2 mil imagenes y ocupa aproximadamente 0.5G de espacio en disco duro. Dado que estaremos usandolo en la nube no se requiere su descarga local, pues de otro modo tendrian que vovlerlo a subir.</p>
+</aside>
+<p>Asegurate de guardarlo en tu espacio de disco de GDrive y navega al directorio donde lo tienes en una celda de la libreta. Una vez identificada la localizacion en tu espacio de GDrive ejecuta el siguiente comando, modificando la ruta de acuerdo a la localizacion de tu archivo.</p>
+<pre><code>!unzip /content/gdrive/My\ Drive/Colab\ Notebooks/Datasets/eFIDS30.zip -d tf_files/
+</code></pre>
+<p>En el siguiente paso vamos a re-entrenar el modelo usando esta base de conocimiento.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="(Re)entrenando la red neuronal" duration="5">
+        <h2>Configura MobileNet</h2>
+<p>Nuevamente usaremos <a href="https://research.googleblog.com/2017/06/mobilenets-open-source-models-for.html" target="_blank">MobileNet</a>, una red neuronal ligera y eficiente. Esta red puede configurarse de dos formas:</p>
+<ul>
+<li>Resolucion de la imagen de entrada: Si las imagenes que alimentan al modelo son de mayor resolucion, necesitamos mayor poder de procesamiento y el modelo clasifica con mayor exactitud</li>
+<li>Tamaño relativo del modelo: 1.0, 0.75, 0.50 o 0.25.</li>
+</ul>
+<p>Vamos a usar 224 y 0.50 como los parametros del modelo en este laboratorio. El siguiente script ejecuta el codigo a nivel de computadora, noten el comando magico <code>%%bash</code> en la primera linea. La diferencia de este codigo con el del laboratorio anterior es la ruta al archivo de imagenes <code>tf_files/FIDS30</code></p>
+<pre><code>%%bash
+ 
+IMAGE_SIZE=224
+ARCHITECTURE=&#34;mobilenet_0.50_${IMAGE_SIZE}&#34;
+
+python -m scripts.retrain \
+  --bottleneck_dir=tf_files/bottlenecks \
+  --how_many_training_steps=500 \
+  --model_dir=tf_files/models/ \
+  --summaries_dir=tf_files/training_summaries/&#34;${ARCHITECTURE}&#34; \
+  --output_graph=tf_files/retrained_graph.pb \
+  --output_labels=tf_files/retrained_labels.txt \
+  --architecture=&#34;${ARCHITECTURE}&#34; \
+  --image_dir=tf_files/FIDS30
+</code></pre>
+<p>Este paso puede demorar algunos minutos.</p>
+<p>El script descarga un modelo pre-entrenado, agrega una nueva capa final y entrena esta capa en el conjunto de entrenamiento de las imagenes que descargaste previamente.</p>
+<p>El modelo que acabamos de usar no tiene ninguna de las especies de flores que hemos especificado. Sin embargo, la informacion que hace posible que el modelo pueda distinguir entre 1000 clases de objetos puede usarse para nuestros propositos. Toda esta informacion es usada inicialmente para alimentar una red neuronal cuya ultima capa de clasificacion distingue entre las clases de flores.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Usando el nuevo modelo con imagenes que no estan en la base de conocimiento" duration="5">
+        <p>El script de reentrenamiento guarda los datos en los siguientes archivos:</p>
+<ul>
+<li><code>tf_files/retrained_graph.pb</code>, que contiene una version de la red neuronal con la capa final reentrenada usando las nuevas categorias,</li>
+<li><code>tf_files/retrained_labels.txt</code>, un archivo de texto que contiene las etiquetas</li>
+</ul>
+<h2>Clasificando una imagen ejemplo 1</h2>
+<p>Vamos a usar en modelo re-entrenado para identificar la flor en la siguiente imagen</p>
+<p><img style="max-width: 200.00px" src="img/f1058e9141df7fe0.png"></p>
+<p>Esto puede lograrse con el siguiente codigo</p>
+<pre><code>!wget http://elproductor.com/wp-content/uploads/2018/12/guayaba-.jpg
+</code></pre>
+<pre><code>%run scripts/label_image.py \
+ --graph=tf_files/retrained_graph.pb  \
+ --image=guayaba-.jpg
+
+</code></pre>
+<h2>Clasificando una imagen ejemplo 2</h2>
+<pre><code>!wget https://www.producemarketguide.com/sites/default/files/Commodities.tar/Commodities/strawberries_commodity-page.png
+</code></pre>
+<pre><code>display(Image(filename=&#34;strawberries_commodity-page.png&#34;, width=64, height=64))
+%run scripts/label_image.py \
+    --graph=tf_files/retrained_graph.pb  \
+    --image=strawberries_commodity-page.png
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Retroalimentación" duration="1">
+        <google-codelab-survey survey-id="rysi2019-s3-l02-1">
+<h4>Entrenar modelos en la nube hace que el desarrollo de aplicaciones sea</h4>
+<paper-radio-group>
+<paper-radio-button>mas sencillo que en mi computadora local</paper-radio-button>
+<paper-radio-button>imposible</paper-radio-button>
+<paper-radio-button>impractico en situaciones reales</paper-radio-button>
+<paper-radio-button>muy divertido</paper-radio-button>
+</paper-radio-group>
+</google-codelab-survey>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Entregas" duration="1">
+        <aside class="special"><p>1. Sem3Lab2_frutas.ipynb: Utilizando un motor de busqueda, encuentra al menos 10 imagenes de frutas de cualquiera de las 30 categoria que incluye nuestro catalogo de imagenes, descargalas, y ejecuta el script anterior para determinar que fruta es usando el modelo entrenado. Entrega una tabla similar a la siguiente para cada fruta, donde la primera linea sea la fuente de la imagen, despues la imagen y finalmente el resultado del script sobre la imagen.</p>
+</aside>
+<pre><code>!wget https://sportadictos.com/files/2016/01/Beneficios-guayaba.jpg
+display(Image(filename=&#34;Beneficios-guayaba.jpg&#34;, width=224))
+%run scripts/label_image.py \
+   --graph=tf_files/retrained_graph.pb  \
+   --image=Beneficios-guayaba.jpg
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49880327-14', 'auto');
+
+    (function() {
+      var gaCodelab = '';
+      if (gaCodelab) {
+        ga('create', gaCodelab, 'auto', {name: 'codelab'});
+      }
+
+      var gaView;
+      var parts = location.search.substring(1).split('&');
+      for (var i = 0; i < parts.length; i++) {
+        var param = parts[i].split('=');
+        if (param[0] === 'viewga') {
+          gaView = param[1];
+          break;
+        }
+      }
+      if (gaView && gaView !== gaCodelab) {
+        ga('create', gaView, 'auto', {name: 'view'});
+      }
+    })();
+  </script>
+
+</body>
+</html>

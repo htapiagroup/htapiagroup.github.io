@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "source": "Semana 3/DAMJuv1_Sem3_Lab1_TrainModel/DAMJuv1_Sem3_Lab1_TrainModel.md",
+  "format": "html",
+  "prefix": "../../",
+  "mainga": "UA-49880327-14",
+  "updated": "2019-03-20T11:25:05-06:00",
+  "id": "rysi2019-s3-l01",
+  "duration": 19,
+  "title": "Modelo de Identificación de Objetos en Imágenes",
+  "author": "HTM",
+  "summary": "En este laboratorio vamos a utilizar TensorFlow para re-entrenar un modelo de reconocimiento de objetos en imagenes",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "tensorflow"
+  ],
+  "tags": [
+    "python",
+    "tensorflow"
+  ],
+  "url": "rysi2019-s3-l01"
+}
